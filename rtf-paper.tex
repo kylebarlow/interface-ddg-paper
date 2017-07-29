@@ -1,0 +1,27 @@
+\documentclass{article}
+
+\usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
+\usepackage[T1]{fontenc}       % Use modern font encodings
+\usepackage{natbib}
+\usepackage{mciteplus}
+\usepackage{notes2bib}
+
+\newcommand*\latin[1]{\textit{#1}}
+
+\begin{document}
+
+\section{abstract}
+\input{abstract}
+
+\input{main-text}
+
+\section{Acknowledgement}
+\input{acknowledgements}
+
+\section{Supplementary Information}
+\input{suppinfo}
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\end{document}
