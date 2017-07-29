@@ -60,7 +60,18 @@ this is not the case \cite[p.~1]{Cotton1999}.
 \subsection{Floats}
 
 New float types are automatically set up by the class file.  The
-means graphics are included as follows
+means graphics are included as follows (Scheme~\ref{sch:example}).  As
+illustrated, the float is ``here'' if possible.
+\begin{scheme}
+  Your scheme graphic would go here: \texttt{.eps} format\\
+  for \LaTeX\, or \texttt{.pdf} (or \texttt{.png}) for pdf\LaTeX\\
+  \textsc{ChemDraw} files are best saved as \texttt{.eps} files:\\
+  these can be scaled without loss of quality, and can be\\
+  converted to \texttt{.pdf} files easily using \texttt{eps2pdf}.\\
+  %\includegraphics{graphic}
+  \caption{An example scheme}
+  \label{sch:example}
+\end{scheme}
 
 \begin{figure}
   As well as the standard float types \texttt{table}\\
