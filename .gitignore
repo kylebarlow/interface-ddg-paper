@@ -1,0 +1,7 @@
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+acs-flex-ddG.bib
+flex-ddG.pdf
