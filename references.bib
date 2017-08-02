@@ -1,438 +1,153 @@
 
-@article{smith_structure-based_2010,
-	title = {Structure-Based Prediction of the Peptide Sequence Space Recognized by Natural and Synthetic {PDZ} Domains},
-	volume = {402},
-	issn = {0022-2836},
-	url = {http://www.sciencedirect.com/science/article/pii/S0022283610007850},
-	doi = {10.1016/j.jmb.2010.07.032},
-	abstract = {Protein–protein recognition, frequently mediated by members of large families of interaction domains, is one of the cornerstones of biological function. Here, we present a computational, structure-based method to predict the sequence space of peptides recognized by {PDZ} domains, one of the largest families of recognition proteins. As a test set, we use a considerable amount of recent phage display data that describe the peptide recognition preferences for 169 naturally occurring and engineered {PDZ} domains. For both wild-type {PDZ} domains and single point mutants, we find that 70–80\% of the most frequently observed amino acids by phage display are predicted within the top five ranked amino acids. Phage display frequently identified recognition preferences for amino acids different from those present in the original crystal structure. Notably, in about half of these cases, our algorithm correctly captures these preferences, indicating that it can predict mutations that increase binding affinity relative to the starting structure. We also find that we can computationally recapitulate specificity changes upon mutation, a key test for successful forward design of protein–protein interface specificity. Across all evaluated data sets, we find that incorporation backbone sampling improves accuracy substantially, irrespective of using a crystal or {NMR} structure as the starting conformation. Finally, we report successful prediction of several amino acid specificity changes from blind tests in the {DREAM}4 peptide recognition domain specificity prediction challenge. Because the foundational methods developed here are structure based, these results suggest that the approach can be more generally applied to specificity prediction and redesign of other protein–protein interfaces that have structural information but lack phage display data.},
-	pages = {460--474},
-	number = {2},
-	journaltitle = {Journal of Molecular Biology},
-	shortjournal = {Journal of Molecular Biology},
-	author = {Smith, Colin A. and Kortemme, Tanja},
-	urldate = {2013-09-12},
-	date = {2010-09-17},
-	keywords = {backrub backbone flexibility, benchmarkpaper, {PDZ} domain, protein design, specificity prediction, tolerated sequence space},
-	file = {mmc1.pdf:/home/kyleb/Zotero/storage/XAWGH45U/mmc1.pdf:application/pdf;ScienceDirect Full Text PDF:/home/kyleb/Zotero/storage/QCHF4CGC/Smith and Kortemme - 2010 - Structure-Based Prediction of the Peptide Sequence.pdf:application/pdf;ScienceDirect Snapshot:/home/kyleb/Zotero/storage/AVNMAPG6/S0022283610007850.html:text/html}
+@ARTICLE{Abernethy2003,
+  author = {Colin D. Abernethy and Gareth M. Codd and Mark D. Spicer
+    and Michelle K. Taylor},
+  title = {A highly stable {N}-heterocyclic carbene complex of
+    trichloro-oxo-vanadium(\textsc{v}) displaying novel
+    {Cl}---{C}(carbene) bonding interactions},
+  journal = {J.~Am. Chem. Soc.},
+  year = {2003},
+  volume = {125},
+  pages = {1128--1129},
+  number = {5},
+  doi = {10.1021/ja0276321},
 }
 
-@article{ollikainen_coupling_2015,
-	title = {Coupling Protein Side-Chain and Backbone Flexibility Improves the Re-design of Protein-Ligand Specificity},
-	volume = {11},
-	issn = {1553-7358},
-	url = {http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004335},
-	doi = {10.1371/journal.pcbi.1004335},
-	abstract = {Author Summary   Designing new protein–ligand interactions has tremendous potential for engineering sensitive biosensors for diagnostics or new enzymes useful in biotechnology, but these applications are extremely challenging, both because of inaccuracies of the energy functions used in modeling and design, and because protein active and binding sites are highly sensitive to subtle changes in structure. Here we describe a new method that addresses the second problem and couples changes in the structure of the protein backbone and of the amino acid side chains, the amino acid sequence, and the conformation of the ligand and its orientation in the binding site. We show that our method improvements significantly increase the accuracy of designing protein–ligand interactions compared to current state-of-the-art design methods. We assess these improvements in two important tests: the first predicts mutations that change ligand-binding preferences in enzymes, and the second predicts protein sequences that bind a given ligand. In these tests, subtle conformational changes made in our model are essential to recapitulate both the results from engineering experiments and the sequence diversity occurring in natural protein families. These results therefore shed light on the mechanisms of how new protein functions might have emerged and can be engineered in the laboratory.},
-	pages = {e1004335},
-	number = {9},
-	journaltitle = {{PLOS} Comput Biol},
-	shortjournal = {{PLOS} Comput Biol},
-	author = {Ollikainen, Noah and Jong, René M. de and Kortemme, Tanja},
-	urldate = {2016-09-16},
-	date = {2015-09-23},
-	keywords = {Amino acid sequence analysis, Biochemical simulations, Enzymes, Macromolecular design, Protein domains, Protein interactions, Protein sequencing, Small molecules},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/XGQJQZRH/Ollikainen et al. - 2015 - Coupling Protein Side-Chain and Backbone Flexibili.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/2JRAWXAU/article.html:text/html}
+@MISC{ACS2007,
+  url = {http://pubs.acs.org/books/references.shtml},
 }
 
-@article{conchuir_web_2015,
-	title = {A Web Resource for Standardized Benchmark Datasets, Metrics, and Rosetta Protocols for Macromolecular Modeling and Design},
-	volume = {10},
-	issn = {1932-6203},
-	url = {http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130433},
-	doi = {10.1371/journal.pone.0130433},
-	abstract = {The development and validation of computational macromolecular modeling and design methods depend on suitable benchmark datasets and informative metrics for comparing protocols. In addition, if a method is intended to be adopted broadly in diverse biological applications, there needs to be information on appropriate parameters for each protocol, as well as metrics describing the expected accuracy compared to experimental data. In certain disciplines, there exist established benchmarks and public resources where experts in a particular methodology are encouraged to supply their most efficient implementation of each particular benchmark. We aim to provide such a resource for protocols in macromolecular modeling and design. We present a freely accessible web resource ( https://kortemmelab.ucsf.edu/benchmarks ) to guide the development of protocols for protein modeling and design. The site provides benchmark datasets and metrics to compare the performance of a variety of modeling protocols using different computational sampling methods and energy functions, providing a “best practice” set of parameters for each method. Each benchmark has an associated downloadable benchmark capture archive containing the input files, analysis scripts, and tutorials for running the benchmark. The captures may be run with any suitable modeling method; we supply command lines for running the benchmarks using the Rosetta software suite. We have compiled initial benchmarks for the resource spanning three key areas: prediction of energetic effects of mutations, protein design, and protein structure prediction, each with associated state-of-the-art modeling protocols. With the help of the wider macromolecular modeling community, we hope to expand the variety of benchmarks included on the website and continue to evaluate new iterations of current methods as they become available.},
-	pages = {e0130433},
-	number = {9},
-	journaltitle = {{PLOS} {ONE}},
-	shortjournal = {{PLOS} {ONE}},
-	author = {Conchúir, Shane Ó and Barlow, Kyle A. and Pache, Roland A. and Ollikainen, Noah and Kundert, Kale and O'Meara, Matthew J. and Smith, Colin A. and Kortemme, Tanja},
-	urldate = {2016-04-06},
-	date = {2015-09-03},
-	keywords = {Protein structure prediction, point mutation, Macromolecular design, Protein sequencing, Alanine, Crystal structure, Multiple alignment calculation, Protein structure},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/VMI96DGR/Conchúir et al. - 2015 - A Web Resource for Standardized Benchmark Datasets.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/MSJEGCU5/article.html:text/html}
+@ARTICLE{Arduengo1992,
+  author = {Arduengo, III, Anthony J. and H. V. Rasika Dias and
+    Richard L. Harlow and Michael Kline},
+  title = {Electronic stabilization of nucleophilic carbenes},
+  journal = {J.~Am.\ Chem.\ Soc.},
+  year = {1992},
+  volume = {114},
+  pages = {5530--5534},
+  number = {14},
+  doi = {10.1021/ja00040a007},
 }
 
-@article{dourado_multiscale_2014,
-	title = {A multiscale approach to predicting affinity changes in protein–protein interfaces},
-	volume = {82},
-	rights = {© 2014 Wiley Periodicals, Inc.},
-	issn = {1097-0134},
-	url = {http://onlinelibrary.wiley.com/doi/10.1002/prot.24634/abstract},
-	doi = {10.1002/prot.24634},
-	abstract = {Substitution mutations in protein–protein interfaces can have a substantial effect on binding, which has consequences in basic and applied biomedical research. Experimental expression, purification, and affinity determination of protein complexes is an expensive and time-consuming means of evaluating the effect of mutations, making a fast and accurate in silico method highly desirable. When the structure of the wild-type complex is known, it is possible to economically evaluate the effect of point mutations with knowledge based potentials, which do not model backbone flexibility, but these have been validated only for single mutants. Substitution mutations tend to induce local conformational rearrangements only. Accordingly, {ZEMu} (Zone Equilibration of Mutants) flexibilizes only a small region around the site of mutation, then computes its dynamics under a physics-based force field. We validate with 1254 experimental mutants (with 1–15 simultaneous substitutions) in a wide variety of different protein environments (65 protein complexes), and obtain a significant improvement in the accuracy of predicted ΔΔG. Proteins 2014; 82:2681–2690. © 2014 Wiley Periodicals, Inc.},
-	pages = {2681--2690},
-	number = {10},
-	journaltitle = {Proteins: Structure, Function, and Bioinformatics},
-	shortjournal = {Proteins},
-	author = {Dourado, Daniel F. A. R. and Flores, Samuel Coulbourn},
-	urldate = {2015-05-12},
-	date = {2014-10-01},
-	langid = {english},
-	keywords = {affinity maturation, biologic design, internal coordinate mechanics, multiscale modeling, toread},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/QZQP85UQ/Dourado and Flores - 2014 - A multiscale approach to predicting affinity chang.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/TQNQMR6Z/abstract.html:text/html}
+@ARTICLE{Arduengo1994,
+  author = {Arduengo, III, Anthony J. and Siegfried F. Gamper and
+    Joseph C. Calabrese and Fredric Davidson},
+  title = {{Low}-coordinate carbene complexes of nickel(0) and
+    platinum(0)},
+  journal = jacsat,
+  year = {1994},
+  volume = {116},
+  pages = {4391--4394},
+  number = {10},
+  doi = {10.1021/ja00089a029},
 }
 
-@article{leaver-fay_chapter_2013,
-	title = {Chapter Six - Scientific Benchmarks for Guiding Macromolecular Energy Function Improvement},
-	volume = {523},
-	url = {http://www.sciencedirect.com/science/article/pii/B9780123942920000060},
-	doi = {10.1016/B978-0-12-394292-0.00006-0},
-	series = {Methods in Protein Design},
-	abstract = {Accurate energy functions are critical to macromolecular modeling and design. We describe new tools for identifying inaccuracies in energy functions and guiding their improvement, and illustrate the application of these tools to the improvement of the Rosetta energy function. The feature analysis tool identifies discrepancies between structures deposited in the {PDB} and low-energy structures generated by Rosetta; these likely arise from inaccuracies in the energy function. The {optE} tool optimizes the weights on the different components of the energy function by maximizing the recapitulation of a wide range of experimental observations. We use the tools to examine three proposed modifications to the Rosetta energy function: improving the unfolded state energy model (reference energies), using bicubic spline interpolation to generate knowledge-based torisonal potentials, and incorporating the recently developed Dunbrack 2010 rotamer library (Shapovalov \&amp; Dunbrack, 2011).},
-	pages = {109--143},
-	journaltitle = {Methods in Enzymology},
-	author = {Leaver-Fay, Andrew and O'Meara, Matthew J. and Tyka, Mike and Jacak, Ron and Song, Yifan and Kellogg, Elizabeth H. and Thompson, James and Davis, Ian W. and Pache, Roland A. and Lyskov, Sergey and Gray, Jeffrey J. and Kortemme, Tanja and Richardson, Jane S. and Havranek, James J. and Snoeyink, Jack and Baker, David and Kuhlman, Brian},
-	editor = {Keating, Amy E.},
-	urldate = {2015-03-26},
-	date = {2013},
-	keywords = {benchmarkpaper, Decoy discrimination, energy function, Parameter estimation, Rosetta, Scientific benchmarking},
-	file = {ScienceDirect Full Text PDF:/home/kyleb/Zotero/storage/ABHCV5KV/Leaver-Fay et al. - 2013 - Chapter Six - Scientific Benchmarks for Guiding Ma.pdf:application/pdf;ScienceDirect Snapshot:/home/kyleb/Zotero/storage/F4NX9HDZ/B9780123942920000060.html:text/html}
+@ARTICLE{Eisenstein2005,
+  author = {Appelhans, Leah N. and Zuccaccia, Daniele and Kovacevic,
+    Anes and Chianese, Anthony R. and Miecznikowski, John R. and
+    Macchioni, Aleco and Clot, Eric and Eisenstein, Odile and
+    Crabtree, Robert H.},
+  title = {An anion-dependent switch in selectivity results from a
+    change of {C}---{H} activation mechanism in the reaction of an
+    imidazolium salt with \ce{IrH5(PPh3)2}},
+  journal = {J.~Am.\ Chem. Soc.},
+  year = {2005},
+  volume = {127},
+  pages = {16299--16311},
+  number = {46},
+  doi = {10.1021/ja055317j},
 }
 
-@article{smith_predicting_2011,
-	title = {Predicting the Tolerated Sequences for Proteins and Protein Interfaces Using {RosettaBackrub} Flexible Backbone Design},
-	volume = {6},
-	url = {http://dx.doi.org/10.1371/journal.pone.0020451},
-	doi = {10.1371/journal.pone.0020451},
-	abstract = {Predicting the set of sequences that are tolerated by a protein or protein interface, while maintaining a desired function, is useful for characterizing protein interaction specificity and for computationally designing sequence libraries to engineer proteins with new functions. Here we provide a general method, a detailed set of protocols, and several benchmarks and analyses for estimating tolerated sequences using flexible backbone protein design implemented in the Rosetta molecular modeling software suite. The input to the method is at least one experimentally determined three-dimensional protein structure or high-quality model. The starting structure(s) are expanded or refined into a conformational ensemble using Monte Carlo simulations consisting of backrub backbone and side chain moves in Rosetta. The method then uses a combination of simulated annealing and genetic algorithm optimization methods to enrich for low-energy sequences for the individual members of the ensemble. To emphasize certain functional requirements (e.g. forming a binding interface), interactions between and within parts of the structure (e.g. domains) can be reweighted in the scoring function. Results from each backbone structure are merged together to create a single estimate for the tolerated sequence space. We provide an extensive description of the protocol and its parameters, all source code, example analysis scripts and three tests applying this method to finding sequences predicted to stabilize proteins or protein interfaces. The generality of this method makes many other applications possible, for example stabilizing interactions with small molecules, {DNA}, or {RNA}. Through the use of within-domain reweighting and/or multistate design, it may also be possible to use this method to find sequences that stabilize particular protein conformations or binding interactions over others.},
-	pages = {e20451},
-	number = {7},
-	journaltitle = {{PLoS} {ONE}},
-	shortjournal = {{PLoS} {ONE}},
-	author = {Smith, Colin A. and Kortemme, Tanja},
-	urldate = {2015-03-26},
-	date = {2011-07-18},
-	keywords = {benchmarkpaper},
-	file = {PLoS Full Text PDF:/home/kyleb/Zotero/storage/ZDEDUGQN/Smith and Kortemme - 2011 - Predicting the Tolerated Sequences for Proteins an.pdf:application/pdf}
+@BOOK{Coghill2006,
+  title = {The {ACS} Style Guide},
+  publisher = {Oxford University Press, Inc. and
+               The American Chemical Society},
+  year = {2006},
+  editor = {Coghill, Anne M. and Garson, Lorrin R.},
+  address = {New York},
+  edition = {3},
+  subtitle = {{Effective} Communication of Scientific
+    Information},
 }
 
-@article{kellogg_role_2011,
-	title = {Role of conformational sampling in computing mutation-induced changes in protein structure and stability},
-	volume = {79},
-	rights = {Copyright © 2010 Wiley-Liss, Inc.},
-	issn = {1097-0134},
-	url = {http://onlinelibrary.wiley.com/doi/10.1002/prot.22921/abstract},
-	doi = {10.1002/prot.22921},
-	abstract = {The prediction of changes in protein stability and structure resulting from single amino acid substitutions is both a fundamental test of macromolecular modeling methodology and an important current problem as high throughput sequencing reveals sequence polymorphisms at an increasing rate. In principle, given the structure of a wild-type protein and a point mutation whose effects are to be predicted, an accurate method should recapitulate both the structural changes and the change in the folding-free energy. Here, we explore the performance of protocols which sample an increasing diversity of conformations. We find that surprisingly similar performances in predicting changes in stability are achieved using protocols that involve very different amounts of conformational sampling, provided that the resolution of the force field is matched to the resolution of the sampling method. Methods involving backbone sampling can in some cases closely recapitulate the structural changes accompanying mutations but not surprisingly tend to do more harm than good in cases where structural changes are negligible. Analysis of the outliers in the stability change calculations suggests areas needing particular improvement; these include the balance between desolvation and the formation of favorable buried polar interactions, and unfolded state modeling. Proteins 2011. © 2010 Wiley-Liss, Inc.},
-	pages = {830--838},
-	number = {3},
-	journaltitle = {Proteins: Structure, Function, and Bioinformatics},
-	shortjournal = {Proteins},
-	author = {Kellogg, Elizabeth H. and Leaver-Fay, Andrew and Baker, David},
-	urldate = {2015-03-26},
-	date = {2011-03-01},
-	langid = {english},
-	keywords = {benchmarkpaper, backbone flexibility, free energy change, protein stability, ΔΔG prediction},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/SNK6PN9H/Kellogg et al. - 2011 - Role of conformational sampling in computing mutat.pdf:application/pdf;Full Text PDF:/home/kyleb/Zotero/storage/4XN233VN/Kellogg et al. - 2011 - Role of conformational sampling in computing mutat.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/BUPA4ZGK/Kellogg et al. - 2011 - Role of conformational sampling in computing mutat.html:text/html;Snapshot:/home/kyleb/Zotero/storage/HG6EJHIJ/full.html:text/html}
+@BOOK{Cotton1999,
+  title = {Advanced Inorganic Chemistry},
+  publisher = {Wiley},
+  year = {1999},
+  author = {Cotton, Frank Albert and Wilkinson, Geoffrey and
+    Murillio, Carlos A. and Bochmann, Manfred},
+  address = {Chichester, United Kingdom},
+  edition = {6},
 }
 
-@article{benedix_predicting_2009,
-	title = {Predicting free energy changes using structural ensembles},
-	volume = {6},
-	rights = {© 2009 Nature Publishing Group},
-	issn = {1548-7091},
-	url = {http://www.nature.com/nmeth/journal/v6/n1/full/nmeth0109-3.html},
-	doi = {10.1038/nmeth0109-3},
-	abstract = {Nature Methods is a science methodology journal publishing laboratory techniques and methods papers in the life sciences and areas of chemistry relevant to the life sciences.},
-	pages = {3--4},
-	number = {1},
-	journaltitle = {Nature Methods},
-	shortjournal = {Nat Meth},
-	author = {Benedix, Alexander and Becker, Caroline M. and de Groot, Bert L. and Caflisch, Amedeo and Böckmann, Rainer A.},
-	urldate = {2015-03-26},
-	date = {2009-01},
-	langid = {english},
-	keywords = {benchmarkpaper},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/T9XHK38U/Benedix et al. - 2009 - Predicting free energy changes using structural en.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/E72HRBNN/nmeth0109-3.html:text/html}
+@TECHREPORT{EuropeanCommission2008,
+  address = {Brussels, Belgium},
+  organization = {European Commission},
+  title = {Communication from the European Commission to the
+   European Council and the European Parliament:
+   20 20 by 2020: Europe's climate change opportunity},
+  year = {2008}
 }
 
-@article{moal_skempi:_2012,
-	title = {{SKEMPI}: a Structural Kinetic and Energetic database of Mutant Protein Interactions and its use in empirical models},
-	volume = {28},
-	issn = {1367-4803, 1460-2059},
-	url = {http://bioinformatics.oxfordjournals.org/content/28/20/2600},
-	doi = {10.1093/bioinformatics/bts489},
-	shorttitle = {{SKEMPI}},
-	abstract = {Motivation: Empirical models for the prediction of how changes in sequence alter protein–protein binding kinetics and thermodynamics can garner insights into many aspects of molecular biology. However, such models require empirical training data and proper validation before they can be widely applied. Previous databases contained few stabilizing mutations and no discussion of their inherent biases or how this impacts model construction or validation.
-Results: We present {SKEMPI}, a database of 3047 binding free energy changes upon mutation assembled from the scientific literature, for protein–protein heterodimeric complexes with experimentally determined structures. This represents over four times more data than previously collected. Changes in 713 association and dissociation rates and 127 enthalpies and entropies were also recorded. The existence of biases towards specific mutations, residues, interfaces, proteins and protein families is discussed in the context of how the data can be used to construct predictive models. Finally, a cross-validation scheme is presented which is capable of estimating the efficacy of derived models on future data in which these biases are not present.
-Availability: The database is available online at http://life.bsc.es/pid/mutation\_database/
-Contact: juanf@bsc.es},
-	pages = {2600--2607},
-	number = {20},
-	journaltitle = {Bioinformatics},
-	shortjournal = {Bioinformatics},
-	author = {Moal, Iain H. and Fernández-Recio, Juan},
-	urldate = {2015-03-26},
-	date = {2012-10-15},
-	langid = {english},
-	pmid = {22859501},
-	keywords = {benchmarkpaper},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/UCFG3IP9/Moal and Fernández-Recio - 2012 - SKEMPI a Structural Kinetic and Energetic databas.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/FSIKS29C/2600.html:text/html}
+@INBOOK{Friedman-Hill2003,
+  author         = {E. Friedman-Hill},
+  booktitle      = {{Jess} in Action: {Java} Rule-based Systems},
+  publisher      = {Manning Publications Co.},
+  address        = {Greenwich, CT, USA},
+  title          = {Writing Rules in Jess},
+  edition        = {1},
+  year           = {2003}
 }
 
-@article{kortemme_simple_2002,
-	title = {A simple physical model for binding energy hot spots in protein–protein complexes},
-	volume = {99},
-	issn = {0027-8424, 1091-6490},
-	url = {http://www.pnas.org/content/99/22/14116},
-	doi = {10.1073/pnas.202485799},
-	abstract = {Protein–protein recognition plays a central role in most biological processes. Although the structures of many protein–protein complexes have been solved in molecular detail, general rules describing affinity and selectivity of protein–protein interactions do not accurately account for the extremely diverse nature of the interfaces. We investigate the extent to which a simple physical model can account for the wide range of experimentally measured free energy changes brought about by alanine mutation at protein–protein interfaces. The model successfully predicts the results of alanine scanning experiments on globular proteins (743 mutations) and 19 protein–protein interfaces (233 mutations) with average unsigned errors of 0.81 kcal/mol and 1.06 kcal/mol, respectively. The results test our understanding of the dominant contributions to the free energy of protein–protein interactions, can guide experiments aimed at the design of protein interaction inhibitors, and provide a stepping-stone to important applications such as interface redesign.},
-	pages = {14116--14121},
-	number = {22},
-	journaltitle = {Proceedings of the National Academy of Sciences},
-	shortjournal = {{PNAS}},
-	author = {Kortemme, Tanja and Baker, David},
-	urldate = {2014-11-26},
-	date = {2002-10-29},
-	langid = {english},
-	pmid = {12381794},
-	keywords = {benchmarkpaper},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/EW36ZAFN/Kortemme and Baker - 2002 - A simple physical model for binding energy hot spo.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/ZA4SR8K9/14116.html:text/html}
+@PATENT{Johnson1972,
+  author       = {Johnson, Alexander Lawrence},
+  organization = {E.~I.~du Pont de Nemours},
+  number       = {3637731},
+  title        = {1-(Alkylsubstituted phenyl)imidazoles useful in {ACTH}
+    reverse assay},
+  type         = {US~Patent},
+  year         = {1972}
 }
 
-@article{araki_effect_2016,
-	title = {The Effect of Conformational Flexibility on Binding Free Energy Estimation between Kinases and Their Inhibitors},
-	volume = {56},
-	issn = {1549-9596},
-	url = {http://dx.doi.org/10.1021/acs.jcim.6b00398},
-	doi = {10.1021/acs.jcim.6b00398},
-	abstract = {Accurate prediction of binding affinities of drug candidates to their targets remains challenging because of protein flexibility in solution. Conformational flexibility of the {ATP}-binding site in the {CDK}2 and {ERK}2 kinases was identified using molecular dynamics simulations. The binding free energy (ΔG) of twenty-four {ATP}-competitive inhibitors toward these kinases was assessed using an alchemical free energy perturbation method, {MP}-{CAFEE}. However, large calculation errors of 2–3 kcal/mol were observed using this method, where the free energy simulation starts from a single equilibrated conformation. Here, we developed a new ΔG computation method, where the starting structure was set to multiconformations to cover flexibility. The calculation accuracy was successfully improved, especially for larger molecular size compounds, leading to reliable prediction of a broader range of drug candidates. The present study demonstrates that conformational flexibility of interactions between a compound and the glycine-rich loop in the kinases is a key factor in ΔG estimation.},
-	pages = {2445--2456},
-	number = {12},
-	journaltitle = {Journal of Chemical Information and Modeling},
-	shortjournal = {J. Chem. Inf. Model.},
-	author = {Araki, Mitsugu and Kamiya, Narutoshi and Sato, Miwa and Nakatsui, Masahiko and Hirokawa, Takatsugu and Okuno, Yasushi},
-	urldate = {2017-07-30},
-	date = {2016-12-27},
-	file = {ACS Full Text Snapshot:/home/kyleb/Zotero/storage/WXPGIRJV/acs.jcim.html:text/html}
+@MANUAL{Pople2003,
+  title = {{Gaussian} 03},
+  author = {M.~J. Frisch and G.~W. Trucks and H.~B. Schlegel and G.~E. Scuseria
+and M.~A. Robb and J.~R. Cheeseman and Montgomery and Jr. and J.
+A. and T. Vreven and K.~N. Kudin and J.~C. Burant and J.~M. Millam
+and S.~S. Iyengar and J. Tomasi and V. Barone and B. Mennucci and
+M. Cossi and G. Scalmani and N. Rega and G.~A. Petersson and H. Nakatsuji
+and M. Hada and M. Ehara and K. Toyota and R. Fukuda and J. Hasegawa
+and M. Ishida and T. Nakajima and Y. Honda and O. Kitao and H. Nakai
+and M. Klene and X. Li and J.~E. Knox and H.~P. Hratchian and J.~B.
+Cross and V. Bakken and C. Adamo and J. Jaramillo and R. Gomperts
+and R.~E. Stratmann and O. Yazyev and A.~J. Austin and R. Cammi and
+C. Pomelli and J.~W. Ochterski and P.~Y. Ayala and K. Morokuma and
+G.~A. Voth and P. Salvador and J.~J. Dannenberg and V.~G. Zakrzewski
+and S. Dapprich and A.~D. Daniels and M.~C. Strain and O. Farkas
+and D.~K. Malick and A.~D. Rabuck and K. Raghavachari and J.~B. Foresman
+and J.~V. Ortiz and Q. Cui and A.~G. Baboul and S. Clifford and J.
+Cioslowski and B.~B. Stefanov and G. Liu and A. Liashenko and P.
+Piskorz and I. Komaromi and R.~L. Martin and D.~J. Fox and T. Keith
+and M.~A. Al-Laham and C.~Y. Peng and A. Nanayakkara and M. Challacombe
+and P.~M.~W. Gill and B. Johnson and W. Chen and M.~W. Wong and C.
+Gonzalez and J.~A. Pople},
+  organization = {Gaussian, Inc.},
+  address = {Wallingford, CT},
+  year = {2004},
+  howpublished = {Gaussian, Inc., Wallingford, CT, USA},
+  institution = {Gaussian, Inc.},
+  publisher = {Gaussian, Inc.}
 }
 
-@article{davey_improving_2014,
-	title = {Improving the accuracy of protein stability predictions with multistate design using a variety of backbone ensembles},
-	volume = {82},
-	issn = {1097-0134},
-	url = {http://onlinelibrary.wiley.com/doi/10.1002/prot.24457/abstract},
-	doi = {10.1002/prot.24457},
-	abstract = {Multistate computational protein design ({MSD}) with backbone ensembles approximating conformational flexibility can predict higher quality sequences than single-state design with a single fixed backbone. However, it is currently unclear what characteristics of backbone ensembles are required for the accurate prediction of protein sequence stability. In this study, we aimed to improve the accuracy of protein stability predictions made with {MSD} by using a variety of backbone ensembles to recapitulate the experimentally measured stability of 85 Streptococcal protein G domain β1 sequences. Ensembles tested here include an {NMR} ensemble as well as those generated by molecular dynamics ({MD}) simulations, by Backrub motions, and by {PertMin}, a new method that we developed involving the perturbation of atomic coordinates followed by energy minimization. {MSD} with the {PertMin} ensembles resulted in the most accurate predictions by providing the highest number of stable sequences in the top 25, and by correctly binning sequences as stable or unstable with the highest success rate (≈90\%) and the lowest number of false positives. The performance of {PertMin} ensembles is due to the fact that their members closely resemble the input crystal structure and have low potential energy. Conversely, the {NMR} ensemble as well as those generated by {MD} simulations at 500 or 1000 K reduced prediction accuracy due to their low structural similarity to the crystal structure. The ensembles tested herein thus represent on- or off-target models of the native protein fold and could be used in future studies to design for desired properties other than stability. Proteins 2014; 82:771–784. © 2013 Wiley Periodicals, Inc.},
-	pages = {771--784},
-	number = {5},
-	journaltitle = {Proteins: Structure, Function, and Bioinformatics},
-	shortjournal = {Proteins},
-	author = {Davey, James A. and Chica, Roberto A.},
-	urldate = {2017-07-30},
-	date = {2014-05-01},
-	langid = {english},
-	keywords = {computational protein design, backrub, off-target ensemble, on-target ensemble, perturbation and energy minimization, protein G domain β1, receiver operating characteristic},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/7YRV2G2A/Davey and Chica - 2014 - Improving the accuracy of protein stability predic.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/8HDFJFIQ/abstract.html:text/html}
-}
-
-@article{vangone_contacts-based_2015,
-	title = {Contacts-based prediction of binding affinity in protein–protein complexes},
-	volume = {4},
-	rights = {© 2015 Vangone and Bonvin. This article is distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use and redistribution provided that the original author and source are credited.},
-	issn = {2050-084X},
-	url = {https://elifesciences.org/articles/07454},
-	doi = {10.7554/eLife.07454},
-	abstract = {The number of contacts at the interface of a protein–protein complex, together with the properties of the surface, provides a simple, but well-performing predictor of binding affinity.},
-	pages = {e07454},
-	journaltitle = {{eLife}},
-	shortjournal = {{eLife} Sciences},
-	author = {Vangone, Anna and Bonvin, Alexandre {MJJ}},
-	date = {2015-07-20},
-	langid = {english},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/4CAYWUX4/Vangone and Bonvin - 2015 - Contacts-based prediction of binding affinity in p.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/YLQETAHC/07454.html:text/html}
-}
-
-@article{geng_exploring_2016,
-	title = {Exploring the interplay between experimental methods and the performance of predictors of binding affinity change upon mutations in protein complexes},
-	volume = {29},
-	issn = {1741-0126},
-	url = {https://academic.oup.com/peds/article/29/8/291/2462288/Exploring-the-interplay-between-experimental},
-	doi = {10.1093/protein/gzw020},
-	abstract = {Reliable prediction of binding affinity changes (ΔΔG) upon
-                    mutations in protein complexes relies not only on the performance of
-                    computational methods but also on the availability and quality of experimental
-                    data. Binding affinity changes can be measured by various experimental methods
-                    with different accuracies and limitations. To understand the impact of these on
-                    the prediction of binding affinity change, we present the Database of binding
-                    Affinity Change Upon Mutation ({DACUM}), a database of 1872 binding affinity
-                    changes upon single-point mutations, a subset of the {SKEMPI} database (Moal,I.H.
-                    and Fernández-Recio,J. Bioinformatics, 2012;28:2600–2607) extended with
-                    information on the experimental methods used for ΔΔG measurements. The ΔΔG data were classified into different data
-                    sets based on the experimental method used and the position of the mutation
-                    (interface and non-interface). We tested the prediction performance of the
-                    original {HADDOCK} score, a newly trained version of it and mutation Cutoff
-                    Scanning Matrix (Pires,D.E.V., Ascher,D.B. and Blundell,T.L. Bioinformatics
-                    2014;30:335–342), one of the best reported ΔΔG predictors so
-                    far, on these various data sets. Our results demonstrate a strong impact of the
-                    experimental methods on the performance of binding affinity change predictors
-                    for protein complexes. This underscores the importance of properly considering
-                    and carefully choosing experimental methods in the development of novel binding
-                    affinity change predictors. The {DACUM} database is available online at
-                    https://github.com/haddocking/{DACUM}.},
-	pages = {291--299},
-	number = {8},
-	journaltitle = {Protein Engineering, Design and Selection},
-	shortjournal = {Protein Eng Des Sel},
-	author = {Geng, Cunliang and Vangone, Anna and Bonvin, Alexandre M. J. J.},
-	date = {2016-08-01},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/2X72BKYN/Geng et al. - 2016 - Exploring the interplay between experimental metho.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/49M4LAME/Exploring-the-interplay-between-experimental.html:text/html}
-}
-
-@article{dunbar_sabdab:_2014,
-	title = {{SAbDab}: the structural antibody database},
-	volume = {42},
-	issn = {0305-1048},
-	url = {https://academic.oup.com/nar/article/42/D1/D1140/1044118/SAbDab-the-structural-antibody-database},
-	doi = {10.1093/nar/gkt1043},
-	shorttitle = {{SAbDab}},
-	abstract = {Structural antibody database ({SAbDab}; http://opig.stats.ox.ac.uk/webapps/sabdab) is an online resource containing all the publicly available antibody structures annotated and presented in a consistent fashion. The data are annotated with several properties including experimental information, gene details, correct heavy and light chain pairings, antigen details and, where available, antibody–antigen binding affinity. The user can select structures, according to these attributes as well as structural properties such as complementarity determining region loop conformation and variable domain orientation. Individual structures, datasets and the complete database can be downloaded.},
-	pages = {D1140--D1146},
-	issue = {D1},
-	journaltitle = {Nucleic Acids Research},
-	shortjournal = {Nucleic Acids Res},
-	author = {Dunbar, James and Krawczyk, Konrad and Leem, Jinwoo and Baker, Terry and Fuchs, Angelika and Georges, Guy and Shi, Jiye and Deane, Charlotte M.},
-	date = {2014-01-01},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/KVDGGVBK/Dunbar et al. - 2014 - SAbDab the structural antibody database.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/TVM73URV/SAbDab-the-structural-antibody-database.html:text/html}
-}
-
-@article{davis_backrub_2006,
-	title = {The Backrub Motion: How Protein Backbone Shrugs When a Sidechain Dances},
-	volume = {14},
-	issn = {0969-2126},
-	url = {http://www.sciencedirect.com/science/article/pii/S0969212606000402},
-	doi = {10.1016/j.str.2005.10.007},
-	shorttitle = {The Backrub Motion},
-	abstract = {Surprisingly, the frozen structures from ultra-high-resolution protein crystallography reveal a prevalent, but subtle, mode of local backbone motion coupled to much larger, two-state changes of sidechain conformation. This “backrub” motion provides an influential and common type of local plasticity in protein backbone. Concerted reorientation of two adjacent peptides swings the central sidechain perpendicular to the chain direction, changing accessible sidechain conformations while leaving flanking structure undisturbed. Alternate conformations in sub-1 Å crystal structures show backrub motions for two-thirds of the significant Cβ shifts and 3\% of the total residues in these proteins (126/3882), accompanied by two-state changes in sidechain rotamer. The Backrub modeling tool is effective in crystallographic rebuilding. For homology modeling or protein redesign, backrubs can provide realistic, small perturbations to rigid backbones. For large sidechain changes in protein dynamics or for single mutations, backrubs allow backbone accommodation while maintaining H bonds and ideal geometry.},
-	pages = {265--274},
-	number = {2},
-	journaltitle = {Structure},
-	shortjournal = {Structure},
-	author = {Davis, Ian W. and Arendall, W. Bryan and Richardson, David C. and Richardson, Jane S.},
-	urldate = {2017-07-31},
-	date = {2006-02-02},
-	file = {ScienceDirect Full Text PDF:/home/kyleb/Zotero/storage/VEFSM7VY/Davis et al. - 2006 - The Backrub Motion How Protein Backbone Shrugs Wh.pdf:application/pdf;ScienceDirect Snapshot:/home/kyleb/Zotero/storage/M7KQVYFB/S0969212606000402.html:text/html}
-}
-
-@article{friedland_correspondence_2009,
-	title = {A Correspondence Between Solution-State Dynamics of an Individual Protein and the Sequence and Conformational Diversity of its Family},
-	volume = {5},
-	issn = {1553-7358},
-	url = {http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000393},
-	doi = {10.1371/journal.pcbi.1000393},
-	abstract = {Author Summary Knowledge of protein properties is essential for enhancing the understanding and engineering of biological functions. One key property of proteins is their flexibility—their intrinsic ability to adopt different conformations. This flexibility can be measured experimentally but the measurements are indirect and computational models are required to interpret them. Here we develop a new computational method for interpreting these measurements of flexibility and use it to create a model of flexibility of the protein ubiquitin. We apply our results to show relationships between the flexibility of one protein and the diversity of structures and amino acid sequences of the protein's evolutionary family. Thus, our results show that more accurate computational modeling of protein flexibility is useful for improving prediction of a broader range of amino acid sequences compatible with a given protein. Our method will be helpful for advancing methods to rationally engineer protein functions by enabling sampling of conformational and sequence diversity similar to that of a protein's evolutionary family.},
-	pages = {e1000393},
-	number = {5},
-	journaltitle = {{PLOS} Computational Biology},
-	shortjournal = {{PLOS} Computational Biology},
-	author = {Friedland, Gregory D. and Lakomek, Nils-Alexander and Griesinger, Christian and Meiler, Jens and Kortemme, Tanja},
-	date = {2009-05-29},
-	keywords = {Crystal structure, Molecular dynamics, Monte Carlo method, Multiple alignment calculation, {NMR} relaxation, Protein structure, Protein structure comparison, Sequence alignment},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/6VXQPYJL/Friedland et al. - 2009 - A Correspondence Between Solution-State Dynamics o.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/TQXXHGRW/article.html:text/html}
-}
-
-@article{humphris_prediction_2008,
-	title = {Prediction of Protein-Protein Interface Sequence Diversity Using Flexible Backbone Computational Protein Design},
-	volume = {16},
-	issn = {0969-2126},
-	url = {http://www.sciencedirect.com/science/article/pii/S0969212608003869},
-	doi = {10.1016/j.str.2008.09.012},
-	abstract = {A major challenge in computational protein design is to identify functional sequences as top predictions. One reason for design failures is conformational plasticity, as proteins frequently change their conformation in response to mutations. To advance protein design, here we describe a method employing flexible backbone ensembles to predict sequences tolerated for a protein-protein interface. We show that the predictions are enriched in functional proteins when compared to a phage display screen quantitatively mapping the energy landscape for the interaction between human growth hormone and its receptor. Our model for structural plasticity is inspired by coupled side chain-backbone “backrub” motions observed in high-resolution protein crystal structures. Although the modeled structural changes are subtle, our results on predicting sequence plasticity suggest that backrub sampling may capture a sizable fraction of localized conformational changes that occur in proteins. The described method has implications for predicting sequence libraries to enable challenging protein engineering problems.},
-	pages = {1777--1788},
-	number = {12},
-	journaltitle = {Structure},
-	shortjournal = {Structure},
-	author = {Humphris, Elisabeth L. and Kortemme, Tanja},
-	urldate = {2017-07-31},
-	date = {2008-12-12},
-	keywords = {{PROTEINS}},
-	file = {ScienceDirect Full Text PDF:/home/kyleb/Zotero/storage/5BWNXEZG/Humphris and Kortemme - 2008 - Prediction of Protein-Protein Interface Sequence D.pdf:application/pdf;ScienceDirect Snapshot:/home/kyleb/Zotero/storage/UVS64JZW/S0969212608003869.html:text/html}
-}
-
-@article{schenkelberg_protein_2016,
-	title = {Protein backbone ensemble generation explores the local structural space of unseen natural homologs},
-	volume = {32},
-	issn = {1367-4803},
-	url = {https://academic.oup.com/bioinformatics/article/32/10/1454/1742694/Protein-backbone-ensemble-generation-explores-the},
-	doi = {10.1093/bioinformatics/btw001},
-	abstract = {Motivation: Mutations in homologous proteins affect changes in the backbone conformation that involve a complex interplay of forces which are difficult to predict. Protein design algorithms need to anticipate these backbone changes in order to accurately calculate the energy of the structure given an amino acid sequence, without knowledge of the final, designed sequence. This is related to the problem of predicting small changes in the backbone between highly similar sequences. Results: We explored the ability of the Rosetta suite of protein design tools to move the backbone from its position in one structure (template) to its position in a close homologous structure (target) as a function of the diversity of a backbone ensemble constructed using the template structure, the percent sequence identity between the template and target, and the size of local zone being considered in the ensemble. We describe a pareto front in the likelihood of moving the backbone toward the target as a function of ensemble diversity and zone size. The equations and protocols presented here will be useful for protein design. Availability and implementation : {PyRosetta} scripts available at www.bioinfo.rpi.edu/bystrc/downloads.html\#{ensembleContact}:bystrc@rpi.edu},
-	pages = {1454--1461},
-	number = {10},
-	journaltitle = {Bioinformatics},
-	shortjournal = {Bioinformatics},
-	author = {Schenkelberg, Christian D. and Bystroff, Christopher},
-	urldate = {2017-07-31},
-	date = {2016-05-15},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/S5FF26FD/Schenkelberg and Bystroff - 2016 - Protein backbone ensemble generation explores the .pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/FZEHWDM6/Protein-backbone-ensemble-generation-explores-the.html:text/html}
-}
-
-@article{fleishman_rosettascripts:_2011,
-	title = {{RosettaScripts}: A Scripting Language Interface to the Rosetta Macromolecular Modeling Suite},
-	volume = {6},
-	issn = {1932-6203},
-	url = {http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0020161},
-	doi = {10.1371/journal.pone.0020161},
-	shorttitle = {{RosettaScripts}},
-	abstract = {Macromolecular modeling and design are increasingly useful in basic research, biotechnology, and teaching. However, the absence of a user-friendly modeling framework that provides access to a wide range of modeling capabilities is hampering the wider adoption of computational methods by non-experts. {RosettaScripts} is an {XML}-like language for specifying modeling tasks in the Rosetta framework. {RosettaScripts} provides access to protocol-level functionalities, such as rigid-body docking and sequence redesign, and allows fast testing and deployment of complex protocols without need for modifying or recompiling the underlying C++ code. We illustrate these capabilities with {RosettaScripts} protocols for the stabilization of proteins, the generation of computationally constrained libraries for experimental selection of higher-affinity binding proteins, loop remodeling, small-molecule ligand docking, design of ligand-binding proteins, and specificity redesign in {DNA}-binding proteins.},
-	pages = {e20161},
-	number = {6},
-	journaltitle = {{PLOS} {ONE}},
-	shortjournal = {{PLOS} {ONE}},
-	author = {Fleishman, Sarel J. and Leaver-Fay, Andrew and Corn, Jacob E. and Strauch, Eva-Maria and Khare, Sagar D. and Koga, Nobuyasu and Ashworth, Justin and Murphy, Paul and Richter, Florian and Lemmon, Gordon and Meiler, Jens and Baker, David},
-	date = {2011-06-24},
-	keywords = {{DNA}-binding proteins, Macromolecules, Monte Carlo method, Optimization, Parsers, Protein sequencing, Protein structure, Protein-protein interactions},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/32LUF7IG/Fleishman et al. - 2011 - RosettaScripts A Scripting Language Interface to .pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/7HSXIKHD/article.html:text/html}
-}
-
-@article{song_structure-guided_2011,
-	title = {Structure-guided forcefield optimization},
-	volume = {79},
-	issn = {1097-0134},
-	url = {http://onlinelibrary.wiley.com/doi/10.1002/prot.23013/abstract},
-	doi = {10.1002/prot.23013},
-	abstract = {Accurate modeling of biomolecular systems requires accurate forcefields. Widely used molecular mechanics ({MM}) forcefields obtain parameters from experimental data and quantum chemistry calculations on small molecules but do not have a clear way to take advantage of the information in high-resolution macromolecular structures. In contrast, knowledge-based methods largely ignore the physical chemistry of interatomic interactions, and instead derive parameters almost exclusively from macromolecular structures. This can involve considerable double counting of the same physical interactions. Here, we describe a method for forcefield improvement that combines the strengths of the two approaches. We use this method to improve the Rosetta all-atom forcefield, in which the total energy is expressed as the sum of terms representing different physical interactions as in {MM} forcefields and the parameters are tuned to reproduce the properties of macromolecular structures. To resolve inaccuracies resulting from possible double counting of interactions, we compare distribution functions from low-energy modeled structures to those from crystal structures. The structural and physical bases of the deviations between the modeled and reference structures are identified and used to guide forcefield improvements. We describe improvements resolving double counting between backbone hydrogen bond interactions and Lennard-Jones interactions in helices; between sidechain-backbone hydrogen bonds and the backbone torsion potential; and between the sidechain torsion potential and Lennard-Jones interactions. Discrepancies between computed and observed distributions are also used to guide the incorporation of an explicit Cα-hydrogen bond in β sheets. The method can be used generally to integrate different sources of information for forcefield improvement. Proteins 2011; © 2011 Wiley-Liss, Inc.},
-	pages = {1898--1909},
-	number = {6},
-	journaltitle = {Proteins: Structure, Function, and Bioinformatics},
-	shortjournal = {Proteins},
-	author = {Song, Yifan and Tyka, Michael and Leaver-Fay, Andrew and Thompson, James and Baker, David},
-	urldate = {2017-08-01},
-	date = {2011-06-01},
-	langid = {english},
-	keywords = {forcefield optimization, hydrogen bond potential, rotamer library},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/D7P5BN8X/Song et al. - 2011 - Structure-guided forcefield optimization.pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/FA7XTGZP/abstract.html:text/html}
-}
-
-@article{shapovalov_smoothed_2011,
-	title = {A Smoothed Backbone-Dependent Rotamer Library for Proteins Derived from Adaptive Kernel Density Estimates and Regressions},
-	volume = {19},
-	issn = {0969-2126},
-	url = {http://www.cell.com/structure/abstract/S0969-2126(11)00144-4},
-	doi = {10.1016/j.str.2011.03.019},
-	pages = {844--858},
-	number = {6},
-	journaltitle = {Structure},
-	shortjournal = {Structure},
-	author = {Shapovalov, Maxim V. and Dunbrack, Roland L.},
-	date = {2011-06-08},
-	pmid = {21645855},
-	file = {Full Text PDF:/home/kyleb/Zotero/storage/B7T4JFD4/Shapovalov and Dunbrack - 2011 - A Smoothed Backbone-Dependent Rotamer Library for .pdf:application/pdf;Snapshot:/home/kyleb/Zotero/storage/NPGNQSHS/S0969-2126(11)00144-4.html:text/html}
-}
-
-@article{alford_rosetta_2017,
-	title = {The Rosetta All-Atom Energy Function for Macromolecular Modeling and Design},
-	volume = {13},
-	issn = {1549-9618},
-	url = {http://dx.doi.org/10.1021/acs.jctc.7b00125},
-	doi = {10.1021/acs.jctc.7b00125},
-	abstract = {Over the past decade, the Rosetta biomolecular modeling suite has informed diverse biological questions and engineering challenges ranging from interpretation of low-resolution structural data to design of nanomaterials, protein therapeutics, and vaccines. Central to Rosetta’s success is the energy function: a model parametrized from small-molecule and X-ray crystal structure data used to approximate the energy associated with each biomolecule conformation. This paper describes the mathematical models and physical concepts that underlie the latest Rosetta energy function, called the Rosetta Energy Function 2015 ({REF}15). Applying these concepts, we explain how to use Rosetta energies to identify and analyze the features of biomolecular models. Finally, we discuss the latest advances in the energy function that extend its capabilities from soluble proteins to also include membrane proteins, peptides containing noncanonical amino acids, small molecules, carbohydrates, nucleic acids, and other macromolecules.},
-	pages = {3031--3048},
-	number = {6},
-	journaltitle = {Journal of Chemical Theory and Computation},
-	shortjournal = {J. Chem. Theory Comput.},
-	author = {Alford, Rebecca F. and Leaver-Fay, Andrew and Jeliazkov, Jeliazko R. and O’Meara, Matthew J. and {DiMaio}, Frank P. and Park, Hahnbeom and Shapovalov, Maxim V. and Renfrew, P. Douglas and Mulligan, Vikram K. and Kappel, Kalli and Labonte, Jason W. and Pacella, Michael S. and Bonneau, Richard and Bradley, Philip and Dunbrack, Roland L. and Das, Rhiju and Baker, David and Kuhlman, Brian and Kortemme, Tanja and Gray, Jeffrey J.},
-	urldate = {2017-08-01},
-	date = {2017-06-13},
-	file = {ACS Full Text Snapshot:/home/kyleb/Zotero/storage/GMALECYF/acs.jctc.html:text/html}
+@ARTICLE{Mena2000,
+  author = {Angel Abarca and Pilar G{\'o}mez-Sal and Avelino Mart{\'i}n
+    and Miguel Mena and Josep Mar{\'i}a Poblet and Carlos Y{\'e}lamos},
+  title = {Ammonolysis of mono(pentamethylcyclopentadienyl)
+    titanium(\textsc{iv}) derivatives},
+  journal = {Inorg. Chem.},
+  year = {2000},
+  volume = {39},
+  pages = {642--651},
+  number = {4},
+  doi = {10.1021/ic9907718},
 }

@@ -1,7 +1,7 @@
-flex-ddG.aux
-flex-ddG.bbl
-flex-ddG.blg
-flex-ddG.dvi
-flex-ddG.log
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
 acs-flex-ddG.bib
 flex-ddG.pdf
