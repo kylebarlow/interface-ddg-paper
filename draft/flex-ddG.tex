@@ -7,10 +7,23 @@
 %     url=false
 % ]{biblatex}
 % \addbibresource{references.bib}
+\usepackage{amsmath}
 
 \begin{document}
 
 A good benchmarking set is important to test a new method. Skempi \cite{moal_skempi:_2012} is the largest known database, but is not curated to be maximally effective for method development and benchmarking. Because experimental methods can have a strong effect on the performance of predictors of changes in binding free energy\cite{geng_exploring_2016}, some filtering of the entire universe of known mutations is necessary. To prevent overfitting, we have chosen to use the dataset used by ZEMU \cite{dourado_multiscale_2014}, which filtered by x, y, and z.
+
+\begin{equation}\label{split-ddg-equation}
+  \begin{split}
+    {\Delta\Delta}G_{bind} & ={\Delta}G^{MUT}_{bind} - {\Delta}G^{WT}_{bind}\\
+    & =({\Delta}G^{MUT}_{complex} - {\Delta}G^{MUT}_{partner A} - {\Delta}G^{MUT}_{partner B})\\
+    & \quad - ({\Delta}G^{WT}_{complex} - {\Delta}G^{WT}_{partner A} - {\Delta}G^{WT}_{partner B})\\
+  \end{split}
+\end{equation}
+
+\begin{equation}\label{MAE-equation}
+  MAE = \dfrac{1}{n}\sum\limits_{i=1}^n|f_i-y_i| = \dfrac{1}{n}\sum\limits_{i=1}^n|e_i|
+\end{equation}
 
 % \printbibliography
 \bibliographystyle{abbrv}
