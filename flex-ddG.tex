@@ -1,4 +1,4 @@
-\documentclass[journal=jpcbfk,manuscript=article]{achemso}
+\documentclass[journal=jpcbfk,manuscript=article,doi=true]{achemso}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Place any additional packages needed here.  Only include packages
@@ -8,9 +8,9 @@
 %% servers.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[T1]{fontenc}       % Use modern font encodings
+\usepackage[capitalise]{cleveref}
 \usepackage{amsmath}
 \usepackage{import}
-\usepackage[capitalise]{cleveref}
 \usepackage{booktabs}
 \usepackage{multirow}
 
@@ -27,6 +27,7 @@
 %% when typesetting).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+\newcommand\ddg{$\Delta\Delta G$}
 
 \input{authors-title}
 
@@ -72,6 +73,8 @@
 \begin{suppinfo}
 \input{suppinfo}
 \end{suppinfo}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The appropriate \bibliography command should be placed here.
