@@ -9,7 +9,7 @@ CVTEXNAME = flex-ddG
 all: $(CVTEXNAME).pdf
 $(CVTEXNAME).pdf: $(CVTEXNAME).tex $(SOURCES)
 	pdflatex $(CVTEXNAME)
-	$(BIB_PROG) $(CVTEXNAME)
+	-$(BIB_PROG) $(CVTEXNAME)
 	pdflatex $(CVTEXNAME)
 	pdflatex $(CVTEXNAME)
 clean:
