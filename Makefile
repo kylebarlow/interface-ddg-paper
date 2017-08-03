@@ -3,7 +3,7 @@ BIB_PROG := bibtex
 
 # export TEXINPUTS := ~/texmf/achemso:$TEXINPUTS
 
-SOURCES = Makefile flex-ddG.tex references.bib
+SOURCES = Makefile *.tex references.bib
 CVTEXNAME = flex-ddG
 
 all: $(CVTEXNAME).pdf

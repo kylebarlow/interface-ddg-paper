@@ -2,189 +2,102 @@
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-This is a paragraph of text to fill the introduction of the
-demonstration file.  The demonstration file attempts to show the
-modifications of the standard \LaTeX\ macros that are implemented by
-the \textsf{achemso} class.  These are mainly concerned with content,
-as opposed to appearance.
+
+Protein-protein interface interactions are important for biological systems processes.
+Being able to computationally predict the strength of and perturb these interactions would not only serve as a useful experimental tool to improve our understanding of biology, but would also enhance our ability to make drugs to target new processes.
+
+(There are over 9500 known domain-domain interactions in the PDB \cite{finn_ipfam:_2014}) In particular, a computational method capable of predicting mutations that strengthen or weaken known protein-protein interactions would provide a tool capable of precisely perturbing these interactions in such a way to generate knowledge about biological processes and function as drugs.
+
+We set out to create a method for prediction of interface ddGs within the Rosetta macromolecular modeling suite(citation?). The preexisting state-of-the-art Rosetta ddG method,  ddg\_monomer \cite{Kellogg_role_2011}, had not yet been benchmarked on the case of mutations in interfaces of protein-protein complexes. Prior alanine scanning ddG methods were benchmarked in interfaces, but only for mutations for alanine \cite{kortemme_simple_2002,conchuir_web_2015}. These alanine scanning methods sampled only side chain degrees of freedom, which is a fair approximation to make for mutations to alanine (which are not expected to perturb the backbone very much), but not for more general mutations. Continual benchmarking is important because Benchmarks showed that ``Alanine scanning performance has not shown improvement when used with modern Rosetta score functions and aggressive side chain/backbone minimization methods'' \cite{conchuir_web_2015}.
+
+Additionally, we set out to use ensembles. Ensembles had worked well before for prediction of change in stability ddGs \cite{benedix_predicting_2009} and to improve binding dG calculations between kinases and their inhibitors \cite{araki_effect_2016}.
+
+As ``protein molecule in solution is quite mobile, at a range of sizes and timescales,'' (quote from Davis Backrub/Richardson paper) we are generating ensembles using Backrub. The backrub motion is based on local, coupled, side chain and backbone motions observed in high-resolution crystal structures \cite{davis_backrub_2006}. Backrub appears to recapitulate properties of proteins that have been experimentally determined. Eg NMR\cite{friedland_correspondence_2009}, sequence profiles at protein-protein interfaces \cite{humphris_prediction_2008}, sequence profiles of protein-peptide binding specificity \cite{smith_structure-based_2010,smith_predicting_2011}, and redesign of ligand-binding specificity\cite{ollikainen_coupling_2015}.
+
+``the Backrub ensemble is the only ensemble which has a diversity that is greater than its average deviation from crystal structure, a consequence of the ability of Backrub motions to mimic high resolution dynamics from solution NMR while maintaining structural similarity to the input crystal structure''.\cite{davey_improving_2014}
+
+\subsection{unfinished}
+If all of this is true, this should help us look at the energetics of mutations in protein-protein interfaces
+
+Why interfaces? Standard (structural) methods of ddg prdeiction( like ddg\_monomer), don't work great on interfaces, so is a good challenge to predict.
+
+Datasets are also better and more curated than before, so a good time to reevaluate
+
+Predicting energetic changes in functional sites such as binding interfaces is particularly important for protein design
+
+This sets us apart from MD methods because you can’t use MD for design. Rosetta is a standard method for design.
+
+Backrub samples local conformational space.
+It has been previously shown to be successful at sequence tolerance, coupled moves, etc. (Roberto Chica).
+
+Backrub ensemble are good \cite{schenkelberg_protein_2016}
+
+Conformational sampling is large, and sampling it effectively is important if ensembles are to be used. Previous methods such as alanine scanning were able to succeed with a simple heuristic of assuming no backbone change, as the backbone is not likely to change for mutations to alanine.
+
+ddG methods to cite in intro:\cite{vangone_contacts-based_2015}
+
+\section{Methods}
+
+A good benchmarking set is important to test a new method. Skempi \cite{moal_skempi:_2012} is the largest known database, but is not curated to be maximally effective for method development and benchmarking. Because experimental methods can have a strong effect on the performance of predictors of changes in binding free energy\cite{geng_exploring_2016}, some filtering of the entire universe of known mutations is necessary. To prevent overfitting, we have chosen to use the dataset used by ZEMU \cite{dourado_multiscale_2014}. Among other criteria, the dataset was curated to include a wide range of both stabilizing and destabilizing mutants, and to only include data published in peer-review journals.
+
+After a review of the literature the known experimental ddG values originated from, we removed one data point from the 1254 point ZEMu set that we could not match to the original reported affinity value. We also removed 5 mutations that were duplicates and 8 mutations that were reverse mutations of other data points, leaving us with a test set of 1240 mutations.
+
+We defined which complexes contained at least one antibody binding partner by comparison with SAbDab \cite{dunbar_sabdab:_2014}.
+
+We implemented our flex-ddG protocol within the RosettaScripts scripting interface to the Rosetta macromolecular modeling software suite \cite{fleishman_rosettascripts_2011}, which makes the protocol easily adaptable to future improvements and energy function development. We utilized the Talaris \cite{leaver-fay_chapter_2013,song_structure-guided_2011,shapovalov_smoothed_2011} and Ref\cite{alford_rosetta_2017} energy functions in Rosetta. Version numbers of tested software are available in (Supplementary Table XXX).
+
+Method steps are outlined in Figure 1. Step 1: The protocol begins with an initial minimization to calibrate the input model to the Rosetta energy function. This (and later) minimizations are performed with constraints that harmonically restrain pairwise atom distance to their values in the input crystal structure. Step 2: The backrub method is run, at a temperature of 1.2, and for up to 60,000 trials. 50 output structures are generated, which will be used as the base of conformational diversity for the rest of the week. Step 3A: For each of the 50 structure models in the ensemble (output by backrub), the Rosetta ``packer'' is run to search side chain space through the Dunbrack rotamer library built into Rosetta\cite{shapovalov_smoothed_2011}, optimizing side chains for the wild type sequence. Step 3B: Independently and in parallel to step 3A, the packer is run on the 50 backrub models, optimizing side chains for the mutant sequence. Step 4A: Minimization of each of the 50 wild-type structures, again adding pairwise atom-atom constraints to the input structure. Step 4B: Minimization of each of the 50 mutant structures. Step 5A: Each of the 50 minimized wild-type structures are scored in complex, and the individual complex components are scored individually. Step 5B: Each of the 50 minimized mutant structures are scored in complex, and the individual complex components are scored individually. Step 6: The interface ddG score is produced via the following formula:
+
+\begin{equation}\label{split-ddg-equation}
+  \begin{split}
+    {\Delta\Delta}G_{bind} & ={\Delta}G^{MUT}_{bind} - {\Delta}G^{WT}_{bind}\\
+    & =({\Delta}G^{MUT}_{complex} - {\Delta}G^{MUT}_{partner A} - {\Delta}G^{MUT}_{partner B})\\
+    & \quad - ({\Delta}G^{WT}_{complex} - {\Delta}G^{WT}_{partner A} - {\Delta}G^{WT}_{partner B})\\
+  \end{split}
+\end{equation}
+
+We evaluate performance of the protocol by comparing predicted ddG scores to known experimental values, using Pearson’s correlation R, MAE, and Fraction Correct (FC). Fraction Correct is defined as the number of mutations categorized as stabilizing, neutral, or destabilizing correctly, divided by the total number of mutations in the benchmark set. Stabilizing mutations are defined as those with a ddG <= -1.0 kcal/mol, neutral as those with -1.0 kcal/mol < ddG < 1.0 kcal/mol, and destabilizing as those with ddG >= 1.0 kcal/mol.
+
+MAE (Mean Absolute Error) is defined as:
+\begin{equation}\label{MAE-equation}
+  MAE = \dfrac{1}{n}\sum\limits_{i=1}^n|f_i-y_i| = \dfrac{1}{n}\sum\limits_{i=1}^n|e_i|
+\end{equation}
 
 \section{Results and discussion}
 
-\subsection{Outline}
+Main performance of the protocol is summarized in \ref{tab:table-2}. Performance is shown for 4 prediction methods: (a) our flex ddG, backrub ensemble method, (b) the prior state-of-the-art Rosetta methodology, ddg\_monomer \cite{Kellogg_role_ 2011}, (c) a control version of our flex ddG protocol, with the backrub ensemble generation step omitted, leaving only the minimization and packing steps, and (d) the ZEMu (zone equilibration of mutants) method\cite{dourado_multiscale_2014}.
 
-The document layout should follow the style of the journal concerned.
-Where appropriate, sections and subsections should be added in the
-normal way. If the class options are set correctly, warnings will be
-given if these should not be present.
+Our flex ddG method outperforms the comparison methods on the complete dataset in each of the correlation, MAE, and fraction correct methods. On the small-to-large subset of mutations where we expect to see the largest performance gains from using a backbone ensemble method, we see a substantial improvement in performance as compared to the alternative methods. Performance of the flex ddG on the subset of single mutations to alanine, for which we do not expect to require intensive backbone sampling, as mutations to alanine can accommodate much of ramachandran space{ref?}, also is competitive or outperforms the alternative methods. Finally, our method shows improved performance compared to the control method and ddg\_monomer on the subset of multiple mutations, but does not match the performance of the ZEMu method. The underlying scatterplots for the flex ddG and control methods on the complete dataset and small-to-large subsets are shown in \cite{fig:figure-1}. Scatterplots for the underlying data behind the rest of the rows in \ref{tab:table-2} is shown in the Supplementary Information.
 
-\subsection{References}
+\cite{fig:fig4-id} shows the effect of increasing ensemble size on performance, as measured by Pearson’s R and MAE. For the complete data set and all subsets shown, correlation performance increases until the scores of about 20 structures are averaged to produce the final predicted interface ddG, after which point the returns from additional sampling diminish. MAE performance also ceases to significantly improve performance after about 20 structures. Performance improvement is most strong for the case of small-to-large mutations.
 
-The class makes various changes to the way that references are
-handled.  The class loads \textsf{natbib}, and also the
-appropriate bibliography style.  References can be made using
-the normal method; the citation should be placed before any
-punctuation, as the class will move it if using a superscript
-citation style
-\cite{Mena2000,Abernethy2003,Friedman-Hill2003,EuropeanCommission2008}.
-The use of \textsf{natbib} allows the use of the various citation
-commands of that package: \citeauthor{Abernethy2003} have shown
-something, in \citeyear{Cotton1999}, or as given by
-Ref.~\citenum{Mena2000}.  Long lists of authors will be
-automatically truncated in most article formats, but not in
-supplementary information or reviews \cite{Pople2003}. If you
-encounter problems with the citation macros, please check that
-your copy of \textsf{natbib} is up to date. The demonstration
-database file \texttt{references.bib} shows how to complete
-entries correctly. Notice that ``\latin{et al.}'' is auto-formatted
-using the \texttt{\textbackslash latin} command.
+\cite{fig:fig4-WildTypeComplex} also shows the effect on performance of averaging more structures, but the structures used are first sorted by the score of the score of the corresponding repacked and minimized wild type structure. In this case, continual improvement of both correlation and MAE are seen for all subgroups as more structures are averaged, but the largest gains in performance are still obtained with the first 20-30 structures used. As it is not possible to obtain this performance by picking the 20-30 best scoring complexes without have generated an ensemble of 50 to select for, and as the performance when choosing structures sorted in this fashion is not significantly improved over \cite{fig:fig4-id} (where there is no sorting), simply generating 20-30 structures should constitute sufficient sampling for most use cases.
 
-Multiple citations to be combined into a list can be given as
-a single citation.  This uses the \textsf{mciteplus} package
-\cite{Johnson1972,*Arduengo1992,*Eisenstein2005,*Arduengo1994}.
-Citations other than the first of the list should be indicated
-with a star. If the \textsf{mciteplus} package is not installed,
-the standard bibliography tools will still work but starred
-references will be ignored. Individual references can be referred
-to using \texttt{\textbackslash mciteSubRef}:
-``ref.~\mciteSubRef{Eisenstein2005}''.
+\section{Conclusions}
 
-The class also handles notes to be added to the bibliography.  These
-should be given in place in the document \bibnote{This is a note.
-The text will be moved the the references section.  The title of the
-section will change to ``Notes and References''.}.  As with
-citations, the text should be placed before punctuation.  A note is
-also generated if a citation has an optional note.  This assumes that
-the whole work has already been cited: odd numbering will result if
-this is not the case \cite[p.~1]{Cotton1999}.
+\subsection{unfinished}
 
-\subsection{Floats}
+\begin{itemize}
+\item Monomeric Rosetta ddG does not work for interfaces
+\item As stated in intro, ensembles have advantages, etc.
+\item Dataset: zemu (why better than skempi). Table 1
+\item General prediction protocol in figure 1
+\item Metric description: pearson’s R, fraction correct, MAE
+\item Description of main results, subsets, and comparison to zemu method
+\item Scatter plots and table
+\item Discuss fig 3 - step v correlation. Also discuss temperature, ref supplemental table/fig
+\item Number of structures in ensemble average, discuss filtering structures by score (ref supp. fig). Fig 4 - one panel showing number of structures effect on correlation (at best backrub step)
+\item Structure comparison - RMSD deviation are subtle. Torsions could be more informative?
+\item We applied machine learning to our cases to try and study which individual score terms were informative
+\end{itemize}
 
-New float types are automatically set up by the class file.  The
-means graphics are included as follows (Scheme~\ref{sch:example}).  As
-illustrated, the float is ``here'' if possible.
-\begin{scheme}
-  Your scheme graphic would go here: \texttt{.eps} format\\
-  for \LaTeX\, or \texttt{.pdf} (or \texttt{.png}) for pdf\LaTeX\\
-  \textsc{ChemDraw} files are best saved as \texttt{.eps} files:\\
-  these can be scaled without loss of quality, and can be\\
-  converted to \texttt{.pdf} files easily using \texttt{eps2pdf}.\\
-  %\includegraphics{graphic}
-  \caption{An example scheme}
-  \label{sch:example}
-\end{scheme}
+\subsection{more unfinished}
+Local conformational sampling
 
-\begin{figure}
-  As well as the standard float types \texttt{table}\\
-  and \texttt{figure}, the class also recognises\\
-  \texttt{scheme}, \texttt{chart} and \texttt{graph}.
-  \caption{An example figure}
-  \label{fgr:example}
-\end{figure}
+Perhaps because
+As the protein folding funnel is narrower near the free energy minimum {Dill, From Levinthal to pathways to funnels (include this?)}, it should be more possible to find a discrete number of states to represent in an ensemble and use in ddG modeling,
+We can capture the thin part of the funnel:
+“backrub sampling may capture a sizable fraction of localized conformational changes that occur in proteins” \cite{humphris_prediction_2008}
 
-Charts, figures and schemes do not necessarily have to be labelled or
-captioned.  However, tables should always have a title. It is
-possible to include a number and label for a graphic without any
-title, using an empty argument to the \texttt{\textbackslash caption}
-macro.
-
-The use of the different floating environments is not required, but
-it is intended to make document preparation easier for authors. In
-general, you should place your graphics where they make logical
-sense; the production process will move them if needed.
-
-\subsection{Math(s)}
-
-The \textsf{achemso} class does not load any particular additional
-support for mathematics.  If packages such as \textsf{amsmath} are
-required, they should be loaded in the preamble.  However,
-the basic \LaTeX\ math(s) input should work correctly without
-this.  Some inline material \( y = mx + c \) or $ 1 + 1 = 2 $
-followed by some display. \[ A = \pi r^2 \]
-
-It is possible to label equations in the usual way (Eq.~\ref{eqn:example}).
-\begin{equation}
-  \frac{\mathrm{d}}{\mathrm{d}x} \, r^2 = 2r \label{eqn:example}
-\end{equation}
-This can also be used to have equations containing graphical
-content. To align the equation number with the middle of the graphic,
-rather than the bottom, a minipage may be used.
-\begin{equation}
-  \begin{minipage}[c]{0.80\linewidth}
-    \centering
-    As illustrated here, the width of \\
-    the minipage needs to allow some  \\
-    space for the number to fit in to.
-    %\includegraphics{graphic}
-  \end{minipage}
-  \label{eqn:graphic}
-\end{equation}
-
-\section{Experimental}
-
-The usual experimental details should appear here.  This could
-include a table, which can be referenced as Table~\ref{tbl:example}.
-Notice that the caption is positioned at the top of the table.
-\begin{table}
-  \caption{An example table}
-  \label{tbl:example}
-  \begin{tabular}{ll}
-    \hline
-    Header one  & Header two  \\
-    \hline
-    Entry one   & Entry two   \\
-    Entry three & Entry four  \\
-    Entry five  & Entry five  \\
-    Entry seven & Entry eight \\
-    \hline
-  \end{tabular}
-\end{table}
-
-Adding notes to tables can be complicated.  Perhaps the easiest
-method is to generate these using the basic
-\texttt{\textbackslash textsuperscript} and
-\texttt{\textbackslash emph} macros, as illustrated (Table~\ref{tbl:notes}).
-\begin{table}
-  \caption{A table with notes}
-  \label{tbl:notes}
-  \begin{tabular}{ll}
-    \hline
-    Header one                            & Header two \\
-    \hline
-    Entry one\textsuperscript{\emph{a}}   & Entry two  \\
-    Entry three\textsuperscript{\emph{b}} & Entry four \\
-    \hline
-  \end{tabular}
-
-  \textsuperscript{\emph{a}} Some text;
-  \textsuperscript{\emph{b}} Some more text.
-\end{table}
-
-The example file also loads the optional \textsf{mhchem} package, so
-that formulas are easy to input: \texttt{\textbackslash ce\{H2SO4\}}
-gives \ce{H2SO4}.  See the use in the bibliography file (when using
-titles in the references section).
-
-The use of new commands should be limited to simple things which will
-not interfere with the production process.  For example,
-\texttt{\textbackslash mycommand} has been defined in this example,
-to give italic, mono-spaced text: some text.
-
-\section{Extra information when writing JACS Communications}
-
-When producing communications for \emph{J.~Am.\ Chem.\ Soc.}, the
-class will automatically lay the text out in the style of the
-journal. This gives a guide to the length of text that can be
-accommodated in such a publication. There are some points to bear in
-mind when preparing a JACS Communication in this way.  The layout
-produced here is a \emph{model} for the published result, and the
-outcome should be taken as a \emph{guide} to the final length. The
-spacing and sizing of graphical content is an area where there is
-some flexibility in the process.  You should not worry about the
-space before and after graphics, which is set to give a guide to the
-published size. This is very dependant on the final published layout.
-
-You should be able to use the same source to produce a JACS
-Communication and a normal article.  For example, this demonstration
-file will work with both \texttt{type=article} and
-\texttt{type=communication}. Sections and any abstract are
-automatically ignored, although you will get warnings to this effect.
+Questions:
+Shouldn’t it be easier to predict interface ddGs, as we don’t need to consider the stability effects of mutants in the unfolded state
