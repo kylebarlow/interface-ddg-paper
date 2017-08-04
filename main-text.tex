@@ -25,7 +25,7 @@ Datasets are also better and more curated than before, so a good time to reevalu
 
 Predicting energetic changes in functional sites such as binding interfaces is particularly important for protein design
 
-This sets us apart from MD methods because you can’t use MD for design. Rosetta is a standard method for design.
+This sets us apart from MD methods because you can't use MD for design. Rosetta is a standard method for design.
 
 Backrub samples local conformational space.
 It has been previously shown to be successful at sequence tolerance, coupled moves, etc. (Roberto Chica).
@@ -72,7 +72,7 @@ where $y_i$ are the predicted \ddg\ values, $x_i$ are the known, experimentally 
 
 \subimport*{figs-and-tables/}{table-main}
 
-Main performance of the protocol is summarized in \cref{tab:table-main}. Performance is shown for 4 prediction methods: (a) our flex ddG, backrub ensemble method, (b) the prior state-of-the-art Rosetta methodology, ddg\_monomer \cite{kellogg_role_2011}, (c) a control version of our flex ddG protocol, with the backrub ensemble generation step omitted, leaving only the minimization and packing steps, and (d) the ZEMu (zone equilibration of mutants) method\cite{dourado_multiscale_2014}.
+Main performance of the protocol is summarized in \cref{tab:table-main}. Performance is shown for 4 prediction methods: (a) our flex ddG, backrub ensemble method, (b) the prior state-of-the-art Rosetta methodology, ddg\_monomer \cite{kellogg_role_2011}, (c) a control version of our flex ddG protocol which omits the backrub ensemble generation step, leaving only the minimization and packing steps, and (d) the ZEMu (zone equilibration of mutants) method\cite{dourado_multiscale_2014}.
 
 Our flex ddG method outperforms the comparison methods on the complete dataset in each of the correlation, MAE, and fraction correct methods. On the small-to-large subset of mutations where we expect to see the largest performance gains from using a backbone ensemble method, we see a substantial improvement in performance as compared to the alternative methods. Performance of the flex ddG on the subset of single mutations to alanine, for which we do not expect to require intensive backbone sampling, as mutations to alanine can accommodate much of ramachandran space\cite{cunningham_high-resolution_1989}, also is competitive or outperforms the alternative methods. Finally, our method shows improved performance compared to the control method and ddg\_monomer on the subset of multiple mutations, but does not match the performance of the ZEMu method.
 However, flex-ddG outperforms ZEMu on multiple mutations if none of the mutations are to alanine (\cref{tab:table-mult}).
@@ -81,13 +81,48 @@ The underlying scatterplots for the flex ddG and control methods on the complete
 
 \subimport*{figs-and-tables/}{figure-scatter}
 
-\cref{fig:structs-v-corr-id} shows the effect of increasing ensemble size on performance, as measured by Pearson’s R and MAE. For the complete data set and all subsets shown, correlation performance increases until the scores of about 20 structures are averaged to produce the final predicted interface ddG, after which point the returns from additional sampling diminish. MAE performance also ceases to significantly improve performance after about 20 structures. Performance improvement is most strong for the case of small-to-large mutations.
+\subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}
 
-\cref{fig:structs-v-corr-WildTypeComplex} also shows the effect on performance of averaging more structures, but the structures used are first sorted by the score of the score of the corresponding repacked and minimized wild type structure. In this case, continual improvement of both correlation and MAE are seen for all subgroups as more structures are averaged, but the largest gains in performance are still obtained with the first 20-30 structures used. As it is not possible to obtain this performance by picking the 20-30 best scoring complexes without have generated an ensemble of 50 to select for, and as the performance when choosing structures sorted in this fashion is not significantly improved over the results in \cref{fig:structs-v-corr-id} (where there is no sorting), simply generating 20-30 structures should constitute sufficient sampling for most use cases.
+\subsection{Effect of averaging more structures}
 
-Sampling is also controlled by changing how many steps the backrub simulation runs for. \cref{fig:steps-v-corr}.
+\cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14} shows the effect on performance as scores from an increasing number of structures are averaged.
+The structures used are first sorted by the score of the score of the corresponding repacked and minimized wild type structure.
+\cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}(a) shows perfomance on the complete dataset.
+As more structures, of increasingly high wild type complex score, are averaged, correlation with known experimental values increases.
+Conversely, performance for the no backrub control method (shown in light blue) decreases as more structures are average.
+This result indicates that sampling with backrub adds information that improves ddG calculation, and adds it in such a way that cannot be quantified through score alone, as the additional structures being averaged have higher scores \cref{fig:wildtypecomplex-scores-complete}, and would traditionally be though of as being less predictive.
+
+The ddg\_monomer method also sees an increase in performance on the complete dataset as more structures are averaged (\cref{fig:structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}), indicating that ramping the repulsive term of the energy function during minimization in ddg\_monomer also improves results by sampling conformational space more broadly.
+
+Averaging across more structures show an even stronger positive effect on correlation \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}(b) for the subset of small-to-large mutations.
+However, the subset of multiple mutations (where none are mutations to alanine) shown in \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}(c) does not see monotonically increasing performance as more structures are averaged, indicating that more parameterization of the backrub method might be necessary for multiple mutations.
+
+The improved performance effect is also present in \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}(d) for the subset of single mutations to alanines, a subset where it is not expected that increased sampling is neccessary, indicating that increased sampling at least does not hurt in this case.
+
+As it is not possible to select 20 best-scoring structures without generating a full ensemble of 50, and as the performance when choosing structures sorted in this fashion is not significantly improved over the results in \cref{fig:structs-v-corr-id-zemu-12-60000-rscript-validated-t14} (where there is no sorting), simply generating 20-30 structures should constitute sufficient sampling for most use cases.
+
+\subsection{Effect of changing backrub temperature}
+
+Sampling is also controlled by changing how many steps the backrub simulation runs for.
+\cref{fig:steps-v-corr} shows the performance effect of increasing backrub simulation length (while averaging all 50 structures at each output step).
+Increased performance is not simply a result of scores decreasing as the simulation progresses, as the score of the minimized wild type complex does not decrease uniformly across the sampled ensemble as the simulation progresses (\cref{fig:wildtypecomplex-scores-complete}).
+
+When viewing the effect on sampling on increases steps (vs. previously increasing number of structures), we see relatively flat performance on the complete dataset and subset of single mutations to alanine.
+As with increasing number of structures, we also see increased performance on the subset of small-to-large mutations.
+Unlike when increasing the number of averaged structures, we see improved performance with additional sampling (from longer backrub simulations) on the subset of multiple mutations (not to alanine). This indicates that the effects of increasing sampling through creating more structure models and running longer backrub simulations are not equivalent, and that both sampling parameters are important to consider when running the flex ddG protocol.
+
+\subsection{Score analysis}
+
+We applied machine learning to our cases to try and study which individual score terms were informative.
+
+\subsection{Structure analysis}
+
+As mean backrub ensemble RMSD increases (\cref{fig:t14-mean-ensemble-error}), we don't see any significant correlation between mean ensemble RMSD and ddG error (\cref{fig:spear-corr-rmsd-error}). E.g. we can't measure that we are sampling more effectively through mean ensemble RMSD.
 
 \section{Conclusions}
+
+We have made sampling better, maybe it is time to also make scoring better. Ref energy energy does not improve performation (TODO citation).
+GAM reweighting indicates potential future benefits of non-linear reweighting of Rosetta energy function terms, particularly in this case of interfaces.
 
 \subsection{unfinished}
 
@@ -99,7 +134,6 @@ Sampling is also controlled by changing how many steps the backrub simulation ru
 \item Metric description: pearson’s R, fraction correct, MAE
 \item Description of main results, subsets, and comparison to zemu method
 \item Scatter plots and table
-\item Discuss fig 3 - step v correlation. Also discuss temperature, ref supplemental table/fig
 \item Number of structures in ensemble average, discuss filtering structures by score (ref supp. fig). Fig 4 - one panel showing number of structures effect on correlation (at best backrub step)
 \item Structure comparison - RMSD deviation are subtle. Torsions could be more informative?
 \item We applied machine learning to our cases to try and study which individual score terms were informative
