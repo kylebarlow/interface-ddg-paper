@@ -8,7 +8,22 @@ Being able to computationally predict the strength of and perturb these interact
 
 (There are over 9500 known domain-domain interactions in the PDB \cite{finn_ipfam:_2014}) In particular, a computational method capable of predicting mutations that strengthen or weaken known protein-protein interactions would provide a tool capable of precisely perturbing these interactions in such a way to generate knowledge about biological processes and function as drugs.
 
-We set out to create a method for prediction of interface ddGs within the Rosetta macromolecular modeling suite(citation?). The preexisting state-of-the-art Rosetta ddG method,  ddg\_monomer \cite{kellogg_role_2011}, had not yet been benchmarked on the case of mutations in interfaces of protein-protein complexes. Prior alanine scanning ddG methods were benchmarked in interfaces, but only for mutations for alanine \cite{kortemme_simple_2002,conchuir_web_2015}. These alanine scanning methods sampled only side chain degrees of freedom, which is a fair approximation to make for mutations to alanine (which are not expected to perturb the backbone very much), but not for more general mutations. Continual benchmarking is important because Benchmarks showed that ``Alanine scanning performance has not shown improvement when used with modern Rosetta score functions and aggressive side chain/backbone minimization methods'' \cite{conchuir_web_2015}.
+Prior methods have attempted to tackle this problem computationally,
+Fold-X \cite{guerois_predicting_2002},
+GOBLIN \cite{kamisetty_accounting_2011},
+BeAtMuSiC \cite{dehouck_beatmusic:_2013},
+contact potentials \cite{moal_intermolecular_2013},
+``Predicting the Impact of Missense Mutations on Protein–Protein Binding Affinity'' \cite{li_predicting_2014},
+graph-based signatures \cite{pires_mcsm:_2014},
+zone equilibration of mutants \cite{dourado_multiscale_2014},
+Rosetta method specifically designed to enhance \cite{sammond_structure-based_2007},
+design of antibody-affinity improvement \cite{lippow_computational_2007},
+designed affinity influenza inhibitors \cite{whitehead_optimization_2012},
+ddG methods to cite in intro:\cite{vangone_contacts-based_2015}.
+
+from methods specifically tailored to alanine scanning
+
+We set out to create a method for prediction of interface ddGs within the Rosetta macromolecular modeling suite(citation?). The preexisting state-of-the-art Rosetta ddG method,  ddg\_monomer \cite{kellogg_role_2011}, had not yet been benchmarked on the case of mutations in interfaces of protein-protein complexes. Prior alanine scanning ddG methods were benchmarked in interfaces, but only for mutations for alanine \cite{kortemme_simple_2002,kortemme_computational_2004,conchuir_web_2015}. These alanine scanning methods sampled only side chain degrees of freedom, which is a fair approximation to make for mutations to alanine (which are not expected to perturb the backbone very much), but not for more general mutations. Continual benchmarking is important because Benchmarks showed that ``Alanine scanning performance has not shown improvement when used with modern Rosetta score functions and aggressive side chain/backbone minimization methods'' \cite{conchuir_web_2015}.
 
 Additionally, we set out to use ensembles. Ensembles had worked well before for prediction of change in stability ddGs \cite{benedix_predicting_2009} and to improve binding dG calculations between kinases and their inhibitors \cite{araki_effect_2016}.
 
@@ -33,8 +48,6 @@ It has been previously shown to be successful at sequence tolerance, coupled mov
 Backrub ensemble are good \cite{schenkelberg_protein_2016}
 
 Conformational sampling is large, and sampling it effectively is important if ensembles are to be used. Previous methods such as alanine scanning were able to succeed with a simple heuristic of assuming no backbone change, as the backbone is not likely to change for mutations to alanine.
-
-ddG methods to cite in intro:\cite{vangone_contacts-based_2015}
 
 \section{Methods}
 
