@@ -3,65 +3,63 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-Protein-protein interface interactions are important for biological systems processes.
-Being able to computationally predict the strength of and perturb these interactions would not only serve as a useful experimental tool to improve our understanding of biology, but would also enhance our ability to make drugs to target new processes.
+Protein-protein interface interactions underly many biological processes, including control of complex systems and antibody-antigen recognition.
+In fact, mutations at protein-protein interfaces are over-represented within disease-causing mutations\cite{jubb_mutations_2017}, indicating the central importance of these interactions to biology and impications to human health.
+An ability to computationally predict the strength of and perturb these interactions would not only serve as a useful experimental tool to improve our understanding of biology, but would also enhance our ability to create drugs with novel methods of actions, and additionally enhance engineering applications such as design of protein biosensors.
+In particular, as there are over 9500 known domain-domain interactions in the PDB \cite{finn_ipfam:_2014}, a computational method capable of predicting mutations that strengthen or weaken known protein-protein interactions would provide a tool capable of precisely perturbing these interactions in such a way to generate knowledge about biological processes or improve drug function.
 
-(There are over 9500 known domain-domain interactions in the PDB \cite{finn_ipfam:_2014}) In particular, a computational method capable of predicting mutations that strengthen or weaken known protein-protein interactions would provide a tool capable of precisely perturbing these interactions in such a way to generate knowledge about biological processes and function as drugs.
 
-Prior methods have attempted to tackle this problem computationally,
-Fold-X \cite{guerois_predicting_2002},
-GOBLIN \cite{kamisetty_accounting_2011},
-BeAtMuSiC \cite{dehouck_beatmusic:_2013},
-contact potentials \cite{moal_intermolecular_2013},
-``Predicting the Impact of Missense Mutations on Protein–Protein Binding Affinity'' \cite{li_predicting_2014},
-graph-based signatures \cite{pires_mcsm:_2014},
-zone equilibration of mutants \cite{dourado_multiscale_2014},
-Rosetta method specifically designed to enhance \cite{sammond_structure-based_2007},
-design of antibody-affinity improvement \cite{lippow_computational_2007},
-designed affinity influenza inhibitors \cite{whitehead_optimization_2012},
-ddG methods to cite in intro:\cite{vangone_contacts-based_2015}.
+Prior methods have attempted to predict changes in binding free energies by taking various approaches,
+including using weighted energy functions that set to describe physical interactions underlying protein-protein interactions\cite{guerois_predicting_2002,kamisetty_accounting_2011},
+statistical and contact potentials \cite{dehouck_beatmusic:_2013,moal_intermolecular_2013,vangone_contacts-based_2015,brender_prediction_2015},
+a combination of these approaches\cite{li_predicting_2014},
+graph-based representations\cite{pires_mcsm:_2014},
+methods focused on antibodies\cite{lippow_computational_2007},
+and methods that attempt to sample backbone structure space locally around mutations\cite{dourado_multiscale_2014}.
 
-from methods specifically tailored to alanine scanning
+We set out to create a method for prediction of change in binding free energy after mutation (interface \ddg) within the Rosetta macromolecular modeling suite, which is freely available for academic usage, allowing future combination of these predictions with Rosetta's powerful protein design capabilities, which has proven successful in a variety of applications \cite{tinberg_computational_2013,kaufmann_practically_2010}.
+Prior projects have studied the applied ability of Rosetta specifically to enhance protein-protein binding affinities \cite{sammond_structure-based_2007} and to design influenza inhibitors \cite{whitehead_optimization_2012}, but no prior benchmarking effort has studied the performance of change in binding free energy predictions in Rosetta on a large, diverse benchmark data set, in part because such a dataset has only become available more recently.
+The preexisting state-of-the-art Rosetta \ddg\ method,  ddg\_monomer \cite{kellogg_role_2011}, has been proven effective at predicting changes in stability in monomeric proteins after mutation, but had not yet been tested at predicting change of binding free energies in protein-protein complexes.
+Prior ``alanine scanning'' \ddg\ methods were benchmarked in interfaces, but only for mutations for alanine \cite{kortemme_simple_2002,kortemme_computational_2004,conchuir_web_2015}.
+These alanine scanning methods sampled only side chain degrees of freedom, which is a fair approximation to make for mutations to alanine (which are not expected to cause large backbone perturbations\cite{cunningham_high-resolution_1989}), but a less probable assumption for mutations to larger side chains, as some degree of backbone rearrangement is expected to be necessary to accomodate these larger mutations.
+Adaptation of these alanine scanning methods to recent score function and sampling methods has not shown improvement in benchmarking\cite{conchuir_web_2015}, indicating a need to more thoroughly develop and test a method that attempts to more aggressively sample conformational space.
 
-We set out to create a method for prediction of interface ddGs within the Rosetta macromolecular modeling suite(citation?). The preexisting state-of-the-art Rosetta ddG method,  ddg\_monomer \cite{kellogg_role_2011}, had not yet been benchmarked on the case of mutations in interfaces of protein-protein complexes. Prior alanine scanning ddG methods were benchmarked in interfaces, but only for mutations for alanine \cite{kortemme_simple_2002,kortemme_computational_2004,conchuir_web_2015}. These alanine scanning methods sampled only side chain degrees of freedom, which is a fair approximation to make for mutations to alanine (which are not expected to perturb the backbone very much), but not for more general mutations. Continual benchmarking is important because Benchmarks showed that ``Alanine scanning performance has not shown improvement when used with modern Rosetta score functions and aggressive side chain/backbone minimization methods'' \cite{conchuir_web_2015}.
+We sought to create a method that would take into account the natural conformational flexibility and dynamics of proteins by representing structures as an ensemble of individual full-atom models, generating sufficient microstate-like models to effectively cover the biologically relevant and and accessible portions of the free energy landscape.
+Ensemble representations have proven their effectiveness to predict change in protein stabilities after mutation\cite{benedix_predicting_2009} and to improve $\Delta G_{binding}$ calculations between kinases and their inhibitors \cite{araki_effect_2016}.
 
-Additionally, we set out to use ensembles. Ensembles had worked well before for prediction of change in stability ddGs \cite{benedix_predicting_2009} and to improve binding dG calculations between kinases and their inhibitors \cite{araki_effect_2016}.
-
-As ``protein molecule in solution is quite mobile, at a range of sizes and timescales,'' (quote from Davis Backrub/Richardson paper) we are generating ensembles using Backrub. The backrub motion is based on local, coupled, side chain and backbone motions observed in high-resolution crystal structures \cite{davis_backrub_2006}. Backrub appears to recapitulate properties of proteins that have been experimentally determined. Eg NMR\cite{friedland_correspondence_2009}, sequence profiles at protein-protein interfaces \cite{humphris_prediction_2008}, sequence profiles of protein-peptide binding specificity \cite{smith_structure-based_2010,smith_predicting_2011}, and redesign of ligand-binding specificity\cite{ollikainen_coupling_2015}.
-
-``the Backrub ensemble is the only ensemble which has a diversity that is greater than its average deviation from crystal structure, a consequence of the ability of Backrub motions to mimic high resolution dynamics from solution NMR while maintaining structural similarity to the input crystal structure''.\cite{davey_improving_2014}
-
-\subsection{unfinished}
-If all of this is true, this should help us look at the energetics of mutations in protein-protein interfaces
-
-Why interfaces? Standard (structural) methods of ddg prdeiction( like ddg\_monomer), don't work great on interfaces, so is a good challenge to predict.
-
-Datasets are also better and more curated than before, so a good time to reevaluate
-
-Predicting energetic changes in functional sites such as binding interfaces is particularly important for protein design
-
-This sets us apart from MD methods because you can't use MD for design. Rosetta is a standard method for design.
-
-Backrub samples local conformational space.
-It has been previously shown to be successful at sequence tolerance, coupled moves, etc. (Roberto Chica).
-
-Backrub ensemble are good \cite{schenkelberg_protein_2016}
-
-Conformational sampling is large, and sampling it effectively is important if ensembles are to be used. Previous methods such as alanine scanning were able to succeed with a simple heuristic of assuming no backbone change, as the backbone is not likely to change for mutations to alanine.
+We chose to sample conformational diversity through use of the ``backrub'' protocol implemented in Rosetta.
+The backrub method samples using local, coupled, side chain and backbone motions, similar to those observed in high-resolution crystal structures \cite{davis_backrub_2006}.
+Backrub ensembles appears to recapitulate properties of proteins that have been experimentally determined, such as side chain NMR order parameters\cite{friedland_simple_2008}, sequence profiles at protein-protein interfaces \cite{humphris_prediction_2008}, sequence profiles of protein-peptide binding specificity \cite{smith_structure-based_2010,smith_predicting_2011}, and can sample the conformational variability between protein homologs\cite{schenkelberg_protein_2016}.
+Backrub has also proved effective in design applications, such as for the redesign of ligand-binding specificity\cite{ollikainen_coupling_2015}.
+When Davey and Chica compared backrub ensembles to ensembles generated via molecular dynamics simulations or PertMin, backrub ensembles were shown in certain cases to be
+``the only ensemble which has a diversity that is greater than its average deviation from crystal structure, a consequence of the ability of Backrub motions to mimic high resolution dynamics from solution NMR while maintaining structural similarity to the input crystal structure''.\cite{davey_improving_2014}
+We hypothesized that this property of backrub ensembles would translate into these ensembles serving as an effective structural representation to use when predicting interface \ddg\ values.
 
 \section{Methods}
 
-A good benchmarking set is important to test a new method. Skempi \cite{moal_skempi:_2012} is the largest known database, but is not curated to be maximally effective for method development and benchmarking. Because experimental methods can have a strong effect on the performance of predictors of changes in binding free energy\cite{geng_exploring_2016}, some filtering of the entire universe of known mutations is necessary. To prevent overfitting, we have chosen to use the dataset used by ZEMU \cite{dourado_multiscale_2014}. Among other criteria, the dataset was curated to include a wide range of both stabilizing and destabilizing mutants, and to only include data published in peer-review journals.
+Developing and testing with confidence a new method to predict changes in binding free energy after mutation requires a large benchmark set of covering single mutations, multiple mutations, mutations to all amino acid types, and mutations across a variety of complexes.
+Skempi \cite{moal_skempi:_2012} is the largest known database of known \ddg s in protein-protein interfaces, but can be curated further for maximum effectiveness for method development and benchmarking.
+In part to prevent overfitting our method on a benchmark set of our own creation, we have chosen to use a dataset created by Dourado and Flores\cite{dourado_multiscale_2014} during the creation of their ZEMu (Zone Equilibration of Mutants) method.
+The ZEMu dataset was curated for effectiveness in benchmarking an interface \ddg\ method, including filtering SKEMPI values derived from non-peer reviewed data.
+Confidence in the ``known'' experimental \ddg\ values is important, as it has been shown that the experimental methodology used can have a strong effect on the performance of predictors of changes in binding free energy\cite{geng_exploring_2016}.
+The ZEMu dataset was also curated to include a wide range of both stabilizing and destabilizing mutants, small side chain to large side chain mutations, single and multiple mutations, and a diversity of complexes (\cref{tab:table-composition}).
 
 \subimport*{figs-and-tables/}{table-composition}
 
-After a review of the literature the known experimental ddG values originated from, we removed one data point from the 1254 point ZEMu set that we could not match to the original reported affinity value. We also removed 5 mutations that were duplicates and 8 mutations that were reverse mutations of other data points, leaving us with a test set of 1240 mutations. Subset definitions are shown in \cref{tab:table-composition}.
+After a review of the literature from which the known experimental \ddg\ values originated from, we removed one data point from the 1254 point ZEMu set that we could not match to the originally published reported affinity value. We also removed 5 mutations we determined to be duplicates, along with 8 mutations that were reverse mutations of other data points, leaving us with a test set of 1240 mutations.
+We defined which complexes that contained at least one antibody binding partner by comparison of PDB identifiers with SAbDab \cite{dunbar_sabdab:_2014}.
 
-We defined which complexes contained at least one antibody binding partner by comparison with SAbDab \cite{dunbar_sabdab:_2014}.
+We have implemented our flex ddG protocol within the RosettaScripts scripting interface to the Rosetta macromolecular modeling software suite \cite{fleishman_rosettascripts:_2011}, which makes the protocol easily adaptable to future improvements and energy function development. We utilized the Talaris \cite{leaver-fay_chapter_2013,song_structure-guided_2011,shapovalov_smoothed_2011} and Ref\cite{alford_rosetta_2017} energy functions in Rosetta. Version numbers of tested software are available in \cref{tab:table-versions}.
 
-We implemented our flex-ddG protocol within the RosettaScripts scripting interface to the Rosetta macromolecular modeling software suite \cite{fleishman_rosettascripts:_2011}, which makes the protocol easily adaptable to future improvements and energy function development. We utilized the Talaris \cite{leaver-fay_chapter_2013,song_structure-guided_2011,shapovalov_smoothed_2011} and Ref\cite{alford_rosetta_2017} energy functions in Rosetta. Version numbers of tested software are available in \cref{tab:table-versions}.
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth,keepaspectratio]{figures/fig-overview.pdf}
+    \caption{
+      Schematic of the flex ddG protocol method.
+  } \label{fig:figure-overview}
+\end{figure}
 
-Method steps are outlined in Figure 1. Step 1: The protocol begins with an initial minimization to calibrate the input model to the Rosetta energy function. This (and later) minimizations are performed with constraints that harmonically restrain pairwise atom distance to their values in the input crystal structure. Step 2: The backrub method is run, at a temperature of 1.2, and for up to 60,000 trials. 50 output structures are generated, which will be used as the base of conformational diversity for the rest of the week. Step 3A: For each of the 50 structure models in the ensemble (output by backrub), the Rosetta ``packer'' is run to search side chain space through the Dunbrack rotamer library built into Rosetta\cite{shapovalov_smoothed_2011}, optimizing side chains for the wild type sequence. Step 3B: Independently and in parallel to step 3A, the packer is run on the 50 backrub models, optimizing side chains for the mutant sequence. Step 4A: Minimization of each of the 50 wild-type structures, again adding pairwise atom-atom constraints to the input structure. Step 4B: Minimization of each of the 50 mutant structures. Step 5A: Each of the 50 minimized wild-type structures are scored in complex, and the individual complex components are scored individually. Step 5B: Each of the 50 minimized mutant structures are scored in complex, and the individual complex components are scored individually. Step 6: The interface ddG score is produced via Eq.~\ref{eqn:split-ddg}:
+Flex ddG method steps are outlined in \cref{fig:figure-overview}. Step 1: The protocol begins with an initial minimization to calibrate the input model to the Rosetta energy function. This (and later) minimizations are performed with constraints that harmonically restrain pairwise atom distance to their values in the input crystal structure. Step 2: The backrub method is run, at a temperature of 1.2, and for up to 60,000 trials. 50 output structures are generated, which will be used as the base of conformational diversity for the rest of the week. Step 3A: For each of the 50 structure models in the ensemble (output by backrub), the Rosetta ``packer'' is run to search side chain space through the Dunbrack rotamer library built into Rosetta\cite{shapovalov_smoothed_2011}, optimizing side chains for the wild type sequence. Step 3B: Independently and in parallel to step 3A, the packer is run on the 50 backrub models, optimizing side chains for the mutant sequence. Step 4A: Minimization of each of the 50 wild-type structures, again adding pairwise atom-atom constraints to the input structure. Step 4B: Minimization of each of the 50 mutant structures. Step 5A: Each of the 50 minimized wild-type structures are scored in complex, and the individual complex components are scored individually. Step 5B: Each of the 50 minimized mutant structures are scored in complex, and the individual complex components are scored individually. Step 6: The interface ddG score is produced via Eq.~\ref{eqn:split-ddg}:
 
 \begin{equation}\label{eqn:split-ddg}
   \begin{split}
@@ -127,6 +125,7 @@ Unlike when increasing the number of averaged structures, we see improved perfor
 \subsection{Score analysis}
 
 We applied machine learning to our cases to try and study which individual score terms were informative.
+GAM (generalized additive model) \cite{wood_fast_2011}.
 
 \subsection{Structure analysis}
 
@@ -137,7 +136,15 @@ As mean backrub ensemble RMSD increases (\cref{fig:t14-mean-ensemble-error}), we
 We have made sampling better, maybe it is time to also make scoring better. REF energy energy does not improve performation (\cref{tab:table-ref}).
 GAM reweighting indicates potential future benefits of non-linear reweighting of Rosetta energy function terms, particularly in this case of interfaces.
 
+Not changing the unbound models might work because it adds noise, and because the mobility of amino acids at the dimeric interface is generally lower than for other amino acids at the protein surface \cite{zen_comparing_2010}.
+
 \subsection{unfinished}
+
+Why do our backrub ensembles work better than \cite{kamisetty_accounting_2011} and \cite{kellogg_role_2011}, which also used backrub exactly (GOBLIN) or something like it (Kellogg). Where the sampling takes place, and how much, are important. We've focused around mutations.
+
+Why no boltzmann weighting? If we are sampling the underlying distribution unbiased, we wouldn't need to.
+
+Entropy.
 
 \begin{itemize}
 \item Monomeric Rosetta ddG does not work for interfaces
