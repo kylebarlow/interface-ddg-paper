@@ -8,9 +8,9 @@ CVTEXNAME = flex-ddG
 
 all: $(CVTEXNAME).pdf
 $(CVTEXNAME).pdf: $(CVTEXNAME).tex $(SOURCES)
-	pdflatex $(CVTEXNAME)
+	pdflatex --shell-escape $(CVTEXNAME)
 	-$(BIB_PROG) $(CVTEXNAME)
-	pdflatex $(CVTEXNAME)
-	pdflatex $(CVTEXNAME)
+	pdflatex --shell-escape $(CVTEXNAME)
+	pdflatex --shell-escape $(CVTEXNAME)
 clean:
 	grep -vE '^(#|$$)' .gitignore | xargs rm -f

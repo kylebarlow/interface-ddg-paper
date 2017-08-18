@@ -50,8 +50,8 @@
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/t14-spear-corr.pdf}
-  \caption{
-    Scatter plot showing the average Spearman correlation of ddG prediction error v. mean backrub ensemble RMSD, v. backrub steps.
+  \caption[\ddg\ prediction error vs. ensemble RMSD]{
+    Scatter plot showing the average Spearman correlation of ddG prediction error v. mean pairwise backrub ensemble RMSD, v. backrub steps.
     As mean backrub ensemble RMSD increases (\cref{fig:t14-mean-ensemble}), we don't see any significant change in correlation between mean ensemble RMSD and ddG error.
     This demonstrates that mean pairwise backrub ensemble RMSD is not an effective metric to measure the degree to which we have sampled ``enough''.
   } \label{fig:spear-corr-rmsd-error}
@@ -60,17 +60,25 @@
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-tal-feats.png}
-  \caption{
-    Markus' most recent fit score function functions
+  \caption[Sigmoid fit Rosetta score function terms]{
+    Rosetta interface \ddg\ score function terms fit on interface \ddg\ predictions via a sigmoid git Generalized Additive Model. (Figure courtesy Markus Heinonen)
   } \label{fig:t14-fits-feats}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-corrs.png}
-  \caption{
-    Left: standard, non-fitted predictions vs. experimental \ddg\ values. Right: Fit predictions vs. experimental data. Top: Control (no backrub) predictions. Middle: Backrub/talaris. Bottom: Backrub/REF.
+  \caption[Interface \ddg prediction performance with sigmoid fit score function]{
+    Left: standard, non-fitted predictions vs. experimental \ddg\ values. Right: Fit predictions vs. experimental data. Top: Control (no backrub) predictions. Middle: Backrub/talaris. Bottom: Backrub/REF. (Figure courtesy Markus Heinonen)
   } \label{fig:t14-fit-scatter}
 \end{figure}
 
 \subimport*{figs-and-tables/}{table-ref}
+
+% \begin{table}[htb]
+%   \tiny
+%     \centering
+%     \caption{Filtered ZEMu dataset}
+%     \label{tab:zemu-filtered}
+%     \csvautobooktabular{figures/table-zemu-filtered.csv}
+%   \end{table}
