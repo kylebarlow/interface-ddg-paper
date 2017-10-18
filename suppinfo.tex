@@ -9,20 +9,20 @@
 % \item Filename: brief description
 % \end{itemize}
 
-% Supplementary figures:
-% \begin{itemize}
-% \item \cref{tab:table-mult}
-% \item \cref{fig:steps-v-corr}
-% \item \cref{tab:table-versions}
-% \item \cref{fig:structs-v-corr-id-zemu-12-60000-rscript-validated-t14}
-% \item \cref{fig:structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}
-% \item \cref{fig:wildtypecomplex-scores-complete}
-% \item \cref{fig:spear-corr-rmsd-error}
-% \item \cref{fig:t14-mean-ensemble}
-% \item \cref{tab:table-ref}
-% \item \cref{tab:table-antibodies}
-% \item \cref{fig:t14-fits-feats}
-% \end{itemize}
+Supplementary figures:
+\begin{itemize}
+\item \cref{tab:table-mult}
+\item \cref{fig:steps-v-corr}
+\item \cref{tab:table-versions}
+\item \cref{fig:structs-v-corr-id-zemu-12-60000-rscript-validated-t14}
+\item \cref{fig:structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}
+\item \cref{fig:wildtypecomplex-scores-complete}
+\item \cref{fig:spear-corr-rmsd-error}
+\item \cref{fig:t14-mean-ensemble}
+\item \cref{tab:table-ref}
+\item \cref{tab:table-antibodies}
+\item \cref{fig:t14-fits-feats}
+\end{itemize}
 
 \subimport*{figs-and-tables/}{table-mult}
 \subimport*{figs-and-tables/}{steps-v-corr}
@@ -75,10 +75,43 @@
 
 \subimport*{figs-and-tables/}{table-ref}
 
+% \csvstyle{zemuFiltered}{tabular=|c|c|c|c|l|}
+
+% \csvreader[tabular=|c|c|c|c|l|,
+% table head=\caption{Filtered ZEMu dataset}\label{tab:zemu-filtered}\\\hline
+% \csvlinetotablerow\\\hline
+% \endfirsthead\hline
+% \csvlinetotablerow\\\hline
+% \endhead\hline
+% \endfoot,
+% respect all
+% ]{figures/table-zemu-filtered.csv}
+
+\csvreader[
+table head=\caption{Filtered ZEMu dataset}\label{tab:zemu-filtered}\\\hline
+\csvlinetotablerow\\\hline
+\endfirsthead\hline
+\csvlinetotablerow\\\hline
+\endhead\hline
+\endfoot,
+longtable=|c|c|c|p{8cm}|c|,
+respect all
+]
+{figures/table-zemu-filtered.csv}
+{}
+{\csvlinetotablerow}
+%{ \csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv }
+
+% \csvreader[tabular=|c|c|c|c|l|,
+%   table head=\hline header & \\\hline,
+%   late after line=\\\hline]%
+%   {figures/table-zemu-filtered.csv}{}%
+% {\csvlinetotablerow}%
+
 % \begin{table}[htb]
 %   \tiny
-%     \centering
-%     \caption{Filtered ZEMu dataset}
-%     \label{tab:zemu-filtered}
-%     \csvautobooktabular{figures/table-zemu-filtered.csv}
-%   \end{table}
+%   \centering
+%   \caption{Filtered ZEMu dataset}
+%   \label{tab:zemu-filtered}
+%   \csvautolongtable{figures/table-zemu-filtered.csv}
+% \end{table}
