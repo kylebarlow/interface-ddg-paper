@@ -75,43 +75,17 @@ Supplementary figures:
 
 \subimport*{figs-and-tables/}{table-ref}
 
-% \csvstyle{zemuFiltered}{tabular=|c|c|c|c|l|}
-
-% \csvreader[tabular=|c|c|c|c|l|,
-% table head=\caption{Filtered ZEMu dataset}\label{tab:zemu-filtered}\\\hline
+\csvreader[
+longtable=|c|c|c|p{8cm}|r|,
+table head=\caption{Filtered ZEMu dataset with experimental \ddg\ values}\label{tab:zemu-filtered}\\\hline
+ID & PDB & Res. & Mutations & \ddg\\\hline
+\endhead\hline\endfoot,
 % \csvlinetotablerow\\\hline
 % \endfirsthead\hline
 % \csvlinetotablerow\\\hline
 % \endhead\hline
 % \endfoot,
-% respect all
-% ]{figures/table-zemu-filtered.csv}
-
-\csvreader[
-table head=\caption{Filtered ZEMu dataset}\label{tab:zemu-filtered}\\\hline
-\csvlinetotablerow\\\hline
-\endfirsthead\hline
-\csvlinetotablerow\\\hline
-\endhead\hline
-\endfoot,
-longtable=|c|c|c|p{8cm}|c|,
-respect all
 ]
 {figures/table-zemu-filtered.csv}
-{}
-{\csvlinetotablerow}
-%{ \csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv }
-
-% \csvreader[tabular=|c|c|c|c|l|,
-%   table head=\hline header & \\\hline,
-%   late after line=\\\hline]%
-%   {figures/table-zemu-filtered.csv}{}%
-% {\csvlinetotablerow}%
-
-% \begin{table}[htb]
-%   \tiny
-%   \centering
-%   \caption{Filtered ZEMu dataset}
-%   \label{tab:zemu-filtered}
-%   \csvautolongtable{figures/table-zemu-filtered.csv}
-% \end{table}
+{1=\DataSetID,2=\PDBFileID,3=\Resolution,4=\Mutations,5=\ExperimentalDDG}
+{\DataSetID & \PDBFileID & \Resolution & \Mutations & \ExperimentalDDG}
