@@ -34,7 +34,7 @@ Backrub ensembles appear to recapitulate properties of proteins that have been e
 Backrub has also proved effective in design applications, such as for the redesign of protein-protein interfaces\cite{kapp_control_2012} and recapitulation of mutations that alter ligand-binding specificity\cite{ollikainen_coupling_2015}.
 When Davey and Chica compared backrub ensembles to ensembles generated via molecular dynamics simulations or PertMin\cite{davey_improving_2014}, backrub ensembles were shown in certain cases to be
 the only generated ensembles with a higher diversity (as measured with RMSD) from each other than from the original input crystal structure, indicating that backrub is uniquely suited to produce diverse ensembles that stay in the local conformational space of the input structure.\cite{davey_improving_2014}
-We hypothesized that this property of backrub ensembles would translate into these ensembles serving as an effective structural representation to use when predicting interface \ddg\ values.
+We hypothesized that this property of backrub ensembles would translate into their effective use as an effective representation of near-native conformational states for use in predicting interface \ddg\ values.
 
 \section{Methods}
 
@@ -48,7 +48,7 @@ The ZEMu dataset was also curated to include a wide range of both stabilizing an
 
 After a review of the literature from which the known experimental \ddg\ values originated, we removed one data point from the 1254 point ZEMu set that we could not match to the originally published reported affinity value. We also removed 5 mutations we determined to be duplicates, along with 8 mutations that were reverse mutations of other data points, leaving us with a test set of 1240 mutations.
 We defined complexes that contained at least one antibody binding partner by comparison of PDB identifiers with SAbDab \cite{dunbar_sabdab:_2014}.
-% TODO add to supplement Our filtered version of the ZEMu dataset is available in the Supporting Information section. % TODO as \cref{tab:zemu-filtered}
+Our version of the ZEMu dataset is available in the Supporting Information as \cref{tab:zemu-filtered}.
 
 Our protocol, called ``flex ddG'', is implemented within the RosettaScripts scripting interface to the Rosetta macromolecular modeling software suite \cite{fleishman_rosettascripts:_2011}, which makes the protocol easily adaptable to future improvements and energy function development. We utilized Rosetta's Talaris \cite{leaver-fay_chapter_2013,song_structure-guided_2011,shapovalov_smoothed_2011} energy function.
 Version numbers of tested software are available in \cref{tab:table-versions}.
@@ -64,7 +64,7 @@ Version numbers of tested software are available in \cref{tab:table-versions}.
 Flex ddG method steps are outlined in \cref{fig:figure-overview} (full Rosetta Scripts XML available in the Supporting Information).
 \textbf{Step 1:} The protocol begins with an initial minimization (on backbone $\phi$/$\psi$\ and side chain $\chi$\ torsional degrees of freedom, using the ``lbfgs\_armijo\_nonmonotone'' minimization algorithm option) of the input model using the Rosetta energy function. This (and later) minimizations are performed with constraints that harmonically restrain pairwise atom distance to their values in the input crystal structure. Minimization is run until convergence into a local energy well.
 \textbf{Step 2:} Starting from the minimized input structure, the backrub method in Rosetta is used to create an ensemble of models. In brief, each backrub move is undertaken on a three-residue stretch of protein, chosen randomly from the set of residues within 8 \AA\ of any mutant position. All atoms in the three-residue stretch of structure are rotated locally about an axis defined as the vector between the endpoint c-$\alpha$ atoms. Bond angles involving the endpoint atoms are then minimized. Backrub is run at a temperature of 1.2, for up to 60,000 backrub Monte Carlo trials. 50 output structures are generated.
-\textbf{Step 3A:} For each of the 50 structure models in the ensemble (output by backrub), the Rosetta ``packer'' is used to optimize side chain conformations for the wild-type sequence using discete rotameric conformations \cite{shapovalov_smoothed_2011}. The packer is run with no extra options to the multi-cool annealer\cite{leaver-fay_generic_2011}. % TODO what are the default no other options
+\textbf{Step 3A:} For each of the 50 structure models in the ensemble (output by backrub), the Rosetta ``packer'' is used to optimize side chain conformations for the wild-type sequence using discete rotameric conformations \cite{shapovalov_smoothed_2011}. The packer is run with the multi-cool annealer option\cite{leaver-fay_generic_2011}, which is set to keep a history of the 6 best rotameric states visited during annealing.
 \textbf{Step 3B:} Independently and in parallel to step 3A, side chain conformations for the mutant sequence are optimized on all 50 models.
 \textbf{Step 4A:} Each of the 50 wild-type structures is minimized, again adding pairwise atom-atom constraints to the input structure. Minimization is run with the same parameters as in step 1; the coordinate constraints used in this step are taken from the coordinates of the Step 3A structure.
 \textbf{Step 4B:} In the same fashion as in Step 4A, but for each of the 50 mutant models.
@@ -93,7 +93,6 @@ where $y_i$ are the predicted \ddg\ values, $x_i$ are the known, experimentally 
 \section{Results and discussion}
 
 \subimport*{figs-and-tables/}{table-main}
-% TODO: add more results to main table, such as multiple mutations
 
 The overall performance of the protocol is summarized in \cref{tab:table-main}.
 We compare 4 prediction methods: (a) our flex ddG backrub ensemble method, (b) the prior state-of-the-art Rosetta methodology, ddg\_monomer \cite{kellogg_role_2011}, (c) a control version of our flex ddG protocol which omits the backrub ensemble generation step, leaving only the minimization and packing steps, and (d) the ZEMu (zone equilibration of mutants) method\cite{dourado_multiscale_2014}.
@@ -105,15 +104,13 @@ This observation could be explained by the fact that we undertake backrub sampli
 Finally, our method shows improved performance compared to the control method and ddg\_monomer on the subset of multiple mutations, but for this set does not match the performance of the ZEMu method.
 This could indicate that further refinement to the backrub sampling parameters is required in the case of multiple mutations.
 As there are more mutation sites, there will be more surrounding backrub pivot residue sites.
-However, flex ddG outperforms ZEMu on multiple mutations if none of the mutations are to alanine (\cref{tab:table-mult}).
+However, flex ddG outperforms ZEMu on multiple mutations if none of the mutations are to alanine (\cref{tab:table-main}).
 
 The underlying scatterplots for the flex ddG and control methods on the complete dataset and small-to-large subsets are shown in \cref{fig:figure-scatter}. % TODO Scatterplots for the underlying data behind the rest of the rows in \cref{tab:table-main} is shown in the Supporting Information.
 
 \subimport*{figs-and-tables/}{figure-scatter}
 
 \subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}
-
-% TODO \cref{tab:table-by-structure} and talk about dependence of structures on overall dataset
 
 \subsection{Effect of averaging more structures}
 
@@ -151,21 +148,22 @@ Performance improves for the first step of 2500 backrub steps on the complete da
 The increased performance seen is not simply a result of scores decreasing as the simulation progresses, as the score of the minimized wild type complex does not decrease uniformly across the sampled ensemble as the simulation progresses (\cref{fig:wildtypecomplex-scores-complete}).
 \cref{fig:t14-mean-ensemble} shows that pairwise backrub ensemble RMSDs continue to increase throughout the backrub simulation for all subsets, indicating that diminishing returns at 30,000+ steps is not a result of failure to sample new states, but rather might indicate that no additional sampling is needed to capture the degree of local change in structure that occurs post-mutation in this benchmark set.
 \cref{fig:t14-mean-ensemble} also shows that the starting pairwise ensemble RMSDs vary for each different subset, reflecting the fact that different subsets are composed of different wild-type complexes with different inherent flexibility (as sampled by backrub).
+Correspondingly, \ddg\ predictive power also varies depending on the input complex, as showin in \cref{tab:table-by-structure}.
 This different inherent flexibility should be kept in mind when comparing results across subsets.
 
 Unlike when increasing the number of averaged structures, we see continual improved performance with additional sampling (from longer backrub simulations) on the subset of multiple mutations (not to alanine).
-This indicates that sampling cannot be simply ``increased'' by tuning either the length of the backrub simulation or the number of models generated. % TODO Tanja said to take this out, but maybe we can say how to tune in the paper? , both parameters are independent and must be tuned separately when running the flex ddG protocol.
+This indicates that sampling cannot be simply ``increased'' by independently tuning either the length of the backrub simulation or the number of models generated. % TODO Tanja said to take this out, but maybe we can say how to tune in the paper? , both parameters are independent and must be tuned separately when running the flex ddG protocol.
 
 \subsection{Score analysis}
 
-As the sampling/scoring problems of protein modeling are inextricably linked, it is often the case that improving one enables further improvements on the other. For example, increased sampling can expose score function problems. % TODO (CITE PAPERS: I think this is mentioned in Dan's KIC paper, in a loop sampling paper from Rhiju, and a paper with Mike Tyka).
+As the sampling/scoring problems of protein modeling are inextricably linked, it is often the case that improving one enables further improvements on the other.
+% TODO (CITE PAPERS: I think this is mentioned in Dan's KIC paper, in a loop sampling paper from Rhiju, and a paper with Mike Tyka). # Kyle couldn't find this
 We sought to analyze underlying errors of the Rosetta score function (when applied to interface \ddg) by reweighting the generally parameterized energy function for this specific application.
 Additionally, analyzing a reweighted energy function on a score term by score term basis could provide insight into which terms might benefit from future developments.
 
 We chose to reweight the energy function using a non-linear reweighting scheme similar to Generalized Additive Models (GAMs)\cite{wood_fast_2011}.
 In this reweighting method, we use Monte Carlo sampling to fit either a linear transformation or a sigmoid function to the individual distributions of score terms, with the objective function of reducing the absolute error between our predictions and known experimental values over the entire dataset.
 
-% TODO for manuscript to supplement
 As we do not modify our models of the unbound state, any effects on stability of the complex partners will cancel out, as the $\Delta G$\ of folding score of the unbound partners is subtracted from the total score of the complex (\cref{eqn:split-ddg}).
 Not modeling conformational change in the unbound models might be effective because to model any such fluctuation might produce more noise than signal when the scores for the bound and unbound states are subtracted.
 This is supported by the prior observation that the mobility of amino acids at dimeric interfaces is generally lower than for other amino acids at the protein surface exposed to solvent \cite{zen_comparing_2010}.
