@@ -1,3 +1,17 @@
+\documentclass{article}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage[capitalise]{cleveref}
+\usepackage{import}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{csvsimple}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{caption}
+
+\newcommand\ddg{$\Delta\Delta G$}
+
 % A listing of the contents of each file supplied as Supporting Information
 % should be included. For instructions on what should be included in the
 % Supporting Information as well as how to prepare this material for
@@ -9,20 +23,28 @@
 % \item Filename: brief description
 % \end{itemize}
 
-Supplementary figures:
-\begin{itemize}
-\item \cref{tab:table-mult}
-\item \cref{fig:steps-v-corr}
-\item \cref{tab:table-versions}
-\item \cref{fig:structs-v-corr-id-zemu-12-60000-rscript-validated-t14}
-\item \cref{fig:structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}
-\item \cref{fig:wildtypecomplex-scores-complete}
-\item \cref{fig:spear-corr-rmsd-error}
-\item \cref{fig:t14-mean-ensemble}
-\item \cref{tab:table-ref}
-\item \cref{tab:table-antibodies}
-\item \cref{fig:t14-fits-feats}
-\end{itemize}
+% Supplementary figures:
+% \begin{itemize}
+% \item \cref{tab:table-mult}
+% \item \cref{fig:steps-v-corr}
+% \item \cref{tab:table-versions}
+% \item \cref{fig:structs-v-corr-id-zemu-12-60000-rscript-validated-t14}
+% \item \cref{fig:structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}
+% \item \cref{fig:wildtypecomplex-scores-complete}
+% \item \cref{fig:spear-corr-rmsd-error}
+% \item \cref{fig:t14-mean-ensemble}
+% \item \cref{tab:table-ref}
+% \item \cref{tab:table-antibodies}
+% \item \cref{fig:t14-fits-feats}
+% \end{itemize}
+
+\begin{document}
+
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+\setcounter{table}{0}
+\renewcommand{\lstlistingname}{Supporting Listing}
 
 \subimport*{figs-and-tables/}{table-mult}
 \subimport*{figs-and-tables/}{steps-v-corr}
@@ -75,6 +97,8 @@ Supplementary figures:
 
 \subimport*{figs-and-tables/}{table-ref}
 
+\clearpage
+
 \csvreader[
 longtable=|c|c|c|p{8cm}|r|,
 table head=\caption{Filtered ZEMu dataset with experimental \ddg\ values}\label{tab:zemu-filtered}\\\hline
@@ -89,3 +113,19 @@ ID & PDB & Res. & Mutations & \ddg\\\hline
 {figures/table-zemu-filtered.csv}
 {1=\DataSetID,2=\PDBFileID,3=\Resolution,4=\Mutations,5=\ExperimentalDDG}
 {\DataSetID & \PDBFileID & \Resolution & \Mutations & \ExperimentalDDG}
+
+\captionof{listing}{
+  Flex ddg Rosetta Script implementation
+  \label{lst:ddg-script}
+}
+\inputminted[
+linenos=true,
+% frame=single,
+breaklines
+]
+{xml}
+{listings/ddG-backrub.xml}
+
+\clearpage
+
+\end{document}

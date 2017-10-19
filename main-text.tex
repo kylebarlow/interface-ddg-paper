@@ -56,12 +56,12 @@ Version numbers of tested software are available in \cref{tab:table-versions}.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/fig-overview.pdf}
-    \caption{
+    \caption[]{
       Schematic of the flex ddG protocol method.
   } \label{fig:figure-overview}
 \end{figure}
 
-Flex ddG method steps are outlined in \cref{fig:figure-overview} (full Rosetta Scripts XML available in \cref{lst:ddg-script}).
+Flex ddG method steps are outlined in \cref{fig:figure-overview} (full Rosetta Scripts XML available in the Supporting Information).
 \textbf{Step 1:} The protocol begins with an initial minimization (on backbone $\phi$/$\psi$\ and side chain $\chi$\ torsional degrees of freedom, using the ``lbfgs\_armijo\_nonmonotone'' minimization algorithm option) of the input model using the Rosetta energy function. This (and later) minimizations are performed with constraints that harmonically restrain pairwise atom distance to their values in the input crystal structure. Minimization is run until convergence into a local energy well.
 \textbf{Step 2:} Starting from the minimized input structure, the backrub method in Rosetta is used to create an ensemble of models. In brief, each backrub move is undertaken on a three-residue stretch of protein, chosen randomly from the set of residues within 8 \AA\ of any mutant position. All atoms in the three-residue stretch of structure are rotated locally about an axis defined as the vector between the endpoint c-$\alpha$ atoms. Bond angles involving the endpoint atoms are then minimized. Backrub is run at a temperature of 1.2, for up to 60,000 backrub Monte Carlo trials. 50 output structures are generated.
 \textbf{Step 3A:} For each of the 50 structure models in the ensemble (output by backrub), the Rosetta ``packer'' is used to optimize side chain conformations for the wild-type sequence using discete rotameric conformations \cite{shapovalov_smoothed_2011}. The packer is run with no extra options to the multi-cool annealer\cite{leaver-fay_generic_2011}. % TODO what are the default no other options
