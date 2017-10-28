@@ -53,6 +53,12 @@ Our version of the ZEMu dataset is available in the Supporting Information as \c
 Our protocol, called ``flex ddG'', is implemented within the RosettaScripts scripting interface to the Rosetta macromolecular modeling software suite \cite{fleishman_rosettascripts:_2011}, which makes the protocol easily adaptable to future improvements and energy function development. We utilized Rosetta's Talaris \cite{leaver-fay_chapter_2013,song_structure-guided_2011,shapovalov_smoothed_2011} energy function.
 Version numbers of tested software are available in \cref{tab:table-versions}.
 
+As we do not modify our models of the unbound state, several terms of the Rosetta energy function will cancel out, as the $\Delta G$\ of folding score of the unbound partners is subtracted from the total score of the complex (\cref{eqn:split-ddg}).
+
+The terms in the Rosetta Talaris energy function that cancel out to zero are: yhh\_planarity, pro\_close, hbond\_sr\_bb, ref, fa\_dun, fa\_intra\_rep, omega, p\_aa\_pp, and rama.
+Seven score terms are left; combined they become the final interface \ddg\ score: fa\_sol (an implicit solvation model\cite{lazaridis_effective_1999}), hbond\_sc (side chain-side chain hydrogen bonds), hbond\_bb\_sc (hydrogen bonds between backbone atoms and side chain atoms), fa\_rep (the repulsive component of the Lennard-Jones potential\cite{lennard-jones_determination_1924}), fa\_elec (Coulombic electrostatic potential), hbond\_lr\_bb (long-range hydrogen bond interactions between backbone atoms) and fa\_atr (the attractive component of the Lennard-Jones potential).
+
+
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/fig-overview.pdf}
@@ -89,6 +95,17 @@ MAE (Mean Absolute Error) is defined in Eq.~\ref{eqn:mae} as:
 \end{equation}
 
 where $y_i$ are the predicted \ddg\ values, $x_i$ are the known, experimentally determined values, and $e_i$ is the prediction error.
+
+\subsection{Score analysis}
+
+In order to investigate potential sources of prediction error on an individual score term basis, we used a eneralized additive model\cite{hastie_generalized_1990} approach to fit Rosetta's predicted \ddg\ values to experimentally known values.
+First, we apply an unbiased logistic scaling to individual score terms,
+$$h_{a,b}(x) = \frac{e^{a}}{1 + \exp(- e^{b} x)},$$
+where $a$ is the scaling range of the score, and $b$ is the steepness of the sigmoid scaling. Both parameters are transformed through an exponential to ensure non-negativity. The scaling function $h$ does not introduce bias, that is, $h_\theta(0) = 0$ for any $\theta$. The scoring model results in a generalised additive model (GAM) over the $M$ score terms,
+$$f(\bf{x}) = \sum_{j=1}^M h_{a_i,b_i}(x).$$
+The parameters $\theta = (a_j,b_j)_{j=1}^M$ for the score terms were simultaneously sampled using a random walk Metropolis-Hastings MCMC algorithm (the \texttt{mhsample} function in Matlab) assuming a Gaussian likelihood as the target distribution
+$$p(\theta ; \bf{y}) = N( f(\bf{x}_i) | y_i, \sigma_n^2)$$
+with a noise variance set to $\sigma_n^2 = 1.0$, and where $(\bf{x}_i,y_i)_{i=1}^N$ are the empirical observations $y_i$ that correspond to the protein score terms $\bf{x}_i$, respectively. We sample for $1000$ samples with a burn-in set to $1000$ samples and a thinning parameter of $20$. The proposal distribution was selected to be a symmetric uniform distribution such that $[a^{(s+1)},b^{(s+1)}] \sim U( a^{(s)} \pm 2, b^{(s)} \pm 2)$. The resulting MCMC sample represents all logistics score scalings that reproduce the empirical measurements assuming an error model with noise variance $\sigma_n^2$.
 
 \section{Results and discussion}
 
@@ -133,14 +150,14 @@ Averaging across increased numbers of structures also improves correlation for t
 
 From a practical standpoint, simply generating 20-30 structures should constitute sufficient sampling for most cases, as the performance when selecting the best scoring 20 out of 50 models is not significantly improved over the results in \cref{fig:structs-v-corr-id-zemu-12-60000-rscript-validated-t14} (where there is no sorting of structures by score).
 
-\subsection{Effect of changing backrub sampling steps}
+\subsection{Effect of extent of backrub sampling in each trajectory}
 
 \subimport*{figs-and-tables/}{steps-v-corr}
 
 Sampling can also be controlled by changing the length of the backrub simulation, as measured in the number of Monte Carlo sampling steps.
 \cref{fig:steps-v-corr} shows the effect of increasing backrub simulation length (while averaging all 50 structures at each output step) on performance.
-\ddg\ scores are calculated every 2,500 backrub steps (shown in circles for correlation and in squares for MAE).
-A ``X'' marks the performance with zero backrub steps (control minimization and side chain packing only method).
+\ddg\ scores are calculated every 2,500 backrub steps (shown in dark blue circles for correlation and in light blue plusses for MAE).
+Observed performance of a control method with zero backrub steps that uses only minimization and side chain packing is shown in green.
 
 As we observed when averaging over more structures, increased performance is also seen in both correlation with experimental data and MAE as backrub simulation length increases for the subsets of small-to-large mutations (panel b) and multiple mutations, none to alanine (panel c).
 Performance reaches a maximum at 30,000 backrub steps, after which it levels off.
@@ -162,25 +179,21 @@ As the sampling/scoring problems of protein modeling are inextricably linked, it
 We sought to analyze underlying errors of the Rosetta score function (when applied to interface \ddg) by reweighting the generally parameterized energy function for this specific application.
 Additionally, analyzing a reweighted energy function on a score term by score term basis could provide insight into which terms might benefit from future developments.
 
-We chose to reweight the energy function using a non-linear reweighting scheme similar to Generalized Additive Models (GAMs)\cite{wood_fast_2011}.
-In this reweighting method, we use Monte Carlo sampling to fit either a linear transformation or a sigmoid function to the individual distributions of score terms, with the objective function of reducing the absolute error between our predictions and known experimental values over the entire dataset.
+First, we evaluated the performance of our flex ddG method when run with Rosetta's Talaris\cite{leaver-fay_chapter_2013,song_structure-guided_2011,shapovalov_smoothed_2011} energy function or the more recently developed Rosetta Energy Function (REF)\cite{alford_rosetta_2017}. We did not observe an increase in performance on the complete ZEMu dataset, and performance decreases were seen for the subsets small-to-large mutations and multiple mutations\cref{tab:table-ref}. Flex ddG performance with the REF energy function did increase if the the resolution of the input crystal structure was $<= 1.5 \AA$.
 
-As we do not modify our models of the unbound state, any effects on stability of the complex partners will cancel out, as the $\Delta G$\ of folding score of the unbound partners is subtracted from the total score of the complex (\cref{eqn:split-ddg}).
-Not modeling conformational change in the unbound models might be effective because to model any such fluctuation might produce more noise than signal when the scores for the bound and unbound states are subtracted.
-This is supported by the prior observation that the mobility of amino acids at dimeric interfaces is generally lower than for other amino acids at the protein surface exposed to solvent \cite{zen_comparing_2010}.
+Next, we chose to reweight the energy function using a non-linear reweighting scheme similar to Generalized Additive Models (GAMs)\cite{hastie_generalized_1990}.
+In this reweighting method, we use Monte Carlo sampling to fit a sigmoid function to the individual distributions of score terms, with the objective function of reducing the absolute error between our predictions and known experimental values over the entire dataset.
 
-The terms in the Rosetta Talaris energy function that cancel out to zero are: yhh\_planarity, pro\_close, hbond\_sr\_bb, ref, fa\_dun, fa\_intra\_rep, omega, p\_aa\_pp, and rama.
-Seven score terms are left; combined they become the final interface \ddg\ score: fa\_sol, hbond\_sc, hbond\_bb\_sc, fa\_rep, fa\_elec, hbond\_lr\_bb and fa\_atr.
+The effect on the distribution of predictions is shown in \cref{fig:t14-fit-scatter}. In general, the GAM-adjusted predictions contain less outliers. In particular, experimental \ddg\ values that are relatively neutral (near zero) can sometimes be predicted by flex ddG to be highly destabilizing; the GAM model reduces the magnitude of error of many of these outliers, improving overall performance.
 
-The fit sigmoid and linear functions are shown in \cref{fig:t14-fits-feats}.
-The effect on the distribution of predictions is shown in \cref{fig:t14-fit-scatter}.
+The fit functions are shown in \cref{fig:t14-fits-feats}. Extreme values for most score terms are downweighted, except for long-range hydrogen bond interactions between backbone atoms (hbond\_lr\_bb), which is upweighted.
 
 \section{Conclusions}
 
 We have shown that our new ``flex ddG'' method for estimating change in binding affinity after mutation in protein-protein interfaces is more effective than previous methods on a large, curated benchmark dataset.
 Particular improvement in performance is seen on the subset of small-to-large mutations, indicating that modeling backbone flexibility does improve performance in the case where backbone rearrangements are expected to be more common.
 
-We have also shown more accurate predictions can be obtained by averaging the scores across a generated ensemble of backrub microstates, and that the number of required states is relatively low (20-30).
+We have also shown more accurate predictions can be obtained by averaging the scores across a generated structural ensemble of backrub models, and that the number of required models is relatively low (20-30).
 Prior methods that attempted to produce \ddg\ predictions by averaging an ensemble of models required on the order of thousands of structures  \cite{benedix_predicting_2009}, indicating that backrub sampling can efficiently sample the local conformational landscape around a wild-type structures that is relevant for interface \ddg\ prediction.
 
 By creating a method that uses backrub to sample conformational space more broadly than minimization alone can sample, while still staying close in conformational space to the known wild-type input structure, we have also generated data that should prove useful for future energy function improvements.
