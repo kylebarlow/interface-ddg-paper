@@ -12,7 +12,7 @@ $(CVTEXNAME).pdf: suppinfo.pdf $(CVTEXNAME).tex $(SOURCES)
 	-$(BIB_PROG) $(CVTEXNAME)
 	pdflatex --shell-escape $(CVTEXNAME)
 	pdflatex --shell-escape $(CVTEXNAME)
-suppinfo.pdf: figs-and-tables/* table-by-structure.tex
+suppinfo.pdf: figs-and-tables/* table-by-structure.tex suppinfo.tex
 	pdflatex --shell-escape suppinfo
 	pdflatex --shell-escape suppinfo
 	pdflatex --shell-escape suppinfo
