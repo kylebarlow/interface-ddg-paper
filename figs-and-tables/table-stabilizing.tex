@@ -1,0 +1,25 @@
+\begin{table}
+  \begin{tabular}{llrrrr}
+\toprule
+Mutation Category &       Prediction Method &    N &    R &  MAE &   FC \\
+\midrule
+ \multirow{ 4}{*}{Stabilizing} & flex ddG & \multirow{ 4}{*}{32} & \textbf{0.62} & 2.65 & 0.00  \\
+ & no backrub control & & 0.50 & 2.83 & \textbf{0.03}  \\
+ & ddG monomer (hard-rep) & & 0.39 & 2.66 & \textbf{0.03}  \\
+ & ZEMu paper & & 0.31 & \textbf{2.64} & \textbf{0.03}  \\
+\hline
+ \multirow{ 4}{*}{Neutral} & flex ddG & \multirow{ 4}{*}{719} & \textbf{0.19} & \textbf{0.58} & \textbf{0.85}  \\
+ & no backrub control & & 0.10 & 0.68 & 0.81  \\
+ & ddG monomer (hard-rep) & & 0.13 & 0.61 & 0.84  \\
+ & ZEMu paper & & 0.16 & 0.64 & 0.81  \\
+\hline
+ \multirow{ 4}{*}{Positive} & flex ddG & \multirow{ 4}{*}{489} & \textbf{0.48} & 1.32 & 0.67  \\
+ & no backrub control & & 0.44 & 1.35 & 0.70  \\
+ & ddG monomer (hard-rep) & & 0.47 & \textbf{1.31} & \textbf{0.71}  \\
+ & ZEMu paper & & \textbf{0.48} & 1.32 & 0.70  \\
+\bottomrule
+\end{tabular}
+  \caption[Flex ddG performance on stabilizing mutations]{
+    Performance of the Rosetta flex ddG method on the subset of mutations experimentally determined to be stabilizing ($\Delta\Delta$G $< 0$). Backrub steps = 35000. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset or subset.
+  } \label{tab:table-stabilizing}
+\end{table}

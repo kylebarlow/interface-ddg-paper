@@ -1,0 +1,15 @@
+\begin{table}
+  \begin{tabular}{llrrrr}
+\toprule
+Mutation Category &       Prediction Method &    N &    R &  MAE &   FC \\
+\midrule
+ \multirow{ 4}{*}{pdb-1JTG} & flex ddG & \multirow{ 4}{*}{118} & 0.45 & 1.54 & \textbf{0.87}  \\
+ & no backrub control & & 0.39 & 1.49 & 0.84  \\
+ & ddG monomer (hard-rep) & & 0.40 & 1.48 & 0.86  \\
+ & ZEMu paper & & \textbf{0.51} & \textbf{1.39} & 0.76  \\
+\bottomrule
+\end{tabular}
+  \caption[Flex ddG performance on PDB 1JTG]{
+    Flex ddG performance on PDB 1JTG. Backrub steps = 32500. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset or subset.
+  } \label{tab:table-pdb-1JTG}
+\end{table}

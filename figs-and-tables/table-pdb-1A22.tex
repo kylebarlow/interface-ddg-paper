@@ -1,0 +1,15 @@
+\begin{table}
+  \begin{tabular}{llrrrr}
+\toprule
+Mutation Category &       Prediction Method &    N &    R &  MAE &   FC \\
+\midrule
+ \multirow{ 4}{*}{pdb-1A22} & flex ddG & \multirow{ 4}{*}{142} & \textbf{0.33} & \textbf{0.63} & 0.75  \\
+ & no backrub control & & 0.18 & 0.72 & 0.74  \\
+ & ddG monomer (hard-rep) & & 0.12 & 0.70 & 0.74  \\
+ & ZEMu paper & & 0.19 & 0.64 & \textbf{0.79}  \\
+\bottomrule
+\end{tabular}
+  \caption[Flex ddG performance on PDB 1A22]{
+    Flex ddG performance on PDB 1A22. Backrub steps = 32500. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset or subset.
+  } \label{tab:table-pdb-1A22}
+\end{table}

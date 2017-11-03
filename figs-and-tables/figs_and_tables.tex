@@ -1,0 +1,44 @@
+\documentclass{article}
+
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth,keepaspectratio]{../../figures/fig-overview.pdf}
+    \caption{
+      Schematic of the flex ddG protocol method.
+  } \label{fig:figure-overview}
+\end{figure}
+
+\input{table-composition.tex}
+\input{table-main.tex}
+\input{figure-scatter.tex}
+
+% steps-vs-corr figures
+\input{steps-v-corr.tex}
+\input{steps-v-corr_mult.tex}
+\input{steps-v-corr_resolution.tex}
+\input{steps-v-corr_some_sizes.tex}
+
+% structs-vs-corr figures
+\input{structs-v-corr-id-zemu-12-60000-rscript-validated-t14.tex}
+\input{structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14.tex}
+
+\input{structs-v-corr-id-ddg-monomer-16-003-zemu-2.tex}
+\input{structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2.tex}
+
+\input{table-temperature}
+\input{table-mult}
+\input{table-antibodies}
+\input{table-versions}
+\input{table-stabilizing}
+\input{table-by-structure}
+
+\input{table-ref}
+
+\end{document}

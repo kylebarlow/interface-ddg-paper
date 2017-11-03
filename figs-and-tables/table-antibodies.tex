@@ -1,0 +1,20 @@
+\begin{table}
+  \begin{tabular}{llrrrr}
+\toprule
+Mutation Category &       Prediction Method &     N &    R &  MAE &   FC \\
+\midrule
+ \multirow{ 4}{*}{Complete dataset} & flex ddG & \multirow{ 4}{*}{1240} & \textbf{0.63} & \textbf{0.93} & 0.76  \\
+ & no backrub control & & 0.56 & 1.00 & 0.74  \\
+ & ddG monomer (hard-rep) & & 0.62 & 0.94 & \textbf{0.77}  \\
+ & ZEMu paper & & 0.61 & 0.96 & 0.75  \\
+\hline
+ \multirow{ 4}{*}{Antibodies} & flex ddG & \multirow{ 4}{*}{355} & \textbf{0.60} & \textbf{0.89} & 0.74  \\
+ & no backrub control & & 0.49 & 0.96 & 0.73  \\
+ & ddG monomer (hard-rep) & & 0.58 & 0.90 & \textbf{0.77}  \\
+ & ZEMu paper & & 0.54 & 0.96 & 0.74  \\
+\bottomrule
+\end{tabular}
+  \caption[Flex ddG performance on antibodies]{
+    Performance of the Rosetta flex ddG method on the subset of complexes containing an antibody binding partner (backrub steps = 35000). R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset or subset.
+  } \label{tab:table-antibodies}
+\end{table}

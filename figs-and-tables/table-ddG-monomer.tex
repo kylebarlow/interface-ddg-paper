@@ -1,0 +1,40 @@
+\begin{table}
+  \begin{tabular}{llrlrrr}
+\toprule
+Mutation Category &       Prediction Method &     N & Num/Sorting of Structs &    R &  MAE &   FC \\
+\midrule
+ \multirow{ 5}{*}{Complete dataset} & ddG monomer (hard-rep) & \multirow{ 5}{*}{1240} & WildTypeComplex\_03 & 0.51 & 1.04 & 0.70  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_03 & 0.53 & 1.05 & 0.68  \\
+ & ddG monomer (hard-rep) & & WildTypeComplex\_50 & \textbf{0.62} & \textbf{0.94} & \textbf{0.77}  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_50 & 0.59 & 0.96 & 0.76  \\
+ & ZEMu paper & & id\_01 & 0.61 & 0.96 & 0.75  \\
+\hline
+ \multirow{ 5}{*}{Small-to-large mutation(s)} & ddG monomer (hard-rep) & \multirow{ 5}{*}{130} & WildTypeComplex\_03 & 0.31 & 1.10 & 0.65  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_03 & 0.13 & 1.11 & 0.62  \\
+ & ddG monomer (hard-rep) & & WildTypeComplex\_50 & \textbf{0.52} & \textbf{0.95} & \textbf{0.75}  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_50 & 0.31 & 1.02 & 0.71  \\
+ & ZEMu paper & & id\_01 & 0.48 & 1.03 & 0.64  \\
+\hline
+ \multirow{ 5}{*}{Single mutation to alanine} & ddG monomer (hard-rep) & \multirow{ 5}{*}{748} & WildTypeComplex\_03 & 0.36 & 0.81 & 0.70  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_03 & 0.31 & 0.86 & 0.66  \\
+ & ddG monomer (hard-rep) & & WildTypeComplex\_50 & 0.46 & 0.75 & \textbf{0.76}  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_50 & \textbf{0.50} & \textbf{0.74} & \textbf{0.76}  \\
+ & ZEMu paper & & id\_01 & 0.45 & 0.76 & 0.75  \\
+\hline
+ \multirow{ 5}{*}{Multiple mutations} & ddG monomer (hard-rep) & \multirow{ 5}{*}{273} & WildTypeComplex\_03 & 0.50 & 1.69 & 0.66  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_03 & 0.60 & 1.59 & 0.73  \\
+ & ddG monomer (hard-rep) & & WildTypeComplex\_50 & 0.63 & 1.48 & 0.78  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_50 & 0.60 & 1.52 & \textbf{0.79}  \\
+ & ZEMu paper & & id\_01 & \textbf{0.64} & \textbf{1.46} & 0.78  \\
+\hline
+ \multirow{ 5}{*}{Multiple mutations, none alanine} & ddG monomer (hard-rep) & \multirow{ 5}{*}{45} & WildTypeComplex\_03 & 0.40 & 1.96 & 0.49  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_03 & 0.43 & 1.85 & 0.49  \\
+ & ddG monomer (hard-rep) & & WildTypeComplex\_50 & \textbf{0.58} & \textbf{1.65} & \textbf{0.58}  \\
+ & ddG monomer (soft-rep) & & WildTypeComplex\_50 & 0.25 & 1.75 & 0.56  \\
+ & ZEMu paper & & id\_01 & 0.53 & 1.79 & 0.51  \\
+\bottomrule
+\end{tabular}
+  \caption[ddG monomer results]{
+    ddG monomer results. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset or subset.
+  } \label{tab:table-ddG-monomer}
+\end{table}

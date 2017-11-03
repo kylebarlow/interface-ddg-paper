@@ -1,0 +1,28 @@
+\begin{table}
+  \begin{tabular}{llrrrr}
+\toprule
+Mutation Category &      Prediction Method &     N &    R &  MAE &   FC \\
+\midrule
+ \multirow{ 2}{*}{Complete dataset} & flex ddG & \multirow{ 2}{*}{1240} & \textbf{0.63} & \textbf{0.93} & \textbf{0.76}  \\
+ & flex ddG (REF energy) & & \textbf{0.63} & \textbf{0.93} & \textbf{0.76}  \\
+\hline
+ \multirow{ 2}{*}{Small-to-large mutation(s)} & flex ddG & \multirow{ 2}{*}{130} & \textbf{0.64} & \textbf{0.87} & \textbf{0.75}  \\
+ & flex ddG (REF energy) & & 0.57 & 0.92 & 0.72  \\
+\hline
+ \multirow{ 2}{*}{Single mutation to alanine} & flex ddG & \multirow{ 2}{*}{748} & \textbf{0.50} & \textbf{0.72} & 0.75  \\
+ & flex ddG (REF energy) & & 0.49 & 0.73 & \textbf{0.76}  \\
+\hline
+ \multirow{ 2}{*}{Multiple mutations} & flex ddG & \multirow{ 2}{*}{273} & \textbf{0.62} & \textbf{1.51} & \textbf{0.77}  \\
+ & flex ddG (REF energy) & & 0.59 & 1.57 & 0.75  \\
+\hline
+ \multirow{ 2}{*}{Res. $<=$ 1.5 Ang.} & flex ddG & \multirow{ 2}{*}{52} & 0.46 & 0.85 & 0.75  \\
+ & flex ddG (REF energy) & & \textbf{0.65} & \textbf{0.74} & \textbf{0.77}  \\
+\hline
+ \multirow{ 2}{*}{Res. $>=$ 2.5 Ang.} & flex ddG & \multirow{ 2}{*}{457} & \textbf{0.50} & \textbf{0.74} & 0.74  \\
+ & flex ddG (REF energy) & & 0.48 & 0.75 & \textbf{0.76}  \\
+\bottomrule
+\end{tabular}
+  \caption[REF results]{
+    Performance comparison of the standard flex ddG protocol (using Rosetta's Talaris energy function) with flex ddG run with the REF score function. "res $<=$ 1.5 Ang." indicates data points for which the resolution of the input wild-type crystal structure is less than or equal to 1.5 \AA. Backrub steps = 35000. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset or subset.
+  } \label{tab:table-ref}
+\end{table}

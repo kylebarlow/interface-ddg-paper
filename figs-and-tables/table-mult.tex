@@ -1,0 +1,26 @@
+\begin{table}
+  \begin{tabular}{llrrrr}
+\toprule
+Mutation Category &   Prediction Method &    N &    R &  MAE &   FC \\
+\midrule
+ \multirow{ 3}{*}{Multiple mutations} & flex ddG & \multirow{ 3}{*}{273} & 0.62 & 1.51 & 0.77  \\
+ & no backrub control & & 0.58 & 1.59 & 0.72  \\
+ & ZEMu paper & & \textbf{0.64} & \textbf{1.46} & \textbf{0.78}  \\
+\hline
+ \multirow{ 3}{*}{Multiple mutations, all alanine} & flex ddG & \multirow{ 3}{*}{191} & 0.47 & 1.55 & \textbf{0.85}  \\
+ & no backrub control & & 0.50 & 1.51 & 0.83  \\
+ & ZEMu paper & & \textbf{0.55} & \textbf{1.44} & \textbf{0.85}  \\
+\hline
+ \multirow{ 3}{*}{Multiple mutations, none alanine} & flex ddG & \multirow{ 3}{*}{45} & \textbf{0.67} & \textbf{1.57} & \textbf{0.53}  \\
+ & no backrub control & & 0.44 & 1.82 & \textbf{0.53}  \\
+ & ZEMu paper & & 0.53 & 1.79 & 0.51  \\
+\hline
+ \multirow{ 3}{*}{Mutation(s) to alanine} & flex ddG & \multirow{ 3}{*}{939} & 0.61 & \textbf{0.89} & \textbf{0.77}  \\
+ & no backrub control & & 0.58 & 0.93 & \textbf{0.77}  \\
+ & ZEMu paper & & \textbf{0.62} & 0.90 & \textbf{0.77}  \\
+\bottomrule
+\end{tabular}
+  \caption[Multiple mutations results]{
+    Multiple mutations results (backrub steps = 35000). R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset or subset.
+  } \label{tab:table-mult}
+\end{table}
