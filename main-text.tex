@@ -34,7 +34,7 @@ Backrub ensembles appear to recapitulate properties of proteins that have been e
 Backrub has also proved effective in design applications, such as for the redesign of protein-protein interfaces\cite{kapp_control_2012} and recapitulation of mutations that alter ligand-binding specificity\cite{ollikainen_coupling_2015}.
 When compared to ensembles generated via molecular dynamics simulations or the ``PertMin'' method\cite{davey_improving_2014}, backrub ensembles were shown in certain cases to be
 the only ensembles with a higher diversity (as measured with RMSD) from each other than from the original input crystal structure. This observation suggests that backrub could be uniquely suited to produce diverse ensembles that effectively explore the local conformational space around an input structure.\cite{davey_improving_2014}
-Taken together, we hypothesized that these previously demonstrated properties of backrub ensembles would also make them an effective representation of near-native conformational states for use in predicting interface \ddg\ values. yah
+Taken together, we hypothesized that these previously demonstrated properties of backrub ensembles would also make them an effective representation of near-native conformational states for use in predicting interface \ddg\ values.
 
 \section{Methods}
 
@@ -50,7 +50,7 @@ The ZEMu dataset was also curated to include a range of both stabilizing and des
 
 After a review of the literature from which the known experimental \ddg\ values originated, we removed one data point from the 1254 point ZEMu set that we could not match to the originally reported affinity value. We also removed 5 mutations we determined to be duplicates, along with 8 mutations that were reverse mutations of other data points, leaving us with a test set of 1240 mutations.
 We defined complexes that contained at least one antibody binding partner by comparison of PDB identifiers with SAbDab \cite{dunbar_sabdab:_2014}.
-Our version of the ZEMu dataset is available in the Supporting Information as \cref{tab:zemu-filtered}.
+Our version of the ZEMu dataset is available in the Supporting Information as \cref{dst:zemu-filtered}.
 
 \subsection{Rosetta implementation and energy function}
 
@@ -90,7 +90,7 @@ Flex ddG method steps are outlined in \cref{fig:figure-overview}. The method can
   \end{split}
 \end{equation}
 
-We evaluate performance of the protocol by comparing predicted \ddg\ scores to known experimental values, using Pearson's correlation (R), Fraction Correct (FC), and Mean Absolute Error (MAE). Fraction Correct is defined as the number of mutations categorized correctly as stabilizing, neutral, or destabilizing, divided by the total number of mutations in the benchmark set. Stabilizing mutations are defined as those with a \ddg\ $<=$\ -1.0 kcal/mol, neutral as those with -1.0 kcal/mol $<$\ \ddg\ $<$\ 1.0 kcal/mol, and destabilizing as those with \ddg\ $>=$\ 1.0 kcal/mol. Prior to calculating the fraction correct and MAE metrics, \ddg\ values predicted by Rosetta in REU (Rosetta Energy Units) are scaled into kcal/mol based on the linear fit of predicted to experimental values on the entire benchmark set.
+We evaluate performance of the protocol by comparing predicted \ddg\ scores to known experimental values, using Pearson's correlation (R), Fraction Correct (FC), and Mean Absolute Error (MAE). Fraction Correct is defined as the number of mutations categorized correctly as stabilizing, neutral, or destabilizing, divided by the total number of mutations in the benchmark set. Stabilizing mutations are defined as those with a \ddg\ $<=$\ -1.0 kcal/mol, neutral as those with -1.0 kcal/mol $<$\ \ddg\ $<$\ 1.0 kcal/mol, and destabilizing as those with \ddg\ $>=$\ 1.0 kcal/mol (performance on these subsets is show in \cref{tab:table-stabilizing}). Prior to calculating the fraction correct and MAE metrics, \ddg\ values predicted by Rosetta in REU (Rosetta Energy Units) are scaled into kcal/mol based on the linear fit of predicted to experimental values on the entire benchmark set.
 
 MAE (Mean Absolute Error) is defined in Eq.~\ref{eqn:mae} as:
 
@@ -136,7 +136,7 @@ In the following sections, we set out to assess how different flex ddG implement
 
 \subsection{Effect of ensemble size}
 
-The results presented above used an ensemble size of 50 members but it is unclear what the optimal ensemble size should be. For example, prior methods used ensemble sizes ranging from ten\cite{kamisetty_accounting_2011}\ to thousands\cite{benedix_predicting_2009}. As here the computational time increases linearly with ensemble size, determining an optimal size is practically relevant. We therefore evaluated the performance of flex ddG as we average across an increasing number of structures (from 1 to 50,\cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}.
+The results presented above used an ensemble size of 50 members but it is unclear what the optimal ensemble size should be. For example, prior methods used ensemble sizes ranging from ten\cite{kamisetty_accounting_2011}\ to thousands\cite{benedix_predicting_2009}. As here the computational time increases linearly with ensemble size, determining an optimal size is practically relevant. We therefore evaluated the performance of flex ddG as we average across an increasing number of structures (from 1 to 50, \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}.
 The structures are first sorted by the score of the corresponding repacked and minimized wild type model, such that producing a \ddg\ with 1 model will only use the lowest (best) scoring model, 2 models will use the 2 lowest scoring models, and so forth.
 \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}(a) shows performance on the complete dataset.
 As more structures with increasing wild type complex score are averaged, correlation with known experimental values increases.
@@ -153,7 +153,7 @@ Averaging across increased numbers of structures also improves correlation for t
 Here, improvements are seen up to averaging about 10 structures, after which performance stays approximately constant.
 This observation indicates that increased sampling, in the very least, is not harmful for cases where one would expect structural changes to be relatively small on average.
 
-From a practical standpoint, simply generating 20-30 structures should constitute sufficient sampling for most cases. Sorting the generated models by score and selecting the best scoring 20 out of 50 models does not appear to be necessary, as not sorting the structures by score gives similar results \cref{fig:structs-v-corr-id-zemu-12-60000-rscript-validated-t14}.
+From a practical standpoint, simply generating 20-30 structures should constitute sufficient sampling for most cases. Sorting the generated models by score and selecting the best scoring 20 out of 50 models does not appear to be necessary, as not sorting the structures by score gives similar results (\cref{fig:structs-v-corr-id-zemu-12-60000-rscript-validated-t14}).
 
 \subsection{Effect of extent of backrub sampling in each trajectory}
 
