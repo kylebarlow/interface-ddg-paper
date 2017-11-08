@@ -90,7 +90,7 @@ Flex ddG method steps are outlined in \cref{fig:figure-overview}. The method can
   \end{split}
 \end{equation}
 
-We evaluate performance of the protocol by comparing predicted \ddg\ scores to known experimental values, using Pearson's correlation (R), Fraction Correct (FC), and Mean Absolute Error (MAE). Fraction Correct is defined as the number of mutations categorized correctly as stabilizing, neutral, or destabilizing, divided by the total number of mutations in the benchmark set. Stabilizing mutations are defined as those with a \ddg\ $<=$\ -1.0 kcal/mol, neutral as those with -1.0 kcal/mol $<$\ \ddg\ $<$\ 1.0 kcal/mol, and destabilizing as those with \ddg\ $>=$\ 1.0 kcal/mol (performance on these subsets is show in \cref{tab:table-stabilizing}). Prior to calculating the fraction correct and MAE metrics, \ddg\ values predicted by Rosetta in REU (Rosetta Energy Units) are scaled into kcal/mol based on the linear fit of predicted to experimental values on the entire benchmark set.
+We evaluate performance of the protocol by comparing predicted \ddg\ scores to known experimental values, using Pearson's correlation (R), Fraction Correct (FC), and Mean Absolute Error (MAE). Fraction Correct is defined as the number of mutations categorized correctly as stabilizing, neutral, or destabilizing, divided by the total number of mutations in the benchmark set. Stabilizing mutations are defined as those with a \ddg\ $<=$\ -1.0 kcal/mol, neutral as those with -1.0 kcal/mol $<$\ \ddg\ $<$\ 1.0 kcal/mol, and destabilizing as those with \ddg\ $>=$\ 1.0 kcal/mol (performance on these subsets is show in \cref{tab:table-stabilizing}).
 
 MAE (Mean Absolute Error) is defined in Eq.~\ref{eqn:mae} as:
 

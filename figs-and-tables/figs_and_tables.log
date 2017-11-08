@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2017.5.14)  3 NOV 2017 11:48
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2017.10.25)  7 NOV 2017 22:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **figs_and_tables
 (./figs_and_tables.tex
-LaTeX2e <2017/01/01> patch level 3
-Babel <3.9r> and hyphenation patterns for 7 language(s) loaded.
+LaTeX2e <2017-04-15>
+Babel <3.12> and hyphenation patterns for 7 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -51,14 +51,14 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \@thisrulewidth=\dimen116
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2016/10/09 v1.0u Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -69,8 +69,7 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 Package graphics Info: Driver file: xetex.def on input line 99.
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def
-File: xetex.def 2016/07/11 v4.10 LaTeX color/graphics driver for XeTeX (L3/RRM/
-JK)
+File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
 ))
 \Gin@req@height=\dimen117
 \Gin@req@width=\dimen118
@@ -79,7 +78,7 @@ JK)
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
@@ -153,10 +152,10 @@ LaTeX Font Info:    ... okay on input line 8.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-File: ../../figures/fig-overview.pdf Graphic file (type QTm)
-<use  "../../figures/fig-overview.pdf" >
+File: ../../figures/fig-overview.pdf Graphic file (type pdf)
+<use ../../figures/fig-overview.pdf>
 
-LaTeX Warning: Float too large for page by 33.50404pt on input line 16.
+LaTeX Warning: Float too large for page by 44.22786pt on input line 16.
 
 (./table-composition.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -164,39 +163,42 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 2.
 ) (./table-main.tex) (./figure-scatter.tex
-File: fig-scatter.pdf Graphic file (type QTm)
-
-<use  "fig-scatter.pdf" >) (./steps-v-corr.tex
-File: steps-v-corr.pdf Graphic file (type QTm)
- <use  "steps-v-corr.pdf" >)
-(./steps-v-corr_mult.tex
-File: steps-v-corr_mult.pdf Graphic file (type QTm)
- <use  "steps-v-corr_mult.pdf" >)
-(./steps-v-corr_resolution.tex
-File: steps-v-corr_resolution.pdf Graphic file (type QTm)
- <use  "steps-v-corr_resolution.pdf" >)
+File: fig-scatter.pdf Graphic file (type pdf)
+<use fig-scatter.pdf>
+)
+(./steps-v-corr.tex
+File: steps-v-corr.pdf Graphic file (type pdf)
+<use steps-v-corr.pdf>
+) (./steps-v-corr_mult.tex
+File: steps-v-corr_mult.pdf Graphic file (type pdf)
+<use steps-v-corr_mult.pdf>
+) (./steps-v-corr_resolution.tex
+File: steps-v-corr_resolution.pdf Graphic file (type pdf)
+<use steps-v-corr_resolution.pdf>
+)
 (./steps-v-corr_some_sizes.tex
-File: steps-v-corr_some_sizes.pdf Graphic file (type QTm)
- <use  "steps-v-corr_some_sizes.pdf" >)
+File: steps-v-corr_some_sizes.pdf Graphic file (type pdf)
+<use steps-v-corr_some_sizes.pdf>
+)
 (./structs-v-corr-id-zemu-12-60000-rscript-validated-t14.tex
 File: structs-v-corr-id-zemu-12-60000-rscript-validated-t14.pdf Graphic file (t
-ype QTm)
-
-<use  "structs-v-corr-id-zemu-12-60000-rscript-validated-t14.pdf" >)
+ype pdf)
+<use structs-v-corr-id-zemu-12-60000-rscript-validated-t14.pdf>
+)
 (./structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14.tex
 File: structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14.pdf Gr
-aphic file (type QTm)
-
-<use  "structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14.pdf" 
->) (./structs-v-corr-id-ddg-monomer-16-003-zemu-2.tex
-File: structs-v-corr-id-ddg-monomer-16-003-zemu-2.pdf Graphic file (type QTm)
-
-<use  "structs-v-corr-id-ddg-monomer-16-003-zemu-2.pdf" >)
+aphic file (type pdf)
+<use structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14.pdf>
+)
+(./structs-v-corr-id-ddg-monomer-16-003-zemu-2.tex
+File: structs-v-corr-id-ddg-monomer-16-003-zemu-2.pdf Graphic file (type pdf)
+<use structs-v-corr-id-ddg-monomer-16-003-zemu-2.pdf>
+)
 (./structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2.tex
 File: structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2.pdf Graphic file
- (type QTm)
-
-<use  "structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2.pdf" >)
+ (type pdf)
+<use structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2.pdf>
+)
 (./table-temperature.tex) (./table-mult.tex) (./table-antibodies.tex)
 (./table-versions.tex) (./table-stabilizing.tex) (./table-by-structure.tex
 
@@ -205,10 +207,10 @@ LaTeX Warning: Float too large for page by 1363.23068pt on input line 220.
 ) (./table-ref.tex) [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13]
 [14] (./figs_and_tables.aux) ) 
 Here is how much of TeX's memory you used:
- 1295 strings out of 495006
- 18874 string characters out of 6177692
- 168307 words of memory out of 5000000
- 5076 multiletter control sequences out of 15000+600000
+ 1307 strings out of 494947
+ 19811 string characters out of 6177098
+ 174075 words of memory out of 5000000
+ 5147 multiletter control sequences out of 15000+600000
  3656 words of font info for 16 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  25i,10n,32p,467b,223s stack positions out of 5000i,500n,10000p,200000b,80000s

@@ -1,12 +1,12 @@
 \begin{table}
   \begin{tabular}{llrrrr}
 \toprule
-Mutation Category &       Prediction Method &   N &     R &  MAE &  FC \\
+Mutation Category &   Prediction Method &   N &     R &  MAE &  FC \\
 \midrule
- \multirow{ 4}{*}{pdb-1HE8} & flex ddG & \multirow{ 4}{*}{10} & -0.25 & 0.74 & 0.5  \\
- & no backrub control & & 0.62 & 0.71 & 0.5  \\
- & ddG monomer (hard-rep) & & 0.26 & 0.66 & 0.5  \\
- & ZEMu paper & & \textbf{0.81} & \textbf{0.52} & \textbf{0.8}  \\
+ \multirow{ 4}{*}{pdb-1HE8} & flex ddG & \multirow{ 4}{*}{10} & -0.25 & 0.75 & \textbf{0.5}  \\
+ & no backrub control & & 0.62 & 0.91 & \textbf{0.5}  \\
+ & ddG monomer & & 0.26 & \textbf{0.66} & 0.3  \\
+ & ZEMu paper & & \textbf{0.81} & 1.23 & \textbf{0.5}  \\
 \bottomrule
 \end{tabular}
   \caption[Flex ddG performance on PDB 1HE8]{
