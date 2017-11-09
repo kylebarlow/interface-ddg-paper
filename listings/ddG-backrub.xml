@@ -1,6 +1,5 @@
 <ROSETTASCRIPTS>
   <SCOREFXNS>
-    <ScoreFunction name="fa_talaris2013" weights="talaris2013"/>
     <ScoreFunction name="fa_talaris2014" weights="talaris2014"/>
     <ScoreFunction name="fa_talaris2014_cst" weights="talaris2014">
       <Reweight scoretype="atom_pair_constraint" weight="1.0"/>
@@ -8,6 +7,7 @@
     </ScoreFunction>
   </SCOREFXNS>
 
+  <!-- ### Only required input - mutation resfile ### -->
   <!-- #### All residues must be set to be NATAA packable at top of resfile ### -->
   <TASKOPERATIONS>
     <ReadResfile name="res_mutate" filename="%%mutate_resfile_relpath%%"/>
@@ -16,10 +16,7 @@
   <RESIDUE_SELECTORS>
     <Task name="resselector" fixed="0" packable="0" designable="1" task_operations="res_mutate"/>
     <Neighborhood name="bubble" selector="resselector" distance="8.0"/>
-    <ResidueName name="isgly" residue_name3="GLY"/>
-    <Not name="notgly" selector="isgly"/>
-    <And name="bubble_notgly" selectors="bubble,notgly"/>
-    <PrimarySequenceNeighborhood name="bubble_notgly_adjacent" selector="bubble_notgly" lower="1" upper="1"/>
+    <PrimarySequenceNeighborhood name="bubble_adjacent" selector="bubble" lower="1" upper="1"/>
     <StoredResidueSubset name="restore_neighbor_shell" subset_name="neighbor_shell"/>
     <Not name="everythingelse" selector="restore_neighbor_shell"/>
   </RESIDUE_SELECTORS>
@@ -40,7 +37,7 @@
   </FILTERS>
 
   <MOVERS>
-    <StoreResidueSubset name="neighbor_shell_storer" subset_name="neighbor_shell" residue_selector="bubble_notgly_adjacent" />
+    <StoreResidueSubset name="neighbor_shell_storer" subset_name="neighbor_shell" residue_selector="bubble_adjacent" />
 
     <AddConstraintsToCurrentConformationMover name="addcst" use_distance_cst="1" coord_dev="0.5" min_seq_sep="0" max_distance="9" CA_only="1" bound_width="0.0" cst_weight="0.0"/>
     <ClearConstraintsMover name="clearcst"/>
@@ -50,31 +47,54 @@
     <PackRotamersMover name="mutate" scorefxn="fa_talaris2014" task_operations="commandline_init,res_mutate,norepack,multicool"/>
 
     <ReportToDB name="dbreport" batch_description="interface_ddG" database_name="ddG.db3">
-      <PdbDataFeatures/>
       <ScoreTypeFeatures/>
-      <ScoreFunctionFeatures scorefxn="fa_talaris2013"/>
-      <StructureScoresFeatures scorefxn="fa_talaris2013"/>
-      <ResidueFeatures/>
-      <ResidueScoresFeatures scorefxn="fa_talaris2013"/>
+      <ScoreFunctionFeatures scorefxn="fa_talaris2014"/>
+      <StructureScoresFeatures scorefxn="fa_talaris2014"/>
+    </ReportToDB>
+
+    <ReportToDB name="structreport" batch_description="interface_ddG_struct" database_name="struct.db3">
       <PoseConformationFeatures/>
-      <ResidueConformationFeatures/>
+      <PdbDataFeatures/>
+      <JobDataFeatures/>
+      <ResidueFeatures/>
+      <PoseCommentsFeatures/>
       <ProteinResidueConformationFeatures/>
-      <PairFeatures/>
-      <AtomAtomPairFeatures/>
-      <ProteinBondGeometryFeatures/>
-      <ProteinBackboneTorsionAngleFeatures/>
-      <RotamerFeatures/>
+      <ResidueConformationFeatures/>
     </ReportToDB>
 
     <SavePoseMover name="save_wt_bound_pose" restore_pose="0" reference_name="wt_bound_pose"/>
     <SavePoseMover name="save_backrub_pose" restore_pose="0" reference_name="backrubpdb"/>
     <SavePoseMover name="restore_backrub_pose" restore_pose="1" reference_name="backrubpdb"/>
 
-    <BackrubProtocol name="backrub" mc_kt="1.2" ntrials="20000" pivot_residue_selector="restore_neighbor_shell" task_operations="restrict_to_repacking,commandline_init,extrachizero" recover_low="0"/>
-
-    <InterfaceDdGMover name="int_ddG_mover" wt_ref_savepose_mover="save_wt_bound_pose" db_reporter="dbreport" scorefxn="fa_talaris2013"/>
+    <InterfaceDdGMover name="int_ddG_mover" wt_ref_savepose_mover="save_wt_bound_pose" chain_name="%%chainstomove%%" db_reporter="dbreport" scorefxn="fa_talaris2014"/>
 
     <ScoreMover name="apply_score" scorefxn="fa_talaris2014_cst" verbose="0"/>
+
+    <ParsedProtocol name="finish_ddg_post_backrub">
+      <Add mover_name="save_backrub_pose"/>
+      <Add mover_name="structreport"/>
+
+      <Add mover_name="repack"/>
+
+      <Add mover_name="addcst"/>
+      <Add mover_name="minimize"/>
+      <Add mover_name="clearcst"/>
+
+      <Add mover_name="save_wt_bound_pose"/>
+      <Add mover_name="structreport"/>
+      <Add mover_name="restore_backrub_pose"/>
+
+      <Add mover_name="mutate"/>
+
+      <Add mover_name="addcst"/>
+      <Add mover_name="minimize"/>
+      <Add mover_name="clearcst"/>
+      <Add mover_name="structreport"/>
+
+      <Add mover_name="int_ddG_mover"/>
+    </ParsedProtocol>
+
+    <BackrubProtocol name="backrub" mc_kt="1.2" ntrials="35000" pivot_residue_selector="restore_neighbor_shell" task_operations="restrict_to_repacking,commandline_init,extrachizero" recover_low="0" trajectory_stride="2500" trajectory_apply_mover="finish_ddg_post_backrub"/>
 
   </MOVERS>
   <APPLY_TO_POSE>
@@ -88,24 +108,6 @@
     <Add mover_name="clearcst"/>
 
     <Add mover_name="backrub"/>
-    <Add mover_name="save_backrub_pose"/>
-
-    <Add mover_name="repack"/>
-
-    <Add mover_name="addcst"/>
-    <Add mover_name="minimize"/>
-    <Add mover_name="clearcst"/>
-
-    <Add mover_name="save_wt_bound_pose"/>
-    <Add mover_name="restore_backrub_pose"/>
-
-    <Add mover_name="mutate"/>
-
-    <Add mover_name="addcst"/>
-    <Add mover_name="minimize"/>
-    <Add mover_name="clearcst"/>
-
-    <Add mover_name="int_ddG_mover"/>
   </PROTOCOLS>
   <OUTPUT />
 </ROSETTASCRIPTS>

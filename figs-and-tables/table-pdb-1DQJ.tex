@@ -3,13 +3,13 @@
 \toprule
 Mutation Category &   Prediction Method &   N &    R &  MAE &   FC \\
 \midrule
- \multirow{ 4}{*}{pdb-1DQJ} & flex ddG & \multirow{ 4}{*}{34} & 0.44 & \textbf{1.70} & 0.76  \\
- & no backrub control & & \textbf{0.48} & 1.86 & 0.71  \\
+ \multirow{ 4}{*}{pdb-1DQJ} & flex ddG & \multirow{ 4}{*}{34} & \textbf{0.44} & \textbf{1.70} & 0.76  \\
+ & no backrub control & & 0.39 & 1.93 & 0.65  \\
  & ddG monomer & & 0.37 & 1.87 & \textbf{0.82}  \\
  & ZEMu paper & & 0.28 & 2.08 & 0.59  \\
 \bottomrule
 \end{tabular}
   \caption[Flex ddG performance on PDB 1DQJ]{
-    Flex ddG performance on PDB 1DQJ. Backrub steps = 32500. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset or subset.
+    Flex ddG performance on PDB 1DQJ. Backrub steps = 32500. N = number of mutations in the dataset or subset. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct.
   } \label{tab:table-pdb-1DQJ}
 \end{table}

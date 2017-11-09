@@ -1,5 +1,7 @@
-\documentclass{article}
-\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\documentclass[journal=jpcbfk,manuscript=suppinfo]{achemso}
+\setkeys{acs}{doi = true}
+
+\usepackage[T1]{fontenc}       % Use modern font encodings
 \usepackage[capitalise]{cleveref}
 \usepackage{import}
 \usepackage{booktabs}
@@ -17,6 +19,8 @@
 \usepackage{xr} % Probably not needed for submission
 \externaldocument{flex-ddG}
 
+\input{authors-title}
+
 % A listing of the contents of each file supplied as Supporting Information
 % should be included. For instructions on what should be included in the
 % Supporting Information as well as how to prepare this material for
@@ -33,7 +37,7 @@
 % \item \cref{tab:table-mult}
 % \item \cref{fig:steps-v-corr}
 % \item \cref{tab:table-versions}
-% \item \cref{fig:structs-v-corr-id-zemu-12-60000-rscript-validated-t14}
+% \item \cref{fig:structs-v-corr-id-zemu-12-60000-rscript-simplified-t14}
 % \item \cref{fig:structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}
 % \item \cref{fig:wildtypecomplex-scores-complete}
 % \item \cref{fig:spear-corr-rmsd-error}
@@ -49,17 +53,19 @@
 \setcounter{figure}{0}
 \renewcommand{\thetable}{S\arabic{table}}
 \setcounter{table}{0}
-% \renewcommand{\lstlistingname}{Supporting Listing}
+% \renewcommand{\lstlistingname}{Code Listing}
+\renewcommand*{\thepage}{S\arabic{page}}
 
 \subimport*{figs-and-tables/}{table-versions}
 \subimport*{figs-and-tables/}{table-temperature}
-\subimport*{figs-and-tables/}{table-stabilizing}
 \clearpage
 \input{table-by-structure}
 \clearpage
 
 \begin{landscape}
-\subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14-underlying-data}
+  {\small
+    \subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-simplified-t14-underlying-data}
+  }
 \end{landscape}
 \clearpage
 
@@ -68,25 +74,31 @@
   \includegraphics[width=\textwidth,keepaspectratio]{figures/wildtypecomplex-scores-complete.pdf}
   \caption{
     Contour plot showing the effect of backrub sampling on the average wild-type complex score, for increasing numbers of averaged models. As the number of averaged structures N$_{struct}$ is increased along the x-axis, the average total score of the ensemble of modeled wild-type complexes (shown as colored contours in the body of the plot) also increases, as the wild-type complex models are first sorted according to their total scores and included in the averaged ensemble in order of increasing score.
-    As the number of backrub sampling steps at which the ensemble is generated increases (along the y-axis), the total score of an ensemble of any number of structures tends to decrease, indicating that flex ddG is able to find lower-energy states (as measured by the Rosetta energy function) as the simulation progresses. However, using only the lowest energy structures does not produce higher correlations with experimental \ddg\ values, as shown in \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-validated-t14}.
+    As the number of backrub sampling steps at which the ensemble is generated increases (along the y-axis), the total score of an ensemble of any number of structures tends to decrease, indicating that flex ddG is able to find lower-energy states (as measured by the Rosetta energy function) as the simulation progresses. However, using only the lowest energy structures does not produce higher correlations with experimental \ddg\ values, as shown in \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-simplified-t14}.
   } \label{fig:wildtypecomplex-scores-complete}
 \end{figure}
 
 \subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}
 \clearpage
 \begin{landscape}
-\subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2-underlying-data}
+  {\small
+    \subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2-underlying-data}
+  }
 \end{landscape}
 \clearpage
 
-\subimport*{figs-and-tables/}{structs-v-corr-id-zemu-12-60000-rscript-validated-t14}
+\subimport*{figs-and-tables/}{structs-v-corr-id-zemu-12-60000-rscript-simplified-t14}
 \clearpage
 \begin{landscape}
-\subimport*{figs-and-tables/}{structs-v-corr-id-zemu-12-60000-rscript-validated-t14-underlying-data}
+  {\small
+    \subimport*{figs-and-tables/}{structs-v-corr-id-zemu-12-60000-rscript-simplified-t14-underlying-data}
+  }
 \end{landscape}
 \clearpage
 
-\subimport*{figs-and-tables/}{steps-v-corr-underlying-data.tex}
+{\small
+  \subimport*{figs-and-tables/}{steps-v-corr-underlying-data.tex}
+}
 
 \begin{figure}
   \centering
@@ -118,7 +130,7 @@
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-tal-feats.png}
   \caption[Sigmoid fit Rosetta score function terms]{
-    Sigmoid functions resulting from application of unbiased logistic scaling to individual Rosetta score terms (generated using the flex ddG protocol and the Talaris energy function) in a generalized additive model. Extreme values for most score terms are downweighted, except for long-range hydrogen bond interactions between backbone atoms (hbond\_lr\_bb).
+    Sigmoid functions resulting from application of unbiased logistic scaling to individual Rosetta score terms (generated using the flex ddG protocol and the Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}) in a generalized additive model. Extreme values for most score terms are downweighted, except for long-range hydrogen bond interactions between backbone atoms (hbond\_lr\_bb).
   } \label{fig:t14-fits-feats}
 \end{figure}
 
@@ -127,10 +139,10 @@
 \begin{figure}
   \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-corrs-supp.png}
   \caption[]{
-    \textbf{Left}: standard Rosetta output (non-fitted predictions) vs. experimental \ddg\ values.
-    \textbf{Right}: Generalized additive model (GAM) flex ddG predictions vs. experimental data.
+    \textbf{(a)}: standard Rosetta output (non-fitted predictions) vs. experimental \ddg\ values.
+    \textbf{(b)}: Generalized additive model (GAM) flex ddG predictions vs. experimental data.
     The error bars in gray are represent the range from minimum to maximum fit predicted \ddg\ value for the 1000 sampled GAM models.
-    Flex ddG Rosetta predictions were run with the REF energy function for 30,000 backrub steps with kT=1.2, averaged over 50 output scores.
+    Flex ddG Rosetta predictions were run with the REF energy function\cite{alford_rosetta_2017} for 30,000 backrub steps with kT=1.2, averaged over 50 output scores.
     A line of of best fit is shown in each of the panels.
   } \label{fig:t14-fit-scatter-supp}
 \end{figure}
@@ -146,23 +158,24 @@ Prediction Method &     N &    R &  MAE &   FC \\
 \bottomrule
 \end{tabular}
   \caption[]{
-    Performance for GAM-fit predictions on the complete benchmark data set. Backrub steps = 35000. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset.
+    Performance for GAM-fit predictions on the complete benchmark data set, with talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015} and REF\cite{alford_rosetta_2017} energy functions. Backrub steps = 35000. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset.
   } \label{tab:table-gam-fit}
 \end{table}
 
 \begin{figure}
-  \includegraphics[width=\textwidth,keepaspectratio]{figures/tal_GAM_terms-mpl.png}
+  \includegraphics[width=\textwidth,keepaspectratio]{figures/tal-GAM-terms-mpl.png}
   \caption[]{
-    Total \ddg\ predictions and partial Rosetta score terms (talaris energy function). On the far left, total scores for the original Rosetta predictions are shown in green alongside GAM-fit predictions in orange and the experimentally determined values in blue. On the far right, the error ($\Delta\Delta G_{predicted} - \Delta\Delta G_{experimental}$) is shown. Intermediate strips show the 7 partial Rosetta score terms (fa\_sol, hbond\_sc, hbond\_bb\_sc, hbond\_lr\_bb, fa\_rep, fa\_elec, and fa\_atr) which together equal the total \ddg\ score on the far left.
+    Total \ddg\ predictions and partial Rosetta score terms (talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}). On the far left, total scores for the original Rosetta predictions are shown in green alongside GAM-fit predictions in orange and the experimentally determined values in blue. On the far right, the error ($\Delta\Delta G_{predicted} - \Delta\Delta G_{experimental}$) is shown. Intermediate strips show the 7 partial Rosetta score terms (fa\_sol, hbond\_sc, hbond\_bb\_sc, hbond\_lr\_bb, fa\_rep, fa\_elec, and fa\_atr) which together equal the total \ddg\ score on the far left.
     Points shown are filtered from the complete prediction set according to the following criteria: neutral mutations are removed (-1.0 $<$ experimental \ddg\ or Rosetta predicted \ddg\ score $<$ 1.0). Also removed are points where the absolute value of the error of the original Rosetta prediction is less than 2.0
   } \label{fig:tal-GAM-terms-mpl}
 \end{figure}
 
 \clearpage
 
-\renewcommand{\thetable}{Dataset \arabic{table}}
+\renewcommand\tablename{Dataset}
 \setcounter{table}{0}
 
+{ \small
 \csvreader[
 longtable=|c|c|c|p{8cm}|r|,
 table head=\caption{Curated ZEMu dataset with experimental \ddg\ values}\label{dst:zemu-filtered}\\\hline
@@ -177,6 +190,9 @@ ID & PDB & Res. & Mutations & \ddg\\\hline
 {figures/table-zemu-filtered.csv}
 {1=\DataSetID,2=\PDBFileID,3=\Resolution,4=\Mutations,5=\ExperimentalDDG}
 {\DataSetID & \PDBFileID & \Resolution & \Mutations & \ExperimentalDDG}
+}
+
+\clearpage
 
 \captionof{listing}{
   Flex ddg Rosetta Script implementation
@@ -191,5 +207,7 @@ breaklines
 {listings/ddG-backrub.xml}
 
 \clearpage
+
+\bibliography{references}
 
 \end{document}

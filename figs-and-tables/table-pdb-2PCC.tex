@@ -4,12 +4,12 @@
 Mutation Category &   Prediction Method &   N &     R &  MAE &   FC \\
 \midrule
  \multirow{ 4}{*}{pdb-2PCC} & flex ddG & \multirow{ 4}{*}{12} & \textbf{0.11} & \textbf{1.28} & \textbf{0.58}  \\
- & no backrub control & & 0.00 & 1.43 & \textbf{0.58}  \\
+ & no backrub control & & 0.04 & 1.49 & 0.50  \\
  & ddG monomer & & -0.29 & 1.90 & 0.50  \\
  & ZEMu paper & & -0.24 & 1.53 & 0.50  \\
 \bottomrule
 \end{tabular}
   \caption[Flex ddG performance on PDB 2PCC]{
-    Flex ddG performance on PDB 2PCC. Backrub steps = 32500. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset or subset.
+    Flex ddG performance on PDB 2PCC. Backrub steps = 32500. N = number of mutations in the dataset or subset. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct.
   } \label{tab:table-pdb-2PCC}
 \end{table}
