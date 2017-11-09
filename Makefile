@@ -22,3 +22,5 @@ suppinfo.pdf: figs-and-tables/* table-by-structure.tex suppinfo.tex
 	pdflatex --shell-escape suppinfo
 clean:
 	grep -vE '^(#|$$)' .gitignore | xargs rm -rf
+diff:
+	git-latexdiff --main flex-ddG.tex --latexopt --shell-escape --encoding=ascii -b HEAD~1
