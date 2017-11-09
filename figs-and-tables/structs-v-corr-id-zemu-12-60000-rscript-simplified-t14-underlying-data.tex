@@ -1,28 +1,48 @@
 \begin{table}
-\begin{tabular}{lrrrrr}
+\begin{tabular}{llrrr}
 \toprule
-                              Subset &  Structures &  R - flex ddG &  R - no backrub control &  MAE - flex ddG &  MAE - no backrub control \\
+                Run &                               Subset &  Structures &    R &  MAE \\
 \midrule
-                    Complete dataset &           1 &          0.54 &                    0.56 &            1.24 &                      1.12 \\
-                    Complete dataset &          20 &          0.63 &                    0.57 &            0.98 &                      1.12 \\
-                    Complete dataset &          30 &          0.63 &                    0.56 &            0.97 &                      1.12 \\
-                    Complete dataset &          40 &          0.63 &                    0.56 &            0.96 &                      1.12 \\
-                    Complete dataset &          50 &          0.63 &                    0.56 &            0.96 &                      1.12 \\
-          Small-to-large mutation(s) &           1 &          0.57 &                    0.40 &            1.09 &                      1.11 \\
-          Small-to-large mutation(s) &          20 &          0.65 &                    0.41 &            0.79 &                      1.12 \\
-          Small-to-large mutation(s) &          30 &          0.66 &                    0.41 &            0.76 &                      1.11 \\
-          Small-to-large mutation(s) &          40 &          0.66 &                    0.41 &            0.77 &                      1.11 \\
-          Small-to-large mutation(s) &          50 &          0.65 &                    0.41 &            0.78 &                      1.11 \\
- Multiple mutations, none to alanine &           1 &          0.44 &                    0.45 &            1.88 &                      1.66 \\
- Multiple mutations, none to alanine &          20 &          0.61 &                    0.44 &            1.40 &                      1.66 \\
- Multiple mutations, none to alanine &          30 &          0.63 &                    0.44 &            1.37 &                      1.66 \\
- Multiple mutations, none to alanine &          40 &          0.62 &                    0.44 &            1.39 &                      1.66 \\
- Multiple mutations, none to alanine &          50 &          0.63 &                    0.44 &            1.38 &                      1.66 \\
-          Single mutation to alanine &           1 &          0.45 &                    0.44 &            0.98 &                      0.90 \\
-          Single mutation to alanine &          20 &          0.50 &                    0.44 &            0.77 &                      0.90 \\
-          Single mutation to alanine &          30 &          0.51 &                    0.44 &            0.76 &                      0.90 \\
-          Single mutation to alanine &          40 &          0.51 &                    0.44 &            0.75 &                      0.90 \\
-          Single mutation to alanine &          50 &          0.51 &                    0.44 &            0.75 &                      0.90 \\
+           flex ddG &                     Complete dataset &           1 & 0.54 & 1.24 \\
+           flex ddG &                     Complete dataset &          20 & 0.63 & 0.98 \\
+           flex ddG &                     Complete dataset &          30 & 0.63 & 0.97 \\
+           flex ddG &                     Complete dataset &          40 & 0.63 & 0.96 \\
+           flex ddG &                     Complete dataset &          50 & 0.63 & 0.96 \\
+ no backrub control &                     Complete dataset &           1 & 0.56 & 1.12 \\
+ no backrub control &                     Complete dataset &          20 & 0.57 & 1.12 \\
+ no backrub control &                     Complete dataset &          30 & 0.56 & 1.12 \\
+ no backrub control &                     Complete dataset &          40 & 0.56 & 1.12 \\
+ no backrub control &                     Complete dataset &          50 & 0.56 & 1.12 \\
+           flex ddG &           Small-to-large mutation(s) &           1 & 0.57 & 1.09 \\
+           flex ddG &           Small-to-large mutation(s) &          20 & 0.65 & 0.79 \\
+           flex ddG &           Small-to-large mutation(s) &          30 & 0.66 & 0.76 \\
+           flex ddG &           Small-to-large mutation(s) &          40 & 0.66 & 0.77 \\
+           flex ddG &           Small-to-large mutation(s) &          50 & 0.65 & 0.78 \\
+ no backrub control &           Small-to-large mutation(s) &           1 & 0.40 & 1.11 \\
+ no backrub control &           Small-to-large mutation(s) &          20 & 0.41 & 1.12 \\
+ no backrub control &           Small-to-large mutation(s) &          30 & 0.41 & 1.11 \\
+ no backrub control &           Small-to-large mutation(s) &          40 & 0.41 & 1.11 \\
+ no backrub control &           Small-to-large mutation(s) &          50 & 0.41 & 1.11 \\
+           flex ddG &  Multiple mutations, none to alanine &           1 & 0.44 & 1.88 \\
+           flex ddG &  Multiple mutations, none to alanine &          20 & 0.61 & 1.40 \\
+           flex ddG &  Multiple mutations, none to alanine &          30 & 0.63 & 1.37 \\
+           flex ddG &  Multiple mutations, none to alanine &          40 & 0.62 & 1.39 \\
+           flex ddG &  Multiple mutations, none to alanine &          50 & 0.63 & 1.38 \\
+ no backrub control &  Multiple mutations, none to alanine &           1 & 0.45 & 1.66 \\
+ no backrub control &  Multiple mutations, none to alanine &          20 & 0.44 & 1.66 \\
+ no backrub control &  Multiple mutations, none to alanine &          30 & 0.44 & 1.66 \\
+ no backrub control &  Multiple mutations, none to alanine &          40 & 0.44 & 1.66 \\
+ no backrub control &  Multiple mutations, none to alanine &          50 & 0.44 & 1.66 \\
+           flex ddG &           Single mutation to alanine &           1 & 0.45 & 0.98 \\
+           flex ddG &           Single mutation to alanine &          20 & 0.50 & 0.77 \\
+           flex ddG &           Single mutation to alanine &          30 & 0.51 & 0.76 \\
+           flex ddG &           Single mutation to alanine &          40 & 0.51 & 0.75 \\
+           flex ddG &           Single mutation to alanine &          50 & 0.51 & 0.75 \\
+ no backrub control &           Single mutation to alanine &           1 & 0.44 & 0.90 \\
+ no backrub control &           Single mutation to alanine &          20 & 0.44 & 0.90 \\
+ no backrub control &           Single mutation to alanine &          30 & 0.44 & 0.90 \\
+ no backrub control &           Single mutation to alanine &          40 & 0.44 & 0.90 \\
+ no backrub control &           Single mutation to alanine &          50 & 0.44 & 0.90 \\
 \bottomrule
 \end{tabular}
 

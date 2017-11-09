@@ -62,38 +62,39 @@
 \input{table-by-structure}
 \clearpage
 
-\begin{landscape}
+%\begin{landscape}
   {\small
     \subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-simplified-t14-underlying-data}
   }
-\end{landscape}
+%\end{landscape}
 \clearpage
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/wildtypecomplex-scores-complete.pdf}
   \caption{
-    Contour plot showing the effect of backrub sampling on the average wild-type complex score, for increasing numbers of averaged models. As the number of averaged structures N$_{struct}$ is increased along the x-axis, the average total score of the ensemble of modeled wild-type complexes (shown as colored contours in the body of the plot) also increases, as the wild-type complex models are first sorted according to their total scores and included in the averaged ensemble in order of increasing score.
-    As the number of backrub sampling steps at which the ensemble is generated increases (along the y-axis), the total score of an ensemble of any number of structures tends to decrease, indicating that flex ddG is able to find lower-energy states (as measured by the Rosetta energy function) as the simulation progresses. However, using only the lowest energy structures does not produce higher correlations with experimental \ddg\ values, as shown in \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-simplified-t14}.
+    Contour plot showing the effect of backrub sampling on the average wild-type complex score, for increasing numbers of averaged models. As the number of averaged models is increased along the x-axis, the average total score of the ensemble of wild-type complex models (shown as colored contours in the body of the plot) also increases, as the wild-type complex models are first sorted according to their total scores and included in the averaged ensemble in order of increasing score.
+    As the number of backrub sampling steps at which the ensemble is generated increases (along the y-axis), the total score of an ensemble of any number of models tends to decrease, indicating that flex ddG is able to find lower-energy conformations (as measured by the Rosetta energy function) as the simulation progresses. However, using only the lowest energy models does not produce higher correlations with experimental \ddg\ values, as shown in \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-simplified-t14}.
+    Rosetta scores are in Rosetta Energy Units (REU) using the Rosetta Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}.
   } \label{fig:wildtypecomplex-scores-complete}
 \end{figure}
 
 \subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}
 \clearpage
-\begin{landscape}
+%\begin{landscape}
   {\small
     \subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2-underlying-data}
   }
-\end{landscape}
+%\end{landscape}
 \clearpage
 
 \subimport*{figs-and-tables/}{structs-v-corr-id-zemu-12-60000-rscript-simplified-t14}
 \clearpage
-\begin{landscape}
+%\begin{landscape}
   {\small
     \subimport*{figs-and-tables/}{structs-v-corr-id-zemu-12-60000-rscript-simplified-t14-underlying-data}
   }
-\end{landscape}
+%\end{landscape}
 \clearpage
 
 {\small
@@ -104,7 +105,10 @@
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/t14-mean-ensemble-error.pdf}
   \caption{
-    The average pairwise ensemble RMSD for each ensemble of 50 structures is shown versus increasing backrub sampling steps. Average pairwise RMSD is computed on the mean of all atoms in all residues selected as backrub pivots, superimposed onto the last output structure in the trajectory. For all analyzed subsets, including the complete dataset, pairwise ensemble RMSD increases with increasing backrub sampling steps, indicating that the diversity of sampled models (as measured by RMSD) continues to increase past the point around 30k-35k sampling steps where correlation with experimental \ddg\ values levels out. Subset legend: ala = mutation(s) to alanine; complete = complete ZEMu dataset; mult\_mut = multiple mutations (per data point); res\_gt15\_lt25 = resolution of the input wild-type structure $> 1.5\ \AA$ and $< 2.5\ \AA$; res\_gte25 = resolution of the input wild-type structure $>=\ 2.5\ \AA$; res\_lte15 = resolution of the input wild-type structure $<=\ 1.5\ \AA$; s2l = small-to-large mutation(s); sing\_mut = single mutations. N = number of cases in each subset.
+    The average pairwise ensemble RMSD for each ensemble of 50 models is shown versus increasing backrub sampling steps.
+    Average pairwise RMSD is computed on all atoms in residues selected as neighborhood pivot residues.
+    To calculate pairwise RMSD, this selection of atoms is superimposed onto their positions in the last output model in the backrub trajectory before pairwise RMSDs are computed.
+    For all analyzed subsets, including the complete dataset, pairwise ensemble RMSD increases with increasing backrub sampling steps, indicating that the diversity of sampled models (as measured by RMSD) continues to increase past the point around 30k-35k sampling steps where correlation with experimental \ddg\ values levels out. Subset legend: ala = mutation(s) to alanine; complete = complete ZEMu dataset; mult\_mut = multiple mutations (per data point); res\_gt15\_lt25 = resolution of the input wild-type structure $> 1.5\ \AA$ and $< 2.5\ \AA$; res\_gte25 = resolution of the input wild-type structure $>=\ 2.5\ \AA$; res\_lte15 = resolution of the input wild-type structure $<=\ 1.5\ \AA$; s2l = small-to-large mutation(s); sing\_mut = single mutations. N = number of cases in each subset.
   } \label{fig:t14-mean-ensemble}
 \end{figure}
 
@@ -139,11 +143,12 @@
 \begin{figure}
   \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-corrs-supp.png}
   \caption[]{
-    \textbf{(a)}: standard Rosetta output (non-fitted predictions) vs. experimental \ddg\ values.
+    Experimentally determined $\Delta\Delta G$ values (x-axis) versus predictions using a Generalized additive model (GAM).
+    This plot is analogous to \cref{fig:t14-fit-scatter-main}b in the main text, except that GAM scores are refit from values in Rosetta Energy Units (REU) using the Rosetta REF\cite{alford_rosetta_2017} energy function (instead of Talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}).
+    The error bars in gray represent the range from minimum to maximum fit predicted \ddg\ value for the 1000 sampled GAM models.
+    A line of best fit is shown.
+    \textbf{(a)}: standard Rosetta output (non-fitted REF predictions) vs. experimental \ddg\ values.
     \textbf{(b)}: Generalized additive model (GAM) flex ddG predictions vs. experimental data.
-    The error bars in gray are represent the range from minimum to maximum fit predicted \ddg\ value for the 1000 sampled GAM models.
-    Flex ddG Rosetta predictions were run with the REF energy function\cite{alford_rosetta_2017} for 30,000 backrub steps with kT=1.2, averaged over 50 output scores.
-    A line of of best fit is shown in each of the panels.
   } \label{fig:t14-fit-scatter-supp}
 \end{figure}
 
@@ -152,20 +157,20 @@
 \toprule
 Prediction Method &     N &    R &  MAE &   FC \\
 \midrule
- Flex ddG (talaris) GAM & \multirow{ 4}{*}{1240} & 0.68 & 0.87 & 0.76 \\
+ Flex ddG (Talaris) GAM & \multirow{ 4}{*}{1240} & 0.68 & 0.88 & 0.76 \\
  Flex ddG (REF) GAM & & 0.68 & 0.88 & 0.75  \\
  No backrub control GAM & & 0.62 & 0.93 & 0.75  \\
 \bottomrule
 \end{tabular}
   \caption[]{
-    Performance for GAM-fit predictions on the complete benchmark data set, with talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015} and REF\cite{alford_rosetta_2017} energy functions. Backrub steps = 35000. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct. N = number of mutations in the dataset.
+    Performance for GAM-fit predictions on the complete benchmark data set, with Talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015} and REF\cite{alford_rosetta_2017} energy functions. Backrub steps = 35000. N = number of cases in the dataset. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct.
   } \label{tab:table-gam-fit}
 \end{table}
 
 \begin{figure}
   \includegraphics[width=\textwidth,keepaspectratio]{figures/tal-GAM-terms-mpl.png}
   \caption[]{
-    Total \ddg\ predictions and partial Rosetta score terms (talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}). On the far left, total scores for the original Rosetta predictions are shown in green alongside GAM-fit predictions in orange and the experimentally determined values in blue. On the far right, the error ($\Delta\Delta G_{predicted} - \Delta\Delta G_{experimental}$) is shown. Intermediate strips show the 7 partial Rosetta score terms (fa\_sol, hbond\_sc, hbond\_bb\_sc, hbond\_lr\_bb, fa\_rep, fa\_elec, and fa\_atr) which together equal the total \ddg\ score on the far left.
+    Total \ddg\ predictions and partial Rosetta score terms (Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}). On the far left, total scores for the original Rosetta predictions are shown in green alongside GAM-fit predictions in orange and the experimentally determined values in blue. On the far right, the error ($\Delta\Delta G_{predicted} - \Delta\Delta G_{experimental}$) is shown. Intermediate strips show the 7 partial Rosetta score terms (fa\_sol, hbond\_sc, hbond\_bb\_sc, hbond\_lr\_bb, fa\_rep, fa\_elec, and fa\_atr) which together equal the total \ddg\ score on the far left.
     Points shown are filtered from the complete prediction set according to the following criteria: neutral mutations are removed (-1.0 $<$ experimental \ddg\ or Rosetta predicted \ddg\ score $<$ 1.0). Also removed are points where the absolute value of the error of the original Rosetta prediction is less than 2.0
   } \label{fig:tal-GAM-terms-mpl}
 \end{figure}

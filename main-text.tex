@@ -210,33 +210,5 @@ Prior methods that produced \ddg\ predictions by averaging an ensemble of models
 By creating a method that uses backrub to sample conformational space more broadly than minimization alone, while still staying close to the known wild-type input structure, we have also generated data that should prove useful for future energy function improvements.
 In particular, performance with Rosetta's newest REF energy function\cite{alford_rosetta_2017} is currently not better in our method than performance with the prior Talaris\cite{leaver-fay_chapter_2013,song_structure-guided_2011,shapovalov_smoothed_2011} energy function (\cref{tab:table-ref}), indicating that the backrub sampling parameters might require further benchmarking and adaption to the REF energy function.
 Our error analysis via GAM-like reweighting also indicates potential avenues for energy function improvement by identifying imbalances in predicted energetic contributions leading to overestimation of stabilizing and destabilizing effects.
-Further improvements might also be obtained by more explicitly including the effects of altering water-mediated interactions\cite{lai_enhancing_2017} and of conformational entropy\cite{hu_protein_2006,guerois_predicting_2002}, as well as by considering the commonly observed shortcomings of energy functions balancing the magnitudes of electrostatic interactions and desolvation costs. We expect energy function improvements to require more accurate representation of even subtle conformational changes, as modeled here, as these changes can have a considerable impact on design predictions.
-
-% In the future, we might need to look more at structure metrics.
-% Why do our backrub ensembles work better than \cite{kamisetty_accounting_2011} and \cite{kellogg_role_2011}, which also used backrub exactly (GOBLIN) or something like it (Kellogg). Where the sampling takes place, and how much, are important. We've focused around mutations.
-% Why no boltzmann weighting? If we are sampling the underlying distribution unbiased, we wouldn't need to.
-% Entropy.
-
-% \begin{itemize}
-% \item Monomeric Rosetta ddG does not work for interfaces
-% \item As stated in intro, ensembles have advantages, etc.
-% \item Dataset: zemu (why better than skempi). Table 1
-% \item General prediction protocol in figure 1
-% \item Metric description: pearson’s R, fraction correct, MAE
-% \item Description of main results, subsets, and comparison to zemu method
-% \item Scatter plots and table
-% \item Number of structures in ensemble average, discuss filtering structures by score (ref supp. fig). Fig 4 - one panel showing number of structures effect on correlation (at best backrub step)
-% \item Structure comparison - RMSD deviation are subtle. Torsions could be more informative?
-% \item We applied machine learning to our cases to try and study which individual score terms were informative
-% \end{itemize}
-
-% \subsection{more unfinished}
-% Local conformational sampling
-
-% Perhaps because
-% As the protein folding funnel is narrower near the free energy minimum {Dill, From Levinthal to pathways to funnels (include this?)}, it should be more possible to find a discrete number of states to represent in an ensemble and use in ddG modeling,
-% We can capture the thin part of the funnel:
-% “backrub sampling may capture a sizable fraction of localized conformational changes that occur in proteins” \cite{humphris_prediction_2008}
-
-% Questions:
-% Shouldn’t it be easier to predict interface ddGs, as we don’t need to consider the stability effects of mutants in the unfolded state
+Further improvements might also be obtained by more explicitly including the effects of altering water-mediated interactions\cite{lai_enhancing_2017} and of conformational entropy\cite{hu_protein_2006,guerois_predicting_2002}, as well as by considering the commonly observed shortcomings of energy functions balancing the magnitudes of electrostatic interactions and desolvation costs.
+We expect energy function improvements to require more accurate representation of subtler conformational changes, as these changes can have a considerable impact on design predictions\cite{dou_sampling_2017}.
