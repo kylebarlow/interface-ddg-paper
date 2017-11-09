@@ -1,0 +1,13 @@
+,Mutation Category,Prediction Method,N,R,MAE,FC
+5719,Stabilizing,flex ddG,32,0.54,2.12,0.09
+5710,Stabilizing,no backrub control,32,0.54,2.27,0.34
+7536,Stabilizing,ddG monomer,32,0.39,2.18,0.19
+7833,Stabilizing,ZEMu paper,32,0.31,2.01,0.31
+8322,Neutral,flex ddG,719,0.20,0.51,0.87
+8777,Neutral,no backrub control,719,0.09,0.72,0.79
+8635,Neutral,ddG monomer,719,0.13,0.75,0.80
+8524,Neutral,ZEMu paper,719,0.16,0.66,0.79
+6686,Positive,flex ddG,489,0.48,1.55,0.63
+7083,Positive,no backrub control,489,0.45,1.64,0.67
+6938,Positive,ddG monomer,489,0.47,1.71,0.72
+6670,Positive,ZEMu paper,489,0.48,1.63,0.62

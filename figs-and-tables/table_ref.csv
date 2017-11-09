@@ -1,0 +1,13 @@
+,Mutation Category,Prediction Method,N,R,MAE,FC
+3674,Complete dataset,flex ddG,1240,0.63,0.96,0.76
+3953,Complete dataset,flex ddG (REF energy),1240,0.63,1.19,0.75
+3120,Small-to-large mutation(s),flex ddG,130,0.65,0.78,0.71
+5331,Small-to-large mutation(s),flex ddG (REF energy),130,0.57,1.01,0.72
+6142,Single mutation to alanine,flex ddG,748,0.51,0.75,0.76
+6546,Single mutation to alanine,flex ddG (REF energy),748,0.49,0.90,0.74
+4125,Multiple mutations,flex ddG,273,0.62,1.62,0.78
+4818,Multiple mutations,flex ddG (REF energy),273,0.59,2.12,0.80
+6835,Res. $<=$ 1.5 Ang.,flex ddG,52,0.47,0.93,0.73
+3213,Res. $<=$ 1.5 Ang.,flex ddG (REF energy),52,0.65,1.10,0.75
+6503,Res. $>=$ 2.5 Ang.,flex ddG,457,0.49,0.73,0.76
+6794,Res. $>=$ 2.5 Ang.,flex ddG (REF energy),457,0.48,0.90,0.75

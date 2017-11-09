@@ -1,0 +1,26 @@
+,Mutation Category,Prediction Method,N,Num/Sorting of Structs,R,MAE,FC
+6109,Complete dataset,ddG monomer,1240,WildTypeComplex_03,0.51,1.57,0.64
+5906,Complete dataset,ddG monomer (soft-rep),1240,WildTypeComplex_03,0.53,1.19,0.66
+4221,Complete dataset,ddG monomer,1240,WildTypeComplex_50,0.62,1.16,0.75
+4753,Complete dataset,ddG monomer (soft-rep),1240,WildTypeComplex_50,0.59,0.99,0.75
+4295,Complete dataset,ZEMu paper,1240,id_01,0.61,1.08,0.71
+7816,Small-to-large mutation(s),ddG monomer,130,WildTypeComplex_03,0.31,1.55,0.55
+8612,Small-to-large mutation(s),ddG monomer (soft-rep),130,WildTypeComplex_03,0.13,1.28,0.58
+5988,Small-to-large mutation(s),ddG monomer,130,WildTypeComplex_50,0.52,1.05,0.68
+7792,Small-to-large mutation(s),ddG monomer (soft-rep),130,WildTypeComplex_50,0.31,1.07,0.68
+6817,Small-to-large mutation(s),ZEMu paper,130,id_01,0.48,1.16,0.65
+7628,Single mutation to alanine,ddG monomer,748,WildTypeComplex_03,0.36,1.31,0.62
+7803,Single mutation to alanine,ddG monomer (soft-rep),748,WildTypeComplex_03,0.31,1.03,0.64
+6967,Single mutation to alanine,ddG monomer,748,WildTypeComplex_50,0.46,0.95,0.75
+6377,Single mutation to alanine,ddG monomer (soft-rep),748,WildTypeComplex_50,0.50,0.76,0.75
+7049,Single mutation to alanine,ZEMu paper,748,id_01,0.45,0.86,0.71
+6311,Multiple mutations,ddG monomer,273,WildTypeComplex_03,0.50,2.44,0.70
+4476,Multiple mutations,ddG monomer (soft-rep),273,WildTypeComplex_03,0.60,1.67,0.73
+3854,Multiple mutations,ddG monomer,273,WildTypeComplex_50,0.63,1.85,0.78
+4454,Multiple mutations,ddG monomer (soft-rep),273,WildTypeComplex_50,0.60,1.58,0.74
+3312,Multiple mutations,ZEMu paper,273,id_01,0.64,1.63,0.75
+7504,"Multiple mutations, none to alanine",ddG monomer,45,WildTypeComplex_03,0.40,2.54,0.38
+7283,"Multiple mutations, none to alanine",ddG monomer (soft-rep),45,WildTypeComplex_03,0.43,1.83,0.42
+5061,"Multiple mutations, none to alanine",ddG monomer,45,WildTypeComplex_50,0.58,1.48,0.62
+8077,"Multiple mutations, none to alanine",ddG monomer (soft-rep),45,WildTypeComplex_50,0.25,1.59,0.56
+5910,"Multiple mutations, none to alanine",ZEMu paper,45,id_01,0.53,1.59,0.60
