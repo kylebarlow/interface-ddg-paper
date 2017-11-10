@@ -130,14 +130,6 @@
 %   } \label{fig:t14-fit-scatter}
 % \end{figure}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-tal-feats.png}
-  \caption[Sigmoid fit Rosetta score function terms]{
-    Sigmoid functions resulting from application of unbiased logistic scaling to individual Rosetta score terms (generated using the flex ddG protocol and the Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}) in a generalized additive model. Extreme values for most score terms are downweighted, except for long-range hydrogen bond interactions between backbone atoms (hbond\_lr\_bb).
-  } \label{fig:t14-fits-feats}
-\end{figure}
-
 \subimport*{figs-and-tables/}{table-ref}
 
 \begin{figure}
@@ -150,6 +142,14 @@
     \textbf{(a)}: standard Rosetta output (non-fitted REF predictions) vs. experimental \ddg\ values.
     \textbf{(b)}: Generalized additive model (GAM) flex ddG predictions vs. experimental data.
   } \label{fig:t14-fit-scatter-supp}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-tal-feats.png}
+  \caption[Sigmoid fit Rosetta score function terms]{
+    Sigmoid functions resulting from application of unbiased logistic scaling to individual Rosetta score terms (generated using the flex ddG protocol and the Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}) in a generalized additive model. Extreme values for most score terms are downweighted, except for long-range hydrogen bond interactions between backbone atoms (hbond\_lr\_bb).
+  } \label{fig:t14-fits-feats}
 \end{figure}
 
 \begin{table}
