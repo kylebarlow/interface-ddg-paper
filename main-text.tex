@@ -108,7 +108,7 @@ where $y_i$ are the predicted \ddg\ values, $x_i$ are the known, experimentally 
 
 To investigate potential sources of prediction error on an individual score term basis, we used a generalized additive model\cite{hastie_generalized_1990} approach to fit Rosetta's predicted \ddg\ values to experimentally known values.
 First, we apply an unbiased logistic scaling to individual score terms,
-$$h_{a,b}(x) = \frac{e^{a}}{1 + \exp(- e^{b} x)},$$
+$$h_{a,b}(x) = \frac{2e^{a}}{1 + e^{-xe^{b}}}-e^a,$$
 where $a$ is the scaling range of the score, and $b$ is the steepness of the sigmoid scaling. Both parameters are transformed through an exponential to ensure non-negativity. The scaling function $h$ does not introduce bias, that is, $h_\theta(0) = 0$ for any $\theta$. The scoring model results in a generalized additive model (GAM) over the $M$ score terms,
 $$f(\bf{x}) = \sum_{j=1}^M h_{a_i,b_i}(x).$$
 The parameters $\theta = (a_j,b_j)_{j=1}^M$ for the score terms were simultaneously sampled using a random walk Metropolis-Hastings MCMC algorithm (the \texttt{mhsample} function in Matlab) assuming a Gaussian likelihood as the target distribution
