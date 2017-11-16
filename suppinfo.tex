@@ -122,12 +122,13 @@ Prediction Method &     N &    R &  MAE &   FC \\
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth,keepaspectratio]{figures/t14-mean-ensemble-error.pdf}
+  \includegraphics[width=0.6\textwidth,keepaspectratio]{figures/t14-mean-ensemble-error-50k.png}
   \caption{
     The average pairwise ensemble RMSD for each ensemble of 50 models is shown versus increasing backrub sampling steps.
     Average pairwise RMSD is computed on all atoms in residues selected as neighborhood pivot residues.
     To calculate pairwise RMSD, this selection of atoms is superimposed onto their positions in the last output model in the backrub trajectory before pairwise RMSDs are computed.
-    For all analyzed subsets, including the complete dataset, pairwise ensemble RMSD increases with increasing backrub sampling steps, indicating that the diversity of sampled models (as measured by RMSD) continues to increase past the point around 30k-35k sampling steps where correlation with experimental \ddg\ values levels out. Subset legend: ala = mutation(s) to alanine; complete = complete ZEMu dataset; mult\_mut = multiple mutations (per data point); res\_gt15\_lt25 = resolution of the input wild-type structure $> 1.5\ \AA$ and $< 2.5\ \AA$; res\_gte25 = resolution of the input wild-type structure $>=\ 2.5\ \AA$; res\_lte15 = resolution of the input wild-type structure $<=\ 1.5\ \AA$; s2l = small-to-large mutation(s); sing\_mut = single mutations. N = number of cases in each subset.
+    Pairwise ensemble RMSD increases with increasing backrub sampling steps, indicating that the diversity of sampled models (as measured by RMSD) continues to increase past the point around 30k-35k sampling steps where correlation with experimental \ddg\ values levels out.
+    RMSD shown is calculated for 1216 out of 1240 of the total points in the dataset.
   } \label{fig:t14-mean-ensemble} % TODO y axis: mean of pairwise ensemble RMSDs, and remove everything other than complete
 \end{figure}
 
