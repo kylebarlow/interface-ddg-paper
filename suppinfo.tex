@@ -69,17 +69,6 @@
 %\end{landscape}
 \clearpage
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth,keepaspectratio]{figures/wildtypecomplex-scores-complete.png}
-  \caption{
-    Contour plot showing the effect of backrub sampling on the average wild-type complex score, for increasing numbers of averaged models. As the number of averaged models is increased along the x-axis, the average total score of the ensemble of wild-type complex models (shown as colored contours in the body of the plot) also increases, as the wild-type complex models are first sorted according to their total scores and included in the averaged ensemble in order of increasing score.
-    As the number of backrub sampling steps at which the ensemble is generated increases (along the y-axis), the total score of an ensemble of any number of models tends to decrease, indicating that flex ddG is able to find lower-energy conformations (as measured by the Rosetta energy function) as the simulation progresses. However, using only the lowest energy models does not produce higher correlations with experimental \ddg\ values, as shown in \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-simplified-t14}.
-    Rosetta scores are in Rosetta Energy Units (REU) using the Rosetta Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}.
-  } \label{fig:wildtypecomplex-scores-complete}
-\end{figure}
-
-\subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}
 \clearpage
 %\begin{landscape}
   {\small
@@ -88,7 +77,6 @@
 %\end{landscape}
 \clearpage
 
-\subimport*{figs-and-tables/}{structs-v-corr-id-zemu-12-60000-rscript-simplified-t14}
 \clearpage
 %\begin{landscape}
   {\small
@@ -101,6 +89,37 @@
   \subimport*{figs-and-tables/}{steps-v-corr-underlying-data.tex}
 }
 
+\subimport*{figs-and-tables/}{table-ref}
+
+\begin{table}
+  \begin{tabular}{llrrrr}
+\toprule
+Prediction Method &     N &    R &  MAE &   FC \\
+\midrule
+ Flex ddG (Talaris) GAM & \multirow{ 4}{*}{1240} & 0.68 & 0.88 & 0.76 \\
+ Flex ddG (REF) GAM & & 0.68 & 0.88 & 0.75  \\
+ No backrub control GAM & & 0.62 & 0.93 & 0.75  \\
+\bottomrule
+\end{tabular}
+  \caption[]{
+    Performance for GAM-fit predictions on the complete benchmark data set, with Talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015} and REF\cite{alford_rosetta_2017} energy functions. Backrub steps = 35000. N = number of cases in the dataset. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct.
+  } \label{tab:table-gam-fit}
+\end{table}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth,keepaspectratio]{figures/wildtypecomplex-scores-complete.png}
+  \caption{
+    Contour plot showing the effect of backrub sampling on the average wild-type complex score, for increasing numbers of averaged models. As the number of averaged models is increased along the x-axis, the average total score of the ensemble of wild-type complex models (shown as colored contours in the body of the plot) also increases, as the wild-type complex models are first sorted according to their total scores and included in the averaged ensemble in order of increasing score.
+    As the number of backrub sampling steps at which the ensemble is generated increases (along the y-axis), the total score of an ensemble of any number of models tends to decrease, indicating that flex ddG is able to find lower-energy conformations (as measured by the Rosetta energy function) as the simulation progresses. However, using only the lowest energy models does not produce higher correlations with experimental \ddg\ values, as shown in \cref{fig:structs-v-corr-WildTypeComplex-zemu-12-60000-rscript-simplified-t14}.
+    Rosetta scores are in Rosetta Energy Units (REU) using the Rosetta Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}.
+  } \label{fig:wildtypecomplex-scores-complete}
+\end{figure}
+
+\subimport*{figs-and-tables/}{structs-v-corr-WildTypeComplex-ddg-monomer-16-003-zemu-2}
+\subimport*{figs-and-tables/}{structs-v-corr-id-zemu-12-60000-rscript-simplified-t14}
+
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/t14-mean-ensemble-error.pdf}
@@ -112,25 +131,7 @@
   } \label{fig:t14-mean-ensemble} % TODO y axis: mean of pairwise ensemble RMSDs, and remove everything other than complete
 \end{figure}
 
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=\textwidth,keepaspectratio]{figures/t14-spear-corr.pdf}
-%   \caption[\ddg\ prediction error vs. ensemble RMSD]{
-%     Scatter plot showing the average Spearman correlation of ddG prediction error v. mean pairwise backrub ensemble RMSD, v. backrub steps.
-%     As mean backrub ensemble RMSD increases (\cref{fig:t14-mean-ensemble}), we do not see any significant change in Spearman rank-order correlation between mean ensemble RMSD and ddG error (y-axis), as backrub steps increase (x-axis).
-%     This demonstrates that mean pairwise backrub ensemble RMSD might not be an effective metric to measure the degree to which we have sampled ``enough''.
-%   } \label{fig:spear-corr-rmsd-error}
-% \end{figure}
-
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-corrs.png}
-%   \caption[Interface \ddg prediction performance with sigmoid fit score function]{
-%     Left: standard flex ddG Rosetta output (non-fitted predictions) vs. experimental \ddg\ values. Right: Generalized additive model (GAM) flex ddG predictions vs. experimental data. Top: Control (no backrub) predictions. Middle: Flex ddG run with the Talaris energy function for 30,000 backrub steps with kT=1.2, averaged over 50 output scores. Bottom: Flex ddG run with the REF energy function, also for 30,000 backrub steps with kT=1.2, averaged over 50 output scores. The GAM is able to reduce the number of outlier flex ddG predictions, particularly relatively neutral values that Rosetta predicts to be highly destabilizing. This improvement in performance is most likely due to the ability of the sigmoid member functions of the GAM to limit extreme score term values once they are no longer predictive.
-%   } \label{fig:t14-fit-scatter}
-% \end{figure}
-
-\subimport*{figs-and-tables/}{table-ref}
+%% HERE
 
 \begin{figure}
   \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-corrs-supp.png}
@@ -151,21 +152,6 @@
     Sigmoid functions resulting from application of unbiased logistic scaling to individual Rosetta score terms (generated using the flex ddG protocol and the Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}) in a generalized additive model. Extreme values for most score terms are downweighted, except for long-range hydrogen bond interactions between backbone atoms, which only make minor contributions (hbond\_lr\_bb). % TODO add equation parameters as new table
   } \label{fig:t14-fits-feats}
 \end{figure}
-
-\begin{table}
-  \begin{tabular}{llrrrr}
-\toprule
-Prediction Method &     N &    R &  MAE &   FC \\
-\midrule
- Flex ddG (Talaris) GAM & \multirow{ 4}{*}{1240} & 0.68 & 0.88 & 0.76 \\
- Flex ddG (REF) GAM & & 0.68 & 0.88 & 0.75  \\
- No backrub control GAM & & 0.62 & 0.93 & 0.75  \\
-\bottomrule
-\end{tabular}
-  \caption[]{
-    Performance for GAM-fit predictions on the complete benchmark data set, with Talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015} and REF\cite{alford_rosetta_2017} energy functions. Backrub steps = 35000. N = number of cases in the dataset. R = Pearson's R. MAE = Mean Absolute Error. FC = Fraction Correct.
-  } \label{tab:table-gam-fit}
-\end{table}
 
 \begin{figure}
   \includegraphics[width=\textwidth,keepaspectratio]{figures/tal-GAM-terms-mpl.png}
