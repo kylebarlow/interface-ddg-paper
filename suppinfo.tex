@@ -109,7 +109,7 @@
     Average pairwise RMSD is computed on all atoms in residues selected as neighborhood pivot residues.
     To calculate pairwise RMSD, this selection of atoms is superimposed onto their positions in the last output model in the backrub trajectory before pairwise RMSDs are computed.
     For all analyzed subsets, including the complete dataset, pairwise ensemble RMSD increases with increasing backrub sampling steps, indicating that the diversity of sampled models (as measured by RMSD) continues to increase past the point around 30k-35k sampling steps where correlation with experimental \ddg\ values levels out. Subset legend: ala = mutation(s) to alanine; complete = complete ZEMu dataset; mult\_mut = multiple mutations (per data point); res\_gt15\_lt25 = resolution of the input wild-type structure $> 1.5\ \AA$ and $< 2.5\ \AA$; res\_gte25 = resolution of the input wild-type structure $>=\ 2.5\ \AA$; res\_lte15 = resolution of the input wild-type structure $<=\ 1.5\ \AA$; s2l = small-to-large mutation(s); sing\_mut = single mutations. N = number of cases in each subset.
-  } \label{fig:t14-mean-ensemble}
+  } \label{fig:t14-mean-ensemble} % TODO y axis: mean of pairwise ensemble RMSDs, and remove everything other than complete
 \end{figure}
 
 % \begin{figure}
@@ -135,12 +135,12 @@
 \begin{figure}
   \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-corrs-supp.png}
   \caption[]{
-    Experimentally determined $\Delta\Delta G$ values (x-axis) versus predictions using a Generalized additive model (GAM).
-    This plot is analogous to \cref{fig:t14-fit-scatter-main}b in the main text, except that GAM scores are refit from values in Rosetta Energy Units (REU) using the Rosetta REF\cite{alford_rosetta_2017} energy function (instead of Talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}).
-    The error bars in gray represent the range from minimum to maximum fit predicted \ddg\ value for the 1000 sampled GAM models.
+    Experimentally determined $\Delta\Delta G$ values (x-axis) versus predictions.
+    The error bars in gray represent the range from minimum to maximum fit predicted \ddg\ value for the 1000 sampled GAM (Generalized Additive Model) models.
     A line of best fit is shown.
     \textbf{(a)}: standard Rosetta output (non-fitted REF predictions) vs. experimental \ddg\ values.
-    \textbf{(b)}: Generalized additive model (GAM) flex ddG predictions vs. experimental data.
+    \textbf{(b)}: GAM flex ddG predictions vs. experimental data.
+    This plot is analogous to \cref{fig:t14-fit-scatter-main}b in the main text, except that GAM scores are refit from values in Rosetta Energy Units (REU) using the Rosetta REF\cite{alford_rosetta_2017} energy function (instead of Talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}).
   } \label{fig:t14-fit-scatter-supp}
 \end{figure}
 
@@ -148,7 +148,7 @@
   \centering
   \includegraphics[width=\textwidth,keepaspectratio]{figures/zemu-sigmoid2-tal-feats.png}
   \caption[Sigmoid fit Rosetta score function terms]{
-    Sigmoid functions resulting from application of unbiased logistic scaling to individual Rosetta score terms (generated using the flex ddG protocol and the Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}) in a generalized additive model. Extreme values for most score terms are downweighted, except for long-range hydrogen bond interactions between backbone atoms (hbond\_lr\_bb).
+    Sigmoid functions resulting from application of unbiased logistic scaling to individual Rosetta score terms (generated using the flex ddG protocol and the Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}) in a generalized additive model. Extreme values for most score terms are downweighted, except for long-range hydrogen bond interactions between backbone atoms, which only make minor contributions (hbond\_lr\_bb). % TODO add equation parameters as new table
   } \label{fig:t14-fits-feats}
 \end{figure}
 
