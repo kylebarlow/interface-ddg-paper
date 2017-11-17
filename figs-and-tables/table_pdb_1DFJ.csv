@@ -1,5 +1,5 @@
 ,Mutation Category,Prediction Method,N,R,MAE,FC
-2076,pdb-1DFJ,flex ddG,20,0.71,1.26,0.65
+2365,pdb-1DFJ,flex ddG,20,0.70,1.35,0.70
 1124,pdb-1DFJ,no backrub control,20,0.83,1.04,0.60
 2439,pdb-1DFJ,ddG monomer,20,0.69,1.38,0.55
 5564,pdb-1DFJ,ZEMu paper,20,0.55,1.40,0.55
