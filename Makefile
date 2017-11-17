@@ -15,7 +15,7 @@ $(CVTEXNAME).pdf: suppinfo.pdf $(CVTEXNAME).tex $(SOURCES)
 	pdflatex --shell-escape suppinfo
 	pdflatex --shell-escape suppinfo
 	pdflatex --shell-escape suppinfo
-suppinfo.pdf: figs-and-tables/* table-by-structure.tex suppinfo.tex
+suppinfo.pdf: figs-and-tables/* suppinfo.tex
 	pdflatex --shell-escape suppinfo
 	-$(BIB_PROG) suppinfo
 	pdflatex --shell-escape suppinfo
