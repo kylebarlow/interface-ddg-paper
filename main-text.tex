@@ -70,7 +70,10 @@ Version numbers of tested software are available in \cref{tab:table-versions}.
 \end{figure}
 
 Flex ddG method steps are outlined in \cref{fig:figure-overview}.
-\textbf{Step 1:} The protocol begins with an initial minimization (on backbone $\phi$/$\psi$\ and side chain $\chi$\ torsional degrees of freedom, using the ``lbfgs\_armijo\_nonmonotone'' minimization algorithm option) of the input crystal structure of the wild-type protein complex. This (and later) minimizations are performed with constraints that harmonically restrain pairwise atom distance to their values in the input crystal structure. Minimization is run until convergence (absolute score change upon minimization of less than one REU (Rosetta Energy Unit)).
+\textbf{Step 1:} The protocol begins with an initial minimization (on backbone $\phi$/$\psi$\ and side chain $\chi$\ torsional degrees of freedom, using the limited-memory BFGS minimizer implementation within Rosetta, with Armijo inexact line search conditions (option ``lbfgs\_armijo\_nonmonotone'') of the input crystal structure of the wild-type protein complex.
+This (and later) minimizations are performed with constraints that harmonically restrain pairwise atom distance to their values in the input crystal structure.
+Restraints were added for all pairs for C-alpha atoms within 9 \AA\ of each other using a harmonic score potential defined to have the width (standard deviation) parameter set to 0.5, and added to the Rosetta score function with a term weight of 1.0.
+Minimization is run until convergence (absolute score change upon minimization of less than one REU (Rosetta Energy Unit)).
 \textbf{Step 2:} Starting from the minimized input structure, the backrub method in Rosetta\cite{smith_backrub-like_2008} is used to create an ensemble of models. In brief, each backrub move is undertaken on a randomly chosen protein segment consisting of three to twelve adjacent residues in the neighborhood of any mutated position.
 The mutation neighborhood is defined by finding all residues with a C-$\beta$ atom (C-$\alpha$ for glycines) within 8 \AA\ of any mutant position, then adding this residue and its adjacent N and C-terminal residues to the list of neighborhood residues.
 All atoms in the backrub segment are rotated locally about an axis defined as the vector between the endpoint C-$\alpha$ atoms. Backrub is run at a temperature of 1.2 kT, for up to 50,000 backrub Monte Carlo trials/steps (\cref{tab:table-temperature} shows that using a kT of 1.6 gives similar results to a kT of 1.2). Up to 50 output models are generated.
@@ -90,7 +93,7 @@ All atoms in the backrub segment are rotated locally about an axis defined as th
   \end{split}
 \end{equation}
 
-We evaluate performance of the protocol by comparing predicted \ddg\ scores to known experimental values, using Pearson's correlation (R), Fraction Correct (FC), and Mean Absolute Error (MAE). Fraction Correct is defined as the number of cases in the dataset categorized correctly as stabilizing, neutral, or destabilizing, divided by the total number of cases in the dataset. Stabilizing mutations are defined as those with a \ddg\ $<=$\ -1.0 kcal/mol, neutral as those with -1.0 kcal/mol $<$\ \ddg\ $<$\ 1.0 kcal/mol, and destabilizing as those with \ddg\ $>=$\ 1.0 kcal/mol.
+We evaluate performance of the protocol by comparing predicted \ddg\ scores to known experimental values, using Pearson's correlation (R), Fraction Correct (FC), and Mean Absolute Error (MAE). Fraction Correct is defined as the number of cases in the dataset categorized correctly as stabilizing, neutral, or destabilizing, divided by the total number of cases in the dataset. Stabilizing mutations are defined as those with a \ddg\ $<=$\ -1.0 kcal/mol, neutral as those with -1.0 kcal/mol $<$\ \ddg\ $<$\ 1.0 kcal/mol, and destabilizing as those with \ddg\ $>=$\ 1.0 kcal/mol. The interface DDG score is calculated via Eq. 1 as the arithmetic mean over the different models produced.
 
 MAE (Mean Absolute Error) is defined in Eq.~\ref{eqn:mae} as:
 
@@ -99,6 +102,9 @@ MAE (Mean Absolute Error) is defined in Eq.~\ref{eqn:mae} as:
 \end{equation}
 
 where $y_i$ are the predicted \ddg\ values, $x_i$ are the known, experimentally determined values, and $e_i$ is the prediction error.
+
+As a control, we ran the flex ddG protocol omitting the backrub ensemble generation step.
+This control protocol also generates multiple models because of the minimization and packing steps, but these models are structurally highly similar. On average, 1.8 unique models are produced out of the 50 total generated.
 
 \subsection{Rosetta energy function}
 
@@ -182,7 +188,9 @@ The pairwise backrub ensemble RMSDs continue to increase throughout the backrub 
 
 As the sampling and scoring problems of protein modeling are generally linked, it is often the case that improving one enables further improvements in the other.
 
-First, we compared the performance of our flex ddG method, which was run using Rosetta's Talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015} energy function, to an identical protocol run with the more recently developed Rosetta Energy Function (REF)\cite{alford_rosetta_2017}. We did not observe an increase in performance on the complete ZEMu dataset, and performance decreases were seen for the subsets of small-to-large mutations and multiple mutations (\cref{tab:table-ref}). Interestingly, flex ddG performance with the REF energy function increased over using the Talaris energy function if the resolution of the input crystal structure was $<= 1.5$\ \AA, but this subset of the data was rather small with only 52 mutations.
+First, we compared the performance of our flex ddG method, which was run using Rosetta's Talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015} energy function, to an identical protocol run with the more recently developed Rosetta Energy Function (REF)\cite{alford_rosetta_2017}.
+The REF energy function differs from the Talaris energy function by utilizing a new anisotropic implicit solvation model, and an improved electrostatics and Lennard-Jones model. REF was optimized simultaneously against small-molecule thermodynamic data and high-resolution macromolecular structural data. Using the REF energy function, we did not observe an increase in performance on the complete ZEMu dataset, and performance decreases were seen for the subsets of small-to-large mutations and multiple mutations (\cref{tab:table-ref}).
+Interestingly, flex ddG performance with the REF energy function increased over using the Talaris energy function if the resolution of the input crystal structure was $<= 1.5$\ \AA, but this subset of the data was rather small with only 52 mutations.
 
 Next, we sought to analyze underlying errors of the Rosetta energy function (when applied to interface \ddg) by assessing the individual terms of the energy function. To do so, we chose to reweight the terms of the energy function using a non-linear reweighting scheme similar to Generalized Additive Models (GAMs)\cite{hastie_generalized_1990}.
 In this reweighting method, we used Monte Carlo sampling to fit a sigmoid function to the individual distributions of energy function terms, with the objective function of reducing the absolute error between our predictions and known experimental values over the entire dataset.
@@ -191,6 +199,7 @@ In this reweighting method, we used Monte Carlo sampling to fit a sigmoid functi
   \includegraphics[width=0.5\textwidth,keepaspectratio]{figures/zemu-sigmoid2-corrs-main.png}
   \caption[]{
     Experimentally determined $\Delta\Delta G$ values (x-axis) versus predictions using a Generalized additive model (GAM).
+    The complete dataset is shown.
     GAM scores are refit from values in Rosetta Energy Units (REU) using the Rosetta Talaris\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015} energy function.
     The error bars in gray represent the range from minimum to maximum fit predicted \ddg\ value for the 1000 sampled GAM models.
     \textbf{(a)}: Control (no backrub) Rosetta predictions.
@@ -199,7 +208,7 @@ In this reweighting method, we used Monte Carlo sampling to fit a sigmoid functi
   } \label{fig:t14-fit-scatter-main}
 \end{figure}
 
-The effect on the predictions is shown in \cref{fig:t14-fit-scatter-main}, \cref{fig:t14-fit-scatter-supp}, and \cref{tab:table-gam-fit}. In general, the GAM-adjusted predictions contain fewer outliers. In particular, experimental \ddg\ values that are relatively neutral (near zero) can sometimes be predicted by flex ddG to be highly destabilizing; the GAM model reduces the magnitude of error of many of these outliers, improving overall performance (\cref{fig:t14-fit-scatter-main}). The overall correlation increases from 0.64 to 0.68 (\cref{tab:table-main} and \cref{tab:table-gam-fit})\ when refitting the values from the Rosetta Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}; refitting values from the Rosetta REF energy function\cite{alford_rosetta_2017} leads to a similar increase from 0.63 to 0.68 (\cref{fig:t14-fit-scatter-supp}, \cref{tab:table-ref}, \cref{tab:table-gam-fit}). The correlation coefficient also increases when refitting the values obtained for the no backrub control, but only to 0.62 (\cref{fig:t14-fit-scatter-main}b, \cref{tab:table-gam-fit}).
+The effect on the predictions is shown in \cref{fig:t14-fit-scatter-main}, \cref{fig:t14-fit-scatter-supp}, and \cref{tab:table-gam-fit}. In general, the GAM-adjusted predictions contain fewer outliers. In particular, experimental \ddg\ values that are relatively neutral (near zero) can sometimes be predicted by flex ddG to be highly destabilizing; the GAM model reduces the magnitude of error of many of these outliers, improving overall performance (\cref{fig:t14-fit-scatter-main}). The overall correlation increases from 0.64 to 0.68 (\cref{tab:table-main} and \cref{tab:table-gam-fit})\ when refitting the values from the Rosetta Talaris energy function\cite{song_structure-guided_2011,shapovalov_smoothed_2011,omeara_combined_2015}; refitting values from the Rosetta REF energy function\cite{alford_rosetta_2017} leads to a similar increase from 0.63 to 0.68 (\cref{fig:t14-fit-scatter-supp}, \cref{tab:table-ref}, \cref{tab:table-gam-fit}). The correlation coefficient also increases when refitting the values obtained for the no backrub control, but only to 0.62 (\cref{fig:t14-fit-scatter-main}a, \cref{tab:table-gam-fit}).
 
 The fit functions (fit for Talaris-derived \ddg\ predictions) are shown in \cref{fig:t14-fits-feats}. Extreme values for most score terms are downweighted, especially for the fa\_sol and fa\_atr terms, which make the largest contributions to predicted \ddg\ (\cref{fig:tal-GAM-terms-mpl}).
 
