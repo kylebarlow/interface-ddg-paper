@@ -71,7 +71,7 @@ Version numbers of tested software are available in \cref{tab:table-versions}.
 
 Flex ddG method steps are outlined in \cref{fig:figure-overview}.
 \textbf{Step 1:} The protocol begins with an initial minimization (on backbone $\phi$/$\psi$\ and side chain $\chi$\ torsional degrees of freedom, using the limited-memory Broyden-Fletcher-Goldfarb-Shanno minimizer implementation within Rosetta, with Armijo inexact line search conditions (option ``lbfgs\_armijo\_nonmonotone'') of the input crystal structure of the wild-type protein complex.
-This (and later) minimizations are performed with harmonic restraints on pairwise atom distances to their values in the input crystal structure. Restraints were added for all pairs for C-alpha atoms within 9 \AA\ of each other using a harmonic score potential defined to have the width (standard deviation) parameter set to 0.5, and added to the Rosetta score function with a term weight of 1.0.
+This (and later) minimizations are performed with harmonic restraints on pairwise atom distances to their values in the input crystal structure.
 Restraints were added for all pairs for C-alpha atoms within 9 \AA\ of each other using a harmonic score potential defined to have the width (standard deviation) parameter set to 0.5, and added to the Rosetta score function with a term weight of 1.0.
 Minimization is run until convergence (absolute score change upon minimization of less than one REU (Rosetta Energy Unit)).
 \textbf{Step 2:} Starting from the minimized input structure including both binding partners in the protein-protein complex, the backrub method in Rosetta\cite{smith_backrub-like_2008} is used to create an ensemble of models.
