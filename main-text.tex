@@ -27,7 +27,7 @@ The original Rosetta alanine scanning method\cite{kortemme_simple_2002} did not 
 Inclusion of recent Rosetta energy function and sampling method developments, including methods that attempt to more aggressively sample conformational space, has not resulted in significant improvement to the alanine scanning method\cite{conchuir_web_2015}.
 
 We sought to create a method that would take into account aspects of the conformational plasticity of proteins by representing structures as an ensemble of individual full-atom models to explore biologically relevant and accessible portions of conformational space near the crystallographically determined input structures.
-Ensemble representations have previously been shown to be effective at predicting changes in protein stabilities after mutation and at predicting the effects of mutation on protein-protein binding affinities\cite{benedix_predicting_2009,davey_prediction_2015}, as well as at improving $\Delta G_{binding}$ calculations between kinases and their inhibitors \cite{araki_effect_2016}.
+Ensemble representations have previously been shown to be effective at predicting changes in protein stabilities after mutation\cite{davey_prediction_2015} and at predicting the effects of mutation on protein-protein binding affinities\cite{benedix_predicting_2009}, as well as at improving $\Delta G_{binding}$ calculations between kinases and their inhibitors \cite{araki_effect_2016}.
 
 We chose to sample conformational plasticity using the ``backrub'' protocol implemented in Rosetta \cite{smith_backrub-like_2008}.
 The backrub method samples local side chain and backbone conformational changes, similar to those suggested to underlie observed conformational heterogeneity in high-resolution crystal structures \cite{davis_backrub_2006}, and to accommodate evolved and designed mutations\cite{keedy_role_2012}.
@@ -72,7 +72,7 @@ Version numbers of tested software are available in \cref{tab:table-versions}.
 Flex ddG method steps are outlined in \cref{fig:figure-overview}.
 \textbf{Step 1:} The protocol begins with an initial minimization (on backbone $\phi$/$\psi$\ and side chain $\chi$\ torsional degrees of freedom, using the limited-memory Broyden-Fletcher-Goldfarb-Shanno minimizer implementation within Rosetta, with Armijo inexact line search conditions (option ``lbfgs\_armijo\_nonmonotone'') of the input crystal structure of the wild-type protein complex.
 This (and later) minimizations are performed with harmonic restraints on pairwise atom distances to their values in the input crystal structure.
-Restraints were added for all pairs for C-$\alpha$ atoms within 9 \AA\ of each other using a harmonic score potential defined to have the width (standard deviation) parameter set to 0.5, and added to the Rosetta score function with a term weight of 1.0.
+Restraints were added for all pairs for C-$\alpha$ atoms within 9 \AA\ of each other using a harmonic score potential defined to have the width (standard deviation) parameter set to 0.5 \AA, and added to the Rosetta score function with a term weight of 1.0.
 Minimization is run until convergence (absolute score change upon minimization of less than one REU (Rosetta Energy Unit)).
 \textbf{Step 2:} Starting from the minimized input structure including both binding partners in the protein-protein complex, the backrub method in Rosetta\cite{smith_backrub-like_2008} is used to create an ensemble of models.
 In brief, each backrub move is undertaken on a randomly chosen protein segment consisting of three to twelve adjacent residues in the neighborhood of any mutated position.
@@ -87,7 +87,7 @@ Up to 50 output models are generated.
 \textbf{Step 4B:} As Step 4A, but for each of the 50 mutant models.
 \textbf{Step 5A:} Each of the 50 minimized wild-type models are scored in complex, and the complex partners are scored individually. The scores of the split, unbound complex partners are obtained simply by moving the complex halves away from each other. No further minimization or side chain optimization is performed on the unbound partners before scoring.
 \textbf{Step 5B:} In the same fashion as Step 5A, each of the 50 minimized mutant models are scored in complex, and the complex partners are scored individually.
-\textbf{Step 6:} The interface \ddg\ score is produced via Eq. \ref{eqn:split-ddg}:
+\textbf{Step 6:} The interface \ddg\ score is calculated via Eq. \ref{eqn:split-ddg} as the arithmetic mean over the different models produced:
 
 \begin{equation}\label{eqn:split-ddg}
   \begin{split}
@@ -97,7 +97,7 @@ Up to 50 output models are generated.
   \end{split}
 \end{equation}
 
-We evaluate performance of the protocol by comparing predicted \ddg\ scores to known experimental values, using Pearson's correlation (R), Fraction Correct (FC), and Mean Absolute Error (MAE). Fraction Correct is defined as the number of cases in the dataset categorized correctly as stabilizing, neutral, or destabilizing, divided by the total number of cases in the dataset. Stabilizing mutations are defined as those with a \ddg\ $<=$\ -1.0 kcal/mol, neutral as those with -1.0 kcal/mol $<$\ \ddg\ $<$\ 1.0 kcal/mol, and destabilizing as those with \ddg\ $>=$\ 1.0 kcal/mol. The interface \ddg\ score is calculated via Eq. 1 as the arithmetic mean over the different models produced.
+We evaluate performance of the protocol by comparing predicted \ddg\ scores to known experimental values, using Pearson's correlation (R), Fraction Correct (FC), and Mean Absolute Error (MAE). Fraction Correct is defined as the number of cases in the dataset categorized correctly as stabilizing, neutral, or destabilizing, divided by the total number of cases in the dataset. Stabilizing mutations are defined as those with a \ddg\ $<=$\ -1.0 kcal/mol, neutral as those with -1.0 kcal/mol $<$\ \ddg\ $<$\ 1.0 kcal/mol, and destabilizing as those with \ddg\ $>=$\ 1.0 kcal/mol.
 
 MAE (Mean Absolute Error) is defined in Eq.~\ref{eqn:mae} as:
 
@@ -144,7 +144,7 @@ While the flex ddG method shows improved performance on the subset of multiple m
 This result could indicate that further refinement of the backrub parameters is required when simultaneously sampling conformational space around the sites of multiple mutations.
 For example, while we modeled all mutations simultaneously, it is possible that a protocol that considers mutations sequentially could improve predictions.
 However, and remarkably, flex ddG outperforms ZEMu on the subset of cases with multiple mutations where none of the mutations are to alanine (\cref{tab:table-main}).
-While any comments on the origins of this difference will be speculative especially with only limited structural information on the mutated proteins (as well as information on possible changed dynamics), we note that flex ddG predictions are more accurate for several cases in this dataset with experimental \ddg\ values around zero that ZEMu over or underpredicts
+While any comments on the origins of this difference will be speculative especially with only limited structural information on the mutated proteins (as well as information on possible changed dynamics), we note that flex ddG predictions are more accurate for several cases in this dataset with experimental \ddg\ values around zero that ZEMu over- or underpredicts
 Finally, the flex ddG method also shows considerable improvements over other methods on the subset of antibody-antigen complexes (Table 2).
 
 \cref{fig:figure-scatter} illustrates the performance for the flex ddG and control methods on the complete dataset and small-to-large subsets using scatterplots comparing experimentally determined and computationally estimated changes in binding free energies for each of the cases in the datasets. In particular, a notable improvement with flex ddG over the control can be seen for the 13 small-to-large mutations that were experimentally determined to stabilize the protein-protein interface significantly (\ddg\ $<=$\ -1.0 kcal/mol). For this set, the control method misclassifies most stabilizing mutations to have minimal effect or to be destabilizing (9 mutations with predicted Rosetta \ddg\ scores $>$\ 0) (\cref{fig:figure-scatter}d), whereas flex ddG identifies a sizable number (12 of 13 mutations) to have predicted Rosetta $\Delta\Delta G < 0$ (\cref{fig:figure-scatter}c), even though only one of these mutations is predicted to be strongly stabilizing (predicted \ddg\ score < -1). The capability to predict stabilizing mutations is especially important for challenging design applications to modulate binding affinity and selectivity, as well as creating entirely new high-affinity protein-protein interactions.
